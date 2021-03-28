@@ -1,0 +1,60 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="64E21298-EAD5-A1CB-A29B-3E046884A566" name="ADMIN">
+<createdBy>1</createdBy>
+<createdTime>2021-03-02 17:59:16 UTC</createdTime>
+<ownerDesignName>kursach</ownerDesignName>
+<engineerTo>
+<item key="7253F843-48D8-BB4F-00A3-81DA48D55BDE" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="login" id="51FAC32F-43FD-752D-7FD3-BEBA2E4A3ADB">
+<createdBy>1</createdBy>
+<createdTime>2021-03-02 17:59:23 UTC</createdTime>
+<ownerDesignName>kursach</ownerDesignName>
+<engineerTo>
+<item key="7253F843-48D8-BB4F-00A3-81DA48D55BDE" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="password" id="1A865904-1F00-5D23-E1A4-51E346A2409F">
+<createdBy>1</createdBy>
+<createdTime>2021-03-02 17:59:44 UTC</createdTime>
+<ownerDesignName>kursach</ownerDesignName>
+<engineerTo>
+<item key="7253F843-48D8-BB4F-00A3-81DA48D55BDE" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="C9AF8108-824B-5E9E-77C8-29679F1FFD10" name="ADMIN PK">
+<createdBy>1</createdBy>
+<createdTime>2021-03-02 17:59:43 UTC</createdTime>
+<ownerDesignName>kursach</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="7253F843-48D8-BB4F-00A3-81DA48D55BDE" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>51FAC32F-43FD-752D-7FD3-BEBA2E4A3ADB</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

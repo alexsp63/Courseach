@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="kursach" id="4FBDA9DF-F150-3A14-BEEA-3A7C25C6011B" version="3.5">
+<createdBy>1</createdBy>
+<createdTime>2021-03-02 17:02:10 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>4FBDA9DF-F150-3A14-BEEA-3A7C25C6011B</designId>
+</OSDM_Design>

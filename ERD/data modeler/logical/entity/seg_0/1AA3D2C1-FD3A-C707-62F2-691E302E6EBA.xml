@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="1AA3D2C1-FD3A-C707-62F2-691E302E6EBA" name="ANSWER">
+<createdBy>1</createdBy>
+<createdTime>2021-03-02 17:42:33 UTC</createdTime>
+<ownerDesignName>kursach</ownerDesignName>
+<engineerTo>
+<item key="7253F843-48D8-BB4F-00A3-81DA48D55BDE" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="is correct" id="B70D2139-09B9-15C9-70FF-06CC9161B6FA">
+<createdBy>1</createdBy>
+<createdTime>2021-03-02 17:42:40 UTC</createdTime>
+<ownerDesignName>kursach</ownerDesignName>
+<engineerTo>
+<item key="7253F843-48D8-BB4F-00A3-81DA48D55BDE" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id" id="65F895C9-301D-A33B-C2DF-4753D374885B">
+<createdBy>1</createdBy>
+<createdTime>2021-03-02 17:43:46 UTC</createdTime>
+<generatorID>7B7AFD5E-CD9C-7481-C65F-8743F6442161</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<engineerTo>
+<item key="7253F843-48D8-BB4F-00A3-81DA48D55BDE" value="true"/>
+</engineerTo>
+<referedAttribute>0847318F-A00B-58AC-CB5B-06C763DEBCDD</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="12225011-EA40-0A99-AA3D-0D5C2B7E7EFE">
+<createdBy>1</createdBy>
+<createdTime>2021-03-02 17:44:09 UTC</createdTime>
+<generatorID>DB3B19F9-1961-0D88-3618-A89BA12176C5</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<engineerTo>
+<item key="7253F843-48D8-BB4F-00A3-81DA48D55BDE" value="true"/>
+</engineerTo>
+<referedAttribute>FBCE2273-9987-3812-5E54-F719987A1646</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="18F846AD-C675-988A-42F4-FB0900BD5463" name="ANSWER PK">
+<createdBy>1</createdBy>
+<createdTime>2021-03-02 17:43:46 UTC</createdTime>
+<ownerDesignName>kursach</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="7253F843-48D8-BB4F-00A3-81DA48D55BDE" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>65F895C9-301D-A33B-C2DF-4753D374885B</attributeRef>
+<attributeRef>12225011-EA40-0A99-AA3D-0D5C2B7E7EFE</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

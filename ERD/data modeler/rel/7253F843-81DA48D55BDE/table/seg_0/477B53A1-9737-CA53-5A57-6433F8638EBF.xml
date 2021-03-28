@@ -1,0 +1,91 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="477B53A1-9737-CA53-5A57-6433F8638EBF" name="ANSWER">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>1AA3D2C1-FD3A-C707-62F2-691E302E6EBA</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="is_correct" id="AADCF438-2917-1F78-EE63-D71668B3BBF8">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>B70D2139-09B9-15C9-70FF-06CC9161B6FA</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TEST_id" id="860A723C-6465-6925-57BA-F0EA5DB04345">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>65F895C9-301D-A33B-C2DF-4753D374885B</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="3931B2D3-102F-A747-449E-3FFF653535AE" referredColumn="7E51AB7E-F96E-F36B-F47D-FD8F387FE6E8"/>
+</associations>
+</Column>
+<Column name="QUESTION_id" id="2F63E7DA-0F05-3301-F4FB-6F80D89CEE0D">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>12225011-EA40-0A99-AA3D-0D5C2B7E7EFE</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="32B380CA-B568-B89A-E8F9-972D9D8B236B" referredColumn="188C8529-1486-615A-79B2-E5623452620A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E26858B3-9521-6174-68FD-14E791FCCC38" name="ANSWER_PK">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>18F846AD-C675-988A-42F4-FB0900BD5463</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="860A723C-6465-6925-57BA-F0EA5DB04345"/>
+<colUsage columnID="2F63E7DA-0F05-3301-F4FB-6F80D89CEE0D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7FE06DCA-C830-02C3-8DF9-4FD7ECD8A545" name="ANSWER_TEST_FK">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>7B7AFD5E-CD9C-7481-C65F-8743F6442161</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="860A723C-6465-6925-57BA-F0EA5DB04345"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1A46A002-5144-EA86-F5D3-698B6D5A9BC1" name="ANSWER_QUESTION_FK">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>DB3B19F9-1961-0D88-3618-A89BA12176C5</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2F63E7DA-0F05-3301-F4FB-6F80D89CEE0D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

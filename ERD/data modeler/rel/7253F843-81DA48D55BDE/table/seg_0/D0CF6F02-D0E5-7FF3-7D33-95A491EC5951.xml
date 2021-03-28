@@ -1,0 +1,102 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="D0CF6F02-D0E5-7FF3-7D33-95A491EC5951" name="STATISTICS">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>327B065C-1C29-F75D-6C23-FECA3DFE9080</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="date" id="F3760BB5-7959-A608-63E8-5A3ABD066FDB">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>215524E2-09DD-08CA-335B-593DA960BE0D</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="mark" id="FCA3600D-B0AC-EDDD-B45A-84CAF7268952">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>8106B9CF-CF2E-45B3-7622-FBA52D13940C</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USER_login" id="C37F92AE-F021-AC86-26CE-E7E9CD78E7AD">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>3C1B9EA0-23E5-42A7-0D0E-5A820CD6C476</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C2754E82-621E-0CF8-22D3-9279EC79E8D3" referredColumn="E244D685-E18D-BE44-6E65-1780CDAC91DD"/>
+</associations>
+</Column>
+<Column name="TEST_id" id="AD870569-DCAD-11A9-AC71-76B66DDF1AF8">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>0D37FACC-0C47-A2C8-2FBD-D1A47ACDBF43</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="716C18A2-BF28-20C9-6737-985CF59CBD53" referredColumn="7E51AB7E-F96E-F36B-F47D-FD8F387FE6E8"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="B922A5E0-5E7E-4B29-34F0-DA024E168F4D" name="STATISTICS_PK">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>FD4E8A9E-811E-F645-A669-0D08FE7DA5DA</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C37F92AE-F021-AC86-26CE-E7E9CD78E7AD"/>
+<colUsage columnID="AD870569-DCAD-11A9-AC71-76B66DDF1AF8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CEF2AC61-8F3A-6632-66D2-A93560AB3709" name="STATISTICS_USER_FK">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>B09D336C-56B3-B201-BE73-5D81B611A962</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C37F92AE-F021-AC86-26CE-E7E9CD78E7AD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F05EEA0C-1797-47E7-5EC8-CA23E020D5EA" name="STATISTICS_TEST_FK">
+<createdBy>1</createdBy>
+<createdTime>2021-03-22 10:17:49 UTC</createdTime>
+<generatorID>4BDA4035-A236-70BA-0C24-4D3FE48E71C5</generatorID>
+<ownerDesignName>kursach</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AD870569-DCAD-11A9-AC71-76B66DDF1AF8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
