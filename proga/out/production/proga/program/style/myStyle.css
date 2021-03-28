@@ -1,0 +1,33 @@
+.background {
+    -fx-background-image: url("images/rootBackground.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+.button {
+    -fx-background-radius: 10;
+    -fx-background-color: #9cf8f8;
+    -fx-border-color: #7272fa;
+    -fx-border-radius: 9;
+    -fx-text-fill: #4040f8;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: #95e0e0;
+}
+
+.button1 {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 9;
+    -fx-text-fill: #4040f8;
+    -fx-font-weight: bold;
+}
+
+.button1:hover {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2626f8;
+}
+
