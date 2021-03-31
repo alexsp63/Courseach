@@ -5,6 +5,7 @@ import com.example.englishapp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class QuestionController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('questions:read')")
     public ResponseEntity<List<Question>> readAll(){
         final List<Question> questionList = questionService.findAll();
         return questionList != null && !questionList.isEmpty()
@@ -29,6 +31,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('questions:read')")
     public ResponseEntity<Question> getOne(@PathVariable(name = "id") Question question){
         final Question thisQuestion = question;
         return thisQuestion != null
@@ -37,12 +40,14 @@ public class QuestionController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('questions:write')")
     public ResponseEntity<?> create(@RequestBody Question question){
         Question newAnswer = questionService.create(question);
         return new ResponseEntity<>(newAnswer, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('questions:write')")
     public ResponseEntity<?> update(@PathVariable(name = "id") Question questionFromDB,
                                     @RequestBody Question question)
     {
@@ -54,6 +59,7 @@ public class QuestionController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('questions:write')")
     public ResponseEntity<List<Question>> delete(@PathVariable("id") Question question) {
         if (questionService.delete(question)) {
             return new ResponseEntity<>(HttpStatus.OK);

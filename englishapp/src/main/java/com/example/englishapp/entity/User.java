@@ -17,58 +17,53 @@ public class User {
     private String firstName;
     private String lastName;
 
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Statistic> statistics;
-
-    public String getLogin() {
-        return login;
-    }
 
     public void setLogin(String login) {
         this.login = login;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
+    public String getLogin() {
+        return login;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public List<Statistic> getStatistics() {
-        return statistics;
+    public String getPassword() {
+        return password;
     }
 
-    public void setStatistics(List<Statistic> statistics) {
-        this.statistics = statistics;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", statistics=" + statistics +
-                '}';
+    public Role getRole() {
+        return role;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
 

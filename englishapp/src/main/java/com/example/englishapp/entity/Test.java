@@ -1,10 +1,13 @@
 package com.example.englishapp.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "tests")
+@Data
 public class Test {
 
     @Id
@@ -19,45 +22,5 @@ public class Test {
 
     private int numberOfCorrectAnswers;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getNumberOfCorrectAnswers() {
-        return numberOfCorrectAnswers;
-    }
-
-    public void setNumberOfCorrectAnswers(int numberOfCorrectAnswers) {
-        this.numberOfCorrectAnswers = numberOfCorrectAnswers;
-    }
-
-    public void setStatistics(List<Statistic> statistics) {
-        this.statistics = statistics;
-    }
-
-    public List<Statistic> getStatistics() {
-        return statistics;
-    }
-
-    public void setAnswers(List<Answer> answers) {
-        this.answers = answers;
-    }
-
-    public List<Answer> getAnswers() {
-        return answers;
-    }
-
-    @Override
-    public String toString() {
-        return "Test{" +
-                "id=" + id +
-                ", statistics=" + statistics +
-                ", answers=" + answers +
-                ", numberOfCorrectAnswers=" + numberOfCorrectAnswers +
-                '}';
-    }
 }
