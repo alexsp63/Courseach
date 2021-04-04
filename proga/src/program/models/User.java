@@ -1,22 +1,41 @@
 package program.models;
 
+import com.google.gson.Gson;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class User {
+import java.util.HashMap;
+import java.util.Map;
+
+public class User implements JSONSerialize{
 
     private StringProperty login;
     private StringProperty password;
     private StringProperty firstName;
     private StringProperty lastName;
+    private StringProperty role;
+    private StringProperty status;
 
-    //public User(){}
+    public User(){
+        this(null, null, null, null);
+    }
 
     public User(String login, String password, String firstName, String lastName) {
         this.login = new SimpleStringProperty(login);
         this.password = new SimpleStringProperty(password);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
+        this.role = new SimpleStringProperty("USER");
+        this.status = new SimpleStringProperty("ACTIVE");
+    }
+
+    public User(String login, String password, String firstName, String lastName, String role, String status) {
+        this.login = new SimpleStringProperty(login);
+        this.password = new SimpleStringProperty(password);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.role = new SimpleStringProperty(role);
+        this.status = new SimpleStringProperty(status);
     }
 
     public String login() {
@@ -65,5 +84,18 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName.set(lastName);
+    }
+
+    @Override
+    public String toJson() {
+        Map<String, String> map = new HashMap<>();
+        map.put("login", login.getValue());
+        map.put("password", password.getValue());
+        map.put("firstName", firstName.getValue());
+        map.put("lastName", lastName.getValue());
+        map.put("role", role.getValue());
+        map.put("status", status.getValue());
+        Gson gson = new Gson();
+        return gson.toJson(map);
     }
 }

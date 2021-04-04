@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import program.controllers.AuthorizationController;
+import program.utils.RestAPI;
 
 import java.io.IOException;
 
@@ -15,6 +16,12 @@ public class Main extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private RestAPI restAPI;
+
+
+    public Main() {
+        restAPI = new RestAPI();
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -55,7 +62,7 @@ public class Main extends Application {
             rootLayout.setBottom(authorization);  //устанавливаем форму авторизации по нижнему краю
 
             AuthorizationController controller = loader.getController();
-            controller.setMain(this);
+            controller.setMain(this, restAPI);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,6 +70,10 @@ public class Main extends Application {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public RestAPI getRestAPI() {
+        return restAPI;
     }
 
     public static void main(String[] args) {
