@@ -39,5 +39,19 @@ public class RestAPI {
         return result;
     }
 
+    public List<String> getAllLogins(){
+        List<String> logins = new ArrayList<>();
+        String buffer = HttpClass.getRequest(SERVER_GET_USERS + "/logins");
+        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        for (int i=0; i<jsonResult.size(); i++) {
+            logins.add(jsonResult.get(i).getAsString());
+        }
+        return logins;
+    }
+
+    public void postUser(User newUser){
+        HttpClass.PostRequest(SERVER_GET_USERS, newUser.toJson());
+    }
+
 
 }

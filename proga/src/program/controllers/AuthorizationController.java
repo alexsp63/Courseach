@@ -3,10 +3,9 @@ package program.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 import program.Main;
 import program.models.User;
 import program.utils.RestAPI;
@@ -19,10 +18,10 @@ public class AuthorizationController {
     @FXML
     private PasswordField passwordText;
 
-    private User user;
     private boolean signInIsClicked = false;
     private Main main;
     private RestAPI restAPI;
+    private AnchorPane anchorPane;
 
 
     @FXML
@@ -49,7 +48,7 @@ public class AuthorizationController {
     }
 
     @FXML
-    public void signInButton(ActionEvent actionEvent) {
+    public void signInButton() {
         String login = loginText.getText();
         String password = passwordText.getText();
         if (login.equals("") || password.equals("")){
@@ -73,17 +72,17 @@ public class AuthorizationController {
 
     @FXML
     public void signUpButton(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.initOwner(main.getPrimaryStage());
-        alert.setTitle("SignUp button is clicked");
-        alert.setHeaderText("It's ok");
-        alert.setContentText("I wanna sleep");
-
-        alert.showAndWait();
+        main.hideOverview(anchorPane);
+        main.showSignUpForm();
     }
 
-    public void setMain(Main main, RestAPI restAPI) {
+    public void setMain(Main main, RestAPI restAPI, AnchorPane anchorPane) {
         this.main = main;
         this.restAPI = restAPI;
+        this.anchorPane = anchorPane;
+    }
+
+    public AnchorPane getAnchorPane() {
+        return anchorPane;
     }
 }

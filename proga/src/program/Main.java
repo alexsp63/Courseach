@@ -2,12 +2,17 @@ package program;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import program.controllers.AuthorizationController;
+import program.controllers.SignUpController;
 import program.utils.RestAPI;
 
 import java.io.IOException;
@@ -35,6 +40,14 @@ public class Main extends Application {
         showAuthorizationForm(); //потом форму авторизации
     }
 
+    public void hideOverview(AnchorPane form) {
+        form.setVisible(false);
+    }
+
+    public void showOverview(AnchorPane form) {
+        form.setVisible(true);
+    }
+
     public void initRootLayout() {
 
         //загрузка фона
@@ -43,8 +56,9 @@ public class Main extends Application {
             loader.setLocation(Main.class.getResource("views/root.fxml"));
             rootLayout = (BorderPane) loader.load();
 
-            Scene scene = new Scene(rootLayout);
+            Scene scene = new Scene(rootLayout, Color.TRANSPARENT);
             primaryStage.setScene(scene);
+            //primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -56,16 +70,36 @@ public class Main extends Application {
         //загрузка формы авторизация
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("views/authorization.fxml"));
+            loader.setLocation(Main.class.getResource("views/authorizationForm.fxml"));
             AnchorPane authorization = (AnchorPane) loader.load();
 
-            rootLayout.setBottom(authorization);  //устанавливаем форму авторизации по нижнему краю
+            rootLayout.setCenter(authorization);  //устанавливаем форму авторизации
+
 
             AuthorizationController controller = loader.getController();
-            controller.setMain(this, restAPI);
+            controller.setMain(this, restAPI, authorization);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean showSignUpForm(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/signUpForm.fxml"));
+            AnchorPane signUp = (AnchorPane) loader.load();
+
+            rootLayout.setCenter(signUp);
+
+            SignUpController controller = loader.getController();
+            controller.setMain(this, restAPI, signUp);
+
+            return controller.isCloseISClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public Stage getPrimaryStage() {
