@@ -37,6 +37,14 @@ public class UserController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/logins")
+    public ResponseEntity<List<String>> getLogins(){
+        final List<String> loginList = userService.findAllLogins();
+        return loginList != null && !loginList.isEmpty()
+                ? new ResponseEntity<>(loginList, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     //добавление записи
     @PostMapping
     public ResponseEntity<?> create(@RequestBody User user){
