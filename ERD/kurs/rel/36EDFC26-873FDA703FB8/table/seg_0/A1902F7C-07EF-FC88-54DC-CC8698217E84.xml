@@ -1,0 +1,157 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A1902F7C-07EF-FC88-54DC-CC8698217E84" name="ANSWER_HISTORY">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:25:09 UTC</createdTime>
+<generatorID>6A61B39C-3122-A2CF-AFF3-A03C6C336EC4</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="USER_login" id="D4B4579D-C38A-0F60-ECFA-2CDE8BDBDABB">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:25:09 UTC</createdTime>
+<generatorID>9FCE7514-27C6-3FB2-1116-E666FF7C8967</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="8906E374-0E4C-E00A-454A-9858AD2F6088" referredColumn="1F408F26-5672-A743-FAD3-2B7815E23282"/>
+</associations>
+</Column>
+<Column name="QUESTION_question_id" id="E13DCBCC-5D9D-95C9-F0DD-21CBEBE66C50">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:25:09 UTC</createdTime>
+<generatorID>58CCFC84-3E89-7A14-E08B-4A7A11595D82</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="5D767470-F8E5-0790-D272-49E9B413D179" referredColumn="4F8BEDD3-01D9-9A7C-EEB1-A494986BC122"/>
+</associations>
+</Column>
+<Column name="history_id" id="DB62791D-AE61-7F6A-03F2-16579377F6EE">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:25:09 UTC</createdTime>
+<generatorID>597AD327-B902-27A7-DEEF-812CE9A72F4C</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="is_correct1" id="6501D183-1964-2A77-29B1-177BB23793CA">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:25:09 UTC</createdTime>
+<generatorID>5C57BB56-3A00-EA60-280A-89795FFB204C</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="LESSON_lesson_id" id="6059E670-BC22-F767-7B64-AB57D7784856">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:25:09 UTC</createdTime>
+<generatorID>2E11B4B4-F576-63F5-B840-D00411D449D4</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="684AAA79-AEB2-AB11-A409-551F3D199FAD" referredColumn="30A25418-9645-08CD-290C-F1F56CE51E9D"/>
+</associations>
+</Column>
+<Column name="STATISTICS_stat_id" id="FF82A1A9-F1F8-E550-A00C-51BEADC4FA13">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:34:05 UTC</createdTime>
+<generatorID>586BDD37-7435-B427-6F96-732A9EDE890D</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4A50BDCE-4EF3-6EDA-DD92-96A7F52BBA5C" referredColumn="21F7C8B8-85EB-FE13-B6E9-B86007B197A8"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4B3AC215-E52F-7C4C-7386-B5DEA81E8291" name="ANSWER_HISTORY_PK">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:25:09 UTC</createdTime>
+<generatorID>210FE413-EA2A-B8E7-520B-16A09A4E6293</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D4B4579D-C38A-0F60-ECFA-2CDE8BDBDABB"/>
+<colUsage columnID="E13DCBCC-5D9D-95C9-F0DD-21CBEBE66C50"/>
+<colUsage columnID="DB62791D-AE61-7F6A-03F2-16579377F6EE"/>
+<colUsage columnID="FF82A1A9-F1F8-E550-A00C-51BEADC4FA13"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A0F36282-7042-23BE-2860-7AE0A23F4BBB" name="ANSWER_HISTORY_USER_FK">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:25:09 UTC</createdTime>
+<generatorID>721D3CF9-50DD-8CC3-B743-B98D671DC8AF</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D4B4579D-C38A-0F60-ECFA-2CDE8BDBDABB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="50D03500-0FDE-527B-6181-509627D14EC6" name="ANSWER_HISTORY_QUESTION_FK">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:25:09 UTC</createdTime>
+<generatorID>EB19D2D3-7130-DE16-66E4-5A451F59023B</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E13DCBCC-5D9D-95C9-F0DD-21CBEBE66C50"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="176D37BA-6368-98F4-DF59-451222DFF1B1" name="ANSWER_HISTORY_LESSON_FK">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:25:09 UTC</createdTime>
+<generatorID>93BF5D2E-25F4-1B6F-6F7B-CB52026D602D</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6059E670-BC22-F767-7B64-AB57D7784856"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1E9A780D-F6BA-9666-C1B3-AA18425C92F6" name="ANSWER_HISTORY_STATISTICS_FK">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:34:05 UTC</createdTime>
+<generatorID>7EBE143F-7C79-8A9C-90C7-4F9CCF632BEF</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FF82A1A9-F1F8-E550-A00C-51BEADC4FA13"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

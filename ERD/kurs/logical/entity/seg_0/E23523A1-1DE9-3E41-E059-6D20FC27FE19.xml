@@ -1,0 +1,139 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="E23523A1-1DE9-3E41-E059-6D20FC27FE19" name="QUESTION">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:09:54 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="question_id" id="2C64AA53-D8E6-B030-BBDD-5414C3A06968">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:10:02 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="text" id="EEDACE9A-F558-0A49-1AB8-D8913EF11943">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:10:19 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="correct_answer" id="48FB442E-E7D8-C965-2B70-5A706956141F">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:10:48 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="description" id="A65104C8-C295-1933-82B4-B4405F37A689">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:11:19 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="incorrect_1" id="1293A277-7AD8-27E4-DEFB-48B35E9D9A04">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:12:07 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="incorrect_2" id="1E5F55F7-A0F8-4086-6BCE-39DCC46B10F4">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:12:39 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="incorrect_3" id="13665094-7030-3610-8B9D-8188FCB689B6">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:12:57 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="lesson_id" id="85763C5C-1CBA-D060-4E27-E5B100818C43">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:14:45 UTC</createdTime>
+<generatorID>4F5A9516-21B2-BC5F-EF53-DA45D36BD36B</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<referedAttribute>402F75D6-72F6-449B-F486-82CDB9C96E68</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="2DA04B15-41F8-B15D-0374-D57570C87F72" name="QUESTION PK">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:10:12 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>2C64AA53-D8E6-B030-BBDD-5414C3A06968</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,111 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="CFD61735-008F-CDD3-9D52-61D60FC94D1D" name="USER">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:03:23 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="login" id="96BC3D71-DEE4-E784-FE6C-F7B5AFBA7487">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:03:31 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="password" id="D94B57B9-6B7B-D16A-36FF-DE780A2143CC">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:05:20 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="first_name" id="AD8C0049-2FE8-ECC4-55E7-2F4EE35A04D5">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:05:52 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="last_name" id="E27A2718-682E-D173-2771-E32ECFB05177">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:06:58 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="role" id="3176E967-3C02-391A-05A6-B55F99D574B6">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:07:28 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="status" id="5F2D631B-3680-A05F-B109-3B0CE0FB2670">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:07:48 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="DDFE0DAC-29AF-0671-C826-80AB7009FFD4" name="USER PK">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:05:08 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>96BC3D71-DEE4-E784-FE6C-F7B5AFBA7487</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,104 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="6A61B39C-3122-A2CF-AFF3-A03C6C336EC4" name="ANSWER_HISTORY">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:16:24 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="login" id="9FCE7514-27C6-3FB2-1116-E666FF7C8967">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:17:20 UTC</createdTime>
+<generatorID>721D3CF9-50DD-8CC3-B743-B98D671DC8AF</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<referedAttribute>96BC3D71-DEE4-E784-FE6C-F7B5AFBA7487</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT037</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="question_id" id="58CCFC84-3E89-7A14-E08B-4A7A11595D82">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:17:37 UTC</createdTime>
+<generatorID>EB19D2D3-7130-DE16-66E4-5A451F59023B</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<referedAttribute>2C64AA53-D8E6-B030-BBDD-5414C3A06968</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="history_id" id="597AD327-B902-27A7-DEEF-812CE9A72F4C">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:17:57 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="is_correct1" id="5C57BB56-3A00-EA60-280A-89795FFB204C">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:18:26 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="stat_id" id="586BDD37-7435-B427-6F96-732A9EDE890D">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:33:27 UTC</createdTime>
+<generatorID>7EBE143F-7C79-8A9C-90C7-4F9CCF632BEF</generatorID>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<referedAttribute>411890E2-A5F5-4DE8-5C7F-924D32A92312</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="210FE413-EA2A-B8E7-520B-16A09A4E6293" name="ANSWER_HISTORY PK">
+<createdBy>1</createdBy>
+<createdTime>2021-04-10 14:17:20 UTC</createdTime>
+<ownerDesignName>kurs</ownerDesignName>
+<engineerTo>
+<item key="36EDFC26-36E8-BDE8-DEF9-873FDA703FB8" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>9FCE7514-27C6-3FB2-1116-E666FF7C8967</attributeRef>
+<attributeRef>58CCFC84-3E89-7A14-E08B-4A7A11595D82</attributeRef>
+<attributeRef>597AD327-B902-27A7-DEEF-812CE9A72F4C</attributeRef>
+<attributeRef>586BDD37-7435-B427-6F96-732A9EDE890D</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
