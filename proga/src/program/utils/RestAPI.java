@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import program.models.User;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +17,13 @@ public class RestAPI {
     private static final String AUTH = SERVER_URL + "/login";
 
 
-    public String auth(String login, String password){
-        return HttpClass.PostRequest(AUTH + "?username=" + login + "&password=" + password);
+    public String auth(String login, String password) {
+        try {
+            return HttpClass.PostRequest(AUTH + "?username=" + URLEncoder.encode(login, "UTF-8") + "&password=" + URLEncoder.encode(password, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return "Unsupported Encoding";
+        }
     }
 
     public List<User> getUsers(){
