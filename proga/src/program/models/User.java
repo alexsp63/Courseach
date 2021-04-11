@@ -86,6 +86,10 @@ public class User implements JSONSerialize{
         this.lastName.set(lastName);
     }
 
+    public String getRole() {
+        return role.get();
+    }
+
     @Override
     public String toJson() {
         Map<String, String> map = new HashMap<>();

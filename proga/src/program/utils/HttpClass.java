@@ -1,19 +1,18 @@
 package program.utils;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
 
 public class HttpClass {
 
-    private static String getString(URLConnection conn) throws IOException {
+    private static String getString(URLConnection conn){
         try {
             //если страница возвращается, значит, не произошёл переход в корень /, где у меня ничего нет,
             //а именно туда и попадают после успешной авторизации
             StringBuilder sb = new StringBuilder();
-            //TODO: починить проблемы с кодировкой (русские символы в url)
             InputStream is = new BufferedInputStream(conn.getInputStream());
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String inputLine = "";
@@ -21,32 +20,18 @@ public class HttpClass {
                 sb.append(inputLine);
             }
             return sb.toString();
-        } catch (FileNotFoundException e){
+        } catch (IOException e){
             return null;
         }
-
     }
 
+    //это для неавторизованного пользователя, тут токена нет, сюда у меня разрешение всем на сервере
     public static String getRequest(String urlString){
         try {
             URL url = new URL(urlString);
             URLConnection conn = url.openConnection();
-            return getString(conn);
-        } catch (IOException e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    //post для авторизации
-    public static String PostRequest(String urlString){
-        try{
-            URL url = new URL(urlString);
-            URLConnection conn = url.openConnection();
             HttpURLConnection httpURLConnection = (HttpURLConnection) conn;
-            httpURLConnection.setRequestMethod("POST"); //устанавливаю тип метода
-            httpURLConnection.setDoOutput(true); //собираюсь использовать это соединение для вывода
-            httpURLConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            httpURLConnection.setRequestMethod("GET");
             httpURLConnection.connect();
             return getString(conn);
         } catch (IOException e){
@@ -55,7 +40,23 @@ public class HttpClass {
         }
     }
 
-    //обычный post
+    //такая перегрузка нужна, потому что эти геты уже для авторизованного пользователя по токену
+    public static String getRequest(String urlString, String token){
+        try {
+            URL url = new URL(urlString);
+            URLConnection conn = url.openConnection();
+            HttpURLConnection httpURLConnection = (HttpURLConnection) conn;
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.setRequestProperty("Authorization", token);
+            httpURLConnection.connect();
+            return getString(conn);
+        } catch (IOException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    //post для регистрации, тут нет никакого токена, опять же пермит у меня для всех на регистрацию
     public static String PostRequest(String urlString, String jsonString){
         try{
             URL url = new URL(urlString);

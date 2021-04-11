@@ -95,7 +95,6 @@ public class SignUpController {
             return "Пароли не совпадают!";
         }
         if (unavailableLogins.contains(loginText.getText())) {
-            System.out.println(loginText.getText());
             return "Введённый логин уже используется другим пользователем!";
         }
         return "";

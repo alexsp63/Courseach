@@ -14,6 +14,7 @@ import javafx.stage.StageStyle;
 import program.controllers.AuthorizationController;
 import program.controllers.SignUpController;
 import program.utils.RestAPI;
+import program.utils.StringToMap;
 
 import java.io.IOException;
 
@@ -22,10 +23,13 @@ public class Main extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private RestAPI restAPI;
+    private StringToMap stringToMap;
 
 
     public Main() {
+
         restAPI = new RestAPI();
+        stringToMap = new StringToMap();
     }
 
     @Override
@@ -77,7 +81,7 @@ public class Main extends Application {
 
 
             AuthorizationController controller = loader.getController();
-            controller.setMain(this, restAPI, authorization);
+            controller.setMain(this, restAPI, authorization, stringToMap);
 
         } catch (IOException e) {
             e.printStackTrace();
