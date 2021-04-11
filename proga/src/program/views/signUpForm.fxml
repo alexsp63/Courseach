@@ -5,7 +5,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.controllers.SignUpController">
    <children>
-      <AnchorPane layoutX="158.0" layoutY="100.0" prefHeight="460.0" prefWidth="700.0" styleClass="background1" stylesheets="@../style/myStyle.css" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="200.0">
+      <AnchorPane layoutX="158.0" layoutY="100.0" prefHeight="460.0" prefWidth="700.0" styleClass="background1" stylesheets="@../style/myStyle.css" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="70.0">
          <children>
             <GridPane layoutX="95.0" layoutY="50.0" prefHeight="265.0" prefWidth="493.0">
                <columnConstraints>

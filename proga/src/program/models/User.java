@@ -38,13 +38,6 @@ public class User implements JSONSerialize{
         this.status = new SimpleStringProperty(status);
     }
 
-    public String login() {
-        return login.get();
-    }
-
-    public String password() {
-        return password.get();
-    }
 
     public String getFirstName() {
         return firstName.get();
@@ -70,6 +63,10 @@ public class User implements JSONSerialize{
         return lastName;
     }
 
+    public String getLogin() {
+        return login.get();
+    }
+
     public void setLogin(String login) {
         this.login.set(login);
     }
@@ -88,6 +85,18 @@ public class User implements JSONSerialize{
 
     public String getRole() {
         return role.get();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "login=" + login +
+                ", password=" + password +
+                ", firstName=" + firstName +
+                ", lastName=" + lastName +
+                ", role=" + role +
+                ", status=" + status +
+                '}';
     }
 
     @Override

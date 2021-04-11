@@ -14,14 +14,42 @@
     -fx-border-radius: 10;
 }
 
+.backgroundAdmin {
+    -fx-background-image: url("images/adminBackground.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 10;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 10;
+    border-radius: 20px;
+}
+
 .label1 {
     -fx-text-fill: #5050fd;
     -fx-font-size: 14;
 }
 
+.label2 {
+    -fx-text-fill: #5050fd;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+.labelMain2 {
+    -fx-text-fill: #5050fd;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+}
+
+.labelMessage {
+    -fx-text-fill: #ff0000;
+    -fx-font-size: 14;
+}
+
 .button {
     -fx-background-radius: 10;
-    -fx-background-color: #9cf8f8;
+    -fx-background-color: #a2d6ff;
     -fx-border-color: #7272fa;
     -fx-border-radius: 9;
     -fx-text-fill: #4040f8;
@@ -29,7 +57,7 @@
 }
 
 .button:hover {
-    -fx-background-color: #95e0e0;
+    -fx-background-color: #6fbffd;
 }
 
 .button1 {

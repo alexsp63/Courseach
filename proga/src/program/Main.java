@@ -11,8 +11,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import program.controllers.AdminPageController;
 import program.controllers.AuthorizationController;
 import program.controllers.SignUpController;
+import program.models.User;
 import program.utils.RestAPI;
 import program.utils.StringToMap;
 
@@ -104,6 +106,23 @@ public class Main extends Application {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public void showAdminForm(User admin){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/adminMainPage.fxml"));
+            AnchorPane adminForm = (AnchorPane) loader.load();
+
+            rootLayout.setCenter(adminForm);
+
+            AdminPageController controller = loader.getController();
+            controller.setMain(admin, this, restAPI, adminForm, stringToMap);
+            controller.setAdmin(admin);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Stage getPrimaryStage() {

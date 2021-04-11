@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -27,6 +28,9 @@ public class AuthorizationController implements JSONSerialize {
     @FXML
     private PasswordField passwordText;
 
+    @FXML
+    private Label message;
+
     private boolean signInIsClicked = false;
     private Main main;
     private RestAPI restAPI;
@@ -36,6 +40,7 @@ public class AuthorizationController implements JSONSerialize {
 
     @FXML
     private void initialize() {
+        message.setText("");
         showDefaultText();
     }
 
@@ -44,35 +49,32 @@ public class AuthorizationController implements JSONSerialize {
         passwordText.setPromptText("Пароль");
     }
 
-    public void createAlert(String titleText, String headerText, String contextText){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.initOwner(main.getPrimaryStage());
-        alert.setTitle(titleText);
-        alert.setHeaderText(headerText);
-        alert.setContentText(contextText);
-        alert.showAndWait();
-    }
-
     public boolean isSignInIsClicked() {
         return signInIsClicked;
     }
 
     @FXML
     public void signInButton() throws IOException {
+        message.setText("");
         String response = restAPI.auth(this);
 
         if (response == null){
 
-            createAlert("Ошибка!",
-                    "Данные введены неверно!",
-                    "Пожалуйста, попробуйте снова!");
+            message.setText("Неверный логин или пароль!");
 
         } else {
-
             String login = stringToMap.createMap(response).get("login");
             String token = stringToMap.createMap(response).get("token");
             User currentUser = restAPI.getOneUser(login, token);
-            System.out.println(currentUser.getRole());
+            String role = currentUser.getRole();
+            if (role.equals("ADMIN")){
+                main.hideOverview(anchorPane);
+                main.showAdminForm(currentUser);
+            } else if (role.equals("USER")){
+                System.out.println(role);
+            } else {
+                message.setText("Кажется, кто-то что-то натворил с бд!");
+            }
         }
     }
 
