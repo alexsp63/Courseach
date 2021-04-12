@@ -108,7 +108,7 @@ public class Main extends Application {
         return false;
     }
 
-    public void showAdminForm(User admin){
+    public void showAdminForm(User admin, String token){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("views/adminMainPage.fxml"));
@@ -117,7 +117,7 @@ public class Main extends Application {
             rootLayout.setCenter(adminForm);
 
             AdminPageController controller = loader.getController();
-            controller.setMain(admin, this, restAPI, adminForm, stringToMap);
+            controller.setMain(admin, this, restAPI, adminForm, stringToMap, token);
             controller.setAdmin(admin);
 
         } catch (IOException e) {

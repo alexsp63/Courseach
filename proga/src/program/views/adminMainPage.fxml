@@ -16,7 +16,7 @@
                            <content>
                                <AnchorPane>
                            <children>
-                              <Group AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="237.20000000000005" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="51.400000000000034">
+                              <Group AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="237.20000000000005" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="40.0">
                                  <children>
                                     <GridPane layoutX="9.0" layoutY="60.0" prefHeight="234.0" prefWidth="543.0">
                                       <columnConstraints>
@@ -54,15 +54,13 @@
                                           <Insets left="15.0" />
                                        </padding>
                                     </Label>
-                                     <Label layoutX="50.0" layoutY="300.0" prefHeight="35.0" prefWidth="451.0" textAlignment="CENTER">
+                                     <Label fx:id="adminErrorMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="300.0" prefHeight="35.0" prefWidth="451.0" styleClass="labelMessage" stylesheets="@../style/myStyle.css" textAlignment="CENTER">
                                          <font>
                                              <Font size="17.0" />
                                          </font>
-                                         <padding>
-                                             <Insets left="15.0" />
-                                         </padding>
                                      </Label>
-                                    <Button layoutX="193.0" layoutY="350.0" mnemonicParsing="false" onAction="#adminSave" prefHeight="36.0" prefWidth="161.0" text="Сохранить" />
+                                     <Button layoutX="193.0" layoutY="390.0" mnemonicParsing="false" onAction="#adminCancel" prefHeight="36.0" prefWidth="161.0" text="Очистить изменения" />
+                                    <Button layoutX="193.0" layoutY="348.0" mnemonicParsing="false" onAction="#adminSave" prefHeight="36.0" prefWidth="161.0" text="Сохранить" />
                                  </children>
                               </Group>
                            </children></AnchorPane>
@@ -70,7 +68,57 @@
                        </Tab>
                        <Tab text="Пользователи">
                            <content>
-                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <SplitPane dividerPositions="0.279383429672447" prefHeight="509.6" prefWidth="1040.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <items>
+                                    <AnchorPane>
+                                       <children>
+                                          <TableView layoutX="14.0" layoutY="14.0" prefHeight="508.0" prefWidth="287.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columns>
+                                              <TableColumn prefWidth="138.60000878572464" text="Имя" />
+                                              <TableColumn prefWidth="148.6000213623047" text="Фамилия" />
+                                            </columns>
+                                          </TableView>
+                                       </children></AnchorPane>
+                                    <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="508.0" prefWidth="634.0">
+                                       <children>
+                                          <Group layoutX="14.0" layoutY="14.0" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="24.0">
+                                             <children>
+                                                <Label text="Информация о пользователе" />
+                                                <GridPane layoutX="8.0" layoutY="56.0" prefHeight="293.0" prefWidth="700.0">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <Label text="Имя:" />
+                                                      <Label text="Фамилия:" GridPane.rowIndex="1" />
+                                                      <Label text="Логин:" GridPane.rowIndex="2" />
+                                                      <Label text="Роль:" GridPane.rowIndex="3" />
+                                                      <Label text="Статус:" GridPane.rowIndex="4" />
+                                                      <TextField prefHeight="33.0" prefWidth="350.0" GridPane.columnIndex="1" />
+                                                      <TextField prefHeight="33.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <TextField prefHeight="33.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <TextField prefHeight="33.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <TextField prefHeight="33.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                   </children>
+                                                </GridPane>
+                                                <Button layoutX="277.0" layoutY="378.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="161.0" text="Сохранить" />
+                                                <Button layoutX="277.0" layoutY="423.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="161.0" text="Очистить изменения" />
+                                             </children>
+                                          </Group>
+                                       </children></AnchorPane>
+                                 </items>
+                              </SplitPane>
+                           </children></AnchorPane>
                            </content>
                        </Tab>
                        <Tab text="Уроки">

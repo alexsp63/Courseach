@@ -65,11 +65,13 @@ public class RestAPI {
         return logins;
     }
 
-
-
     public void postUser(User newUser){
         HttpClass.PostRequest(SERVER_GET_USERS, newUser.toJson());
     }
 
+    public void putUser(User user, String token){
+        String jsonString = user.toJson();
+        HttpClass.PutRequest(SERVER_GET_USERS + "/" + user.getLogin(), jsonString, token);
+    }
 
 }

@@ -69,7 +69,7 @@ public class AuthorizationController implements JSONSerialize {
             String role = currentUser.getRole();
             if (role.equals("ADMIN")){
                 main.hideOverview(anchorPane);
-                main.showAdminForm(currentUser);
+                main.showAdminForm(currentUser, token);
             } else if (role.equals("USER")){
                 System.out.println(role);
             } else {

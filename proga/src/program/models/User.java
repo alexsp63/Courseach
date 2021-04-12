@@ -47,6 +47,14 @@ public class User implements JSONSerialize{
         return lastName.get();
     }
 
+    public String getPassword() {
+        return password.get();
+    }
+
+    public String getStatus() {
+        return status.get();
+    }
+
     public StringProperty loginProperty() {
         return login;
     }

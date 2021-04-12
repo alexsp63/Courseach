@@ -12,7 +12,7 @@
               <Button layoutX="60.0" layoutY="113.79998779296875" mnemonicParsing="false" onAction="#signInButton" prefHeight="32.0" prefWidth="114.0" stylesheets="@../style/myStyle.css" text="Вход" />
               <Button layoutX="60.0" layoutY="145.79998779296875" mnemonicParsing="false" onAction="#signUpButton" prefHeight="32.0" prefWidth="114.0" styleClass="button1" stylesheets="@../style/myStyle.css" text="Регистрация" />
               <TextField fx:id="loginText" prefHeight="32.0" prefWidth="233.0" />
-              <Label fx:id="message" layoutX="23.0" layoutY="74.0" prefHeight="32.0" prefWidth="199.0" styleClass="labelMessage" stylesheets="@../style/myStyle.css" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
+              <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="74.0" prefHeight="32.0" prefWidth="233.0" styleClass="labelMessage" stylesheets="@../style/myStyle.css" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
          </children>
       </Group>
     </children>

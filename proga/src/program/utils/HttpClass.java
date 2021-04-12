@@ -79,7 +79,7 @@ public class HttpClass {
         }
     }
 
-    public static String PutRequest(String urlString, String jsonString){
+    public static String PutRequest(String urlString, String jsonString, String token){
         try {
             URL url = new URL(urlString);
             URLConnection conn = url.openConnection();
@@ -90,6 +90,7 @@ public class HttpClass {
             int len = out.length;
             httpURLConnection.setFixedLengthStreamingMode(len);
             httpURLConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            httpURLConnection.setRequestProperty("Authorization", token);
             httpURLConnection.connect();
             try (OutputStream outputStream = httpURLConnection.getOutputStream()) {
                 outputStream.write(out);
