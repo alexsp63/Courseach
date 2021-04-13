@@ -39,10 +39,14 @@ public class UserService {
     }
 
     public User update(User user, User userFromDB) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
-        String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
+        if (!user.getPassword().equals(userFromDB.getPassword())){
+            //если пользователь решил изменить пароль, иначе не надо хешировать уже хешированный пароль
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
+            String hashedPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(hashedPassword);
+        }
         BeanUtils.copyProperties(user, userFromDB, "login");
+        System.out.println(userFromDB.getPassword());
         return userRepository.save(userFromDB);
     }
 
