@@ -55,6 +55,14 @@ public class User implements JSONSerialize{
         return status.get();
     }
 
+    public void setRole(String role) {
+        this.role.set(role);
+    }
+
+    public void setStatus(String status) {
+        this.status.set(status);
+    }
+
     public StringProperty loginProperty() {
         return login;
     }

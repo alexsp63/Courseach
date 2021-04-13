@@ -2,8 +2,7 @@ package program.controllers;
 
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import org.w3c.dom.Text;
 import program.Main;
@@ -31,6 +30,30 @@ public class AdminPageController {
     @FXML
     private Label adminErrorMessage;
 
+    @FXML
+    private TextField userFirstName;
+
+    @FXML
+    private TextField userLastName;
+
+    @FXML
+    private TextField userLogin;
+
+    @FXML
+    private ComboBox<String> userRole;
+
+    @FXML
+    private ComboBox<String> userStatus;
+
+    @FXML
+    private TableView<User> userTable;
+
+    @FXML
+    private TableColumn<User, String> userFirstNameColumn;
+
+    @FXML
+    private TableColumn<User, String> userLastNameColumn;
+
     private Main main;
     private RestAPI restAPI;
     private AnchorPane anchorPane;
@@ -45,11 +68,29 @@ public class AdminPageController {
         this.anchorPane = anchorPane;
         this.stringToMap = stringToMap;
         this.token = token;
+
+        userTable.setItems(main.getUserData());
     }
 
     @FXML
     private void initialize() {
+
         adminLogin.setEditable(false);
+        userFirstName.setEditable(false);
+        userLastName.setEditable(false);
+        userLogin.setEditable(false);
+
+        userFirstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        userLastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+
+        showUserDetails(null);
+
+        userTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, olValue, newValue) -> showUserDetails(newValue)
+        );
+
+        userRole.getItems().addAll("USER", "ADMIN");
+        userStatus.getItems().addAll("ACTIVE", "BANNED");
     }
 
     public void setAdmin(User admin){
@@ -58,6 +99,22 @@ public class AdminPageController {
         adminLogin.setText(admin.getLogin());
         adminNewPassword.setText("");
         adminRepeatedPassword.setText("");
+    }
+
+    public void showUserDetails(User user){
+        if (user != null) {
+            userFirstName.setText(user.getFirstName());
+            userLastName.setText(user.getLastName());
+            userLogin.setText(user.getLogin());
+            userRole.valueProperty().setValue(user.getRole());
+            userStatus.valueProperty().setValue(user.getStatus());
+        } else {
+            userFirstName.setText("");
+            userLastName.setText("");
+            userLogin.setText("");
+            userRole.setPromptText("");
+            userStatus.setPromptText("");
+        }
     }
 
     public static boolean isDouble(String str) {
@@ -124,6 +181,28 @@ public class AdminPageController {
     @FXML
     public void adminCancel(){
         setAdmin(admin);
+    }
+
+    @FXML
+    public void userCancel(){
+        User selectedUser = userTable.getSelectionModel().getSelectedItem();
+        showUserDetails(selectedUser);
+    }
+
+    @FXML
+    public void userSave(){
+        User selectedUser = userTable.getSelectionModel().getSelectedItem();
+        User oldUser = new User(selectedUser.getLogin(),
+                                selectedUser.getPassword(),
+                                selectedUser.getFirstName(),
+                                selectedUser.getLastName(),
+                                selectedUser.getRole(),
+                                selectedUser.getStatus());
+        selectedUser.setRole(userRole.getValue());
+        selectedUser.setStatus(userStatus.getValue());
+        if (oldUser.getRole() != selectedUser.getRole() || oldUser.getStatus() != selectedUser.getStatus()){
+            restAPI.putUser(selectedUser, token);
+        }
     }
 
     private boolean adminInputCheck() {

@@ -33,9 +33,9 @@ public class RestAPI {
         return HttpClass.PostRequest(AUTH, authorizationController.toJson());
     }
 
-    public List<User> getUsers(){
+    public List<User> getUsers(String token){
         List<User> result = new ArrayList<>();
-        String buffer = HttpClass.getRequest(SERVER_GET_USERS);
+        String buffer = HttpClass.getRequest(SERVER_GET_USERS, token);
         JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
 
         for (int i=0; i<jsonResult.size(); i++){

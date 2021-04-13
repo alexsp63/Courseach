@@ -57,7 +57,7 @@ public class AuthorizationController implements JSONSerialize {
     public void signInButton() throws IOException {
         message.setText("");
         String response = restAPI.auth(this);
-
+        //System.out.println(response);
         if (response == null){
 
             message.setText("Неверный логин или пароль!");
@@ -72,8 +72,6 @@ public class AuthorizationController implements JSONSerialize {
                 main.showAdminForm(currentUser, token);
             } else if (role.equals("USER")){
                 System.out.println(role);
-            } else {
-                message.setText("Кажется, кто-то что-то натворил с бд!");
             }
         }
     }

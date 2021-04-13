@@ -1,6 +1,8 @@
 package program;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -26,6 +28,7 @@ public class Main extends Application {
     private BorderPane rootLayout;
     private RestAPI restAPI;
     private StringToMap stringToMap;
+    private ObservableList<User> userData = FXCollections.observableArrayList();
 
 
     public Main() {
@@ -50,8 +53,9 @@ public class Main extends Application {
         form.setVisible(false);
     }
 
-    public void showOverview(AnchorPane form) {
-        form.setVisible(true);
+    public void updateTable(String token){
+        userData.clear();
+        userData.addAll(restAPI.getUsers(token));
     }
 
     public void initRootLayout() {
@@ -119,10 +123,15 @@ public class Main extends Application {
             AdminPageController controller = loader.getController();
             controller.setMain(admin, this, restAPI, adminForm, stringToMap, token);
             controller.setAdmin(admin);
+            updateTable(token);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ObservableList<User> getUserData() {
+        return userData;
     }
 
     public Stage getPrimaryStage() {
