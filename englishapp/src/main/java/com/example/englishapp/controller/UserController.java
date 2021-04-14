@@ -21,8 +21,10 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> readAll(){
-        final List<User> userList = userService.findAll();
+    public ResponseEntity<List<User>> getAll(
+            @RequestParam(required=false) Integer statisticsId
+    ){
+        final List<User> userList = userService.findAll(statisticsId);
         return userList != null && !userList.isEmpty()
                 ? new ResponseEntity<>(userList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

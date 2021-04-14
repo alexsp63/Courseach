@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,10 @@ public class UserService {
     private UserRepository userRepository;
 
 
-    public List<User> findAll(){
+    public List<User> findAll(Integer statisticsId){
+        if (statisticsId != null) {
+            return userRepository.findByStatistics_Id(statisticsId);
+        }
         return userRepository.findAll();
     }
 
@@ -46,7 +50,6 @@ public class UserService {
             user.setPassword(hashedPassword);
         }
         BeanUtils.copyProperties(user, userFromDB, "login");
-        System.out.println(userFromDB.getPassword());
         return userRepository.save(userFromDB);
     }
 

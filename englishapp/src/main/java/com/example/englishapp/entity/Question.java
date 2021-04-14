@@ -1,5 +1,7 @@
 package com.example.englishapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,6 +40,7 @@ public class Question {
     private Lesson lessonId;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @JsonBackReference(value = "question_answerHistories")
     private List<AnswerHistory> answerHistories;
 
 }

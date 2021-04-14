@@ -1,5 +1,7 @@
 package com.example.englishapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,9 +36,11 @@ public class User {
     private Status status;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference(value = "user_statistics")
     private List<Statistic> statistics;
 
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    @JsonBackReference(value = "user_answerHistories")
     private List<AnswerHistory> answerHistories;
 
     public void setLogin(String login) {
