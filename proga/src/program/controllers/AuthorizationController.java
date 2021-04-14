@@ -3,6 +3,7 @@ package program.controllers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -10,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import program.Main;
 import program.models.JSONSerialize;
 import program.models.User;
@@ -60,7 +63,11 @@ public class AuthorizationController implements JSONSerialize {
         //System.out.println(response);
         if (response == null){
 
+            message.setTextFill(Color.web("red"));
             message.setText("Неверный логин или пароль!");
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(e -> message.setText(""));
+            pause.play();
 
         } else {
             String login = stringToMap.createMap(response).get("login");

@@ -1,9 +1,12 @@
 package program.controllers;
 
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import org.w3c.dom.Text;
 import program.Main;
 import program.models.User;
@@ -53,6 +56,9 @@ public class AdminPageController {
 
     @FXML
     private TableColumn<User, String> userLastNameColumn;
+
+    @FXML
+    private Label userOkMessage;
 
     private Main main;
     private RestAPI restAPI;
@@ -174,6 +180,12 @@ public class AdminPageController {
                 oldAdmin.getPassword() != admin.getPassword()){
                 restAPI.putUser(admin, token);
                 setAdmin(admin);
+                adminErrorMessage.setTextFill(Color.web("green"));
+                adminErrorMessage.setText("Информация обновлена");
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                pause.setOnFinished(e -> adminErrorMessage.setText(""));
+                pause.play();
+                main.updateTable(token);
             }
         }
     }
@@ -201,6 +213,11 @@ public class AdminPageController {
         selectedUser.setRole(userRole.getValue());
         selectedUser.setStatus(userStatus.getValue());
         if (oldUser.getRole() != selectedUser.getRole() || oldUser.getStatus() != selectedUser.getStatus()){
+            userOkMessage.setTextFill(Color.web("green"));
+            userOkMessage.setText("Информация обновлена");
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(e -> userOkMessage.setText(""));
+            pause.play();
             restAPI.putUser(selectedUser, token);
         }
     }
@@ -211,7 +228,11 @@ public class AdminPageController {
             adminErrorMessage.setText("");
             return true;
         } else {
+            adminErrorMessage.setTextFill(Color.web("red"));
             adminErrorMessage.setText(message);
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(e -> adminErrorMessage.setText(""));
+            pause.play();
             return false;
         }
     }

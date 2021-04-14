@@ -1,10 +1,13 @@
 package program.controllers;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import program.Main;
 import program.models.User;
 import program.utils.RestAPI;
@@ -27,6 +30,9 @@ public class SignUpController {
 
     @FXML
     private PasswordField repeatPasswordText;
+
+    @FXML
+    private Label errorMes;
 
     private User user;
     private Main main;
@@ -105,11 +111,10 @@ public class SignUpController {
         if (message.length() == 0) {
             return true;
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Введены недопустимые или неверные данные!");
-            alert.setHeaderText("Проверьте все поля и попробуйте снова!");
-            alert.setContentText(message);
-            alert.showAndWait();
+            errorMes.setText(message);
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(e -> errorMes.setText(""));
+            pause.play();
             return false;
         }
     }
