@@ -47,7 +47,7 @@ public class AuthController {
             response.put("token", token);
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
-            System.out.println(e);
+            //System.out.println(e);
             return new ResponseEntity<>("Неверные логин или пароль!", HttpStatus.FORBIDDEN);
         }
     }

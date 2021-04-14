@@ -2,8 +2,8 @@ package com.example.englishapp.entity;
 
 public enum Permission {
 
-    QUESTIONS_READ("questions:read"),
-    QUESTIONS_WRITE("questions:write");
+    TABLE_READ("table:read"),
+    TABLE_WRITE("table:write");
 
     private final String permission;
 

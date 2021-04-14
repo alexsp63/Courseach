@@ -15,7 +15,10 @@ public class QuestionService {
     private QuestionRepository questionRepository;
 
 
-    public List<Question> findAll(){
+    public List<Question> findAll(Integer lessonId){
+        if (lessonId != null){
+            return questionRepository.findAllByLessonId_Id(lessonId);
+        }
         return questionRepository.findAll();
     }
 

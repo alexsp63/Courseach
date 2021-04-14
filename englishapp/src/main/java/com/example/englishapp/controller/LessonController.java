@@ -5,6 +5,7 @@ import com.example.englishapp.service.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class LessonController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('table:read')")
     public ResponseEntity<List<Lesson>> readAll(){
         final List<Lesson> lessonList = lessonService.findAll();
         return lessonList != null && !lessonList.isEmpty()
@@ -29,6 +31,7 @@ public class LessonController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('table:read')")
     public ResponseEntity<Lesson> getOne(@PathVariable(name = "id") Lesson lesson){
         final Lesson thisLesson = lesson;
         return thisLesson != null
@@ -37,12 +40,14 @@ public class LessonController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('table:write')")
     public ResponseEntity<?> create(@RequestBody Lesson lesson){
         Lesson newAnswer = lessonService.create(lesson);
         return new ResponseEntity<>(newAnswer, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('table:write')")
     public ResponseEntity<?> update(@PathVariable(name = "id") Lesson lessonFromDB,
                                     @RequestBody Lesson lesson)
     {
@@ -54,6 +59,7 @@ public class LessonController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('table:write')")
     public ResponseEntity<List<Lesson>> delete(@PathVariable("id") Lesson lesson) {
         if (lessonService.delete(lesson)) {
             return new ResponseEntity<>(HttpStatus.OK);

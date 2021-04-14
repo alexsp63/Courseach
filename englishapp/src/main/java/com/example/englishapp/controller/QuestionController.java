@@ -22,16 +22,18 @@ public class QuestionController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('questions:read')")
-    public ResponseEntity<List<Question>> readAll(){
-        final List<Question> questionList = questionService.findAll();
+    @PreAuthorize("hasAuthority('table:read')")
+    public ResponseEntity<List<Question>> getAll(
+            @RequestParam(required=false) Integer lessonId
+    ){
+        final List<Question> questionList = questionService.findAll(lessonId);
         return questionList != null && !questionList.isEmpty()
                 ? new ResponseEntity<>(questionList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('questions:read')")
+    @PreAuthorize("hasAuthority('table:read')")
     public ResponseEntity<Question> getOne(@PathVariable(name = "id") Question question){
         final Question thisQuestion = question;
         return thisQuestion != null
@@ -40,14 +42,14 @@ public class QuestionController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('questions:write')")
+    @PreAuthorize("hasAuthority('table:write')")
     public ResponseEntity<?> create(@RequestBody Question question){
         Question newAnswer = questionService.create(question);
         return new ResponseEntity<>(newAnswer, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('questions:write')")
+    @PreAuthorize("hasAuthority('table:write')")
     public ResponseEntity<?> update(@PathVariable(name = "id") Question questionFromDB,
                                     @RequestBody Question question)
     {
@@ -59,7 +61,7 @@ public class QuestionController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('questions:write')")
+    @PreAuthorize("hasAuthority('table:write')")
     public ResponseEntity<List<Question>> delete(@PathVariable("id") Question question) {
         if (questionService.delete(question)) {
             return new ResponseEntity<>(HttpStatus.OK);
