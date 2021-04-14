@@ -4,19 +4,20 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import program.controllers.AuthorizationController;
+import program.models.Lesson;
+import program.models.Question;
 import program.models.User;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class RestAPI {
 
     private static final String SERVER_URL = "http://localhost:8080";
     private static final String SERVER_GET_USERS = SERVER_URL + "/user";
     private static final String AUTH = SERVER_URL + "/login";
+    private static final String SERVER_GET_LESSONS = SERVER_URL + "/lesson";
+    private static final String SERVER_GET_QUESTIONS = SERVER_URL + "/question";
 
     public User parseUser(JsonObject thisUser){
         String login = thisUser.get("login").getAsString();
@@ -28,6 +29,29 @@ public class RestAPI {
         return new User(login, password, firstName, lastName, role, status);
     }
 
+    public Lesson parseLesson(JsonObject thisLesson){
+        Integer id = thisLesson.get("id").getAsInt();
+        String name = thisLesson.get("name").getAsString();
+        String text = thisLesson.get("text").getAsString();
+        String questionType = thisLesson.get("questionType").getAsString();
+
+        return new Lesson(name, text, questionType, id);
+    }
+
+    public Question parseQuestion(JsonObject thisQuestion){
+        Integer id = thisQuestion.get("id").getAsInt();
+        String text = thisQuestion.get("text").getAsString();
+        String correctAnswer = thisQuestion.get("correctAnswer").getAsString();
+        String description = thisQuestion.get("description").getAsString();
+        String incorrect1 = thisQuestion.get("incorrect1").toString();
+        String incorrect2 = thisQuestion.get("incorrect2").toString();
+        String incorrect3 = thisQuestion.get("incorrect3").toString();
+        Lesson lesson = parseLesson(thisQuestion.get("lessonId").getAsJsonObject());
+
+        //System.out.println(new Question(id, text, correctAnswer, description, incorrect1, incorrect2, incorrect3, lesson));
+
+        return new Question(id, text, correctAnswer, description, incorrect1, incorrect2, incorrect3, lesson);
+    }
 
     public String auth(AuthorizationController authorizationController) {
         return HttpClass.PostRequest(AUTH, authorizationController.toJson());
@@ -72,6 +96,34 @@ public class RestAPI {
     public void putUser(User user, String token){
         String jsonString = user.toJson();
         HttpClass.PutRequest(SERVER_GET_USERS + "/" + user.getLogin(), jsonString, token);
+    }
+
+    public List<Lesson> getLessons(String token){
+        List<Lesson> result = new ArrayList<>();
+        String buffer = HttpClass.getRequest(SERVER_GET_LESSONS, token);
+        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+
+        for (int i=0; i<jsonResult.size(); i++){
+            JsonObject thisLesson = jsonResult.get(i).getAsJsonObject();
+            Lesson newLesson = parseLesson(thisLesson);
+            result.add(newLesson);
+        }
+        return result;
+    }
+
+    public List<Question> getQuestionsByLesson(String token, Lesson lesson){
+        List<Question> result = new ArrayList<>();
+        String buffer = HttpClass.getRequest(SERVER_GET_QUESTIONS + "?lessonId=" + lesson.getId(),
+                                                token);
+        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+
+        for (int i=0; i<jsonResult.size(); i++){
+            JsonObject thisQuestion = jsonResult.get(i).getAsJsonObject();
+            Question question = parseQuestion(thisQuestion);
+            result.add(question);
+        }
+
+        return result;
     }
 
 }

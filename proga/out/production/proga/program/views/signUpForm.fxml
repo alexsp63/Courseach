@@ -32,8 +32,12 @@
                   <TextField fx:id="lastNameText" prefHeight="28.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button layoutX="272.0" layoutY="342.0" mnemonicParsing="false" onAction="#signUpClicked" prefHeight="35.0" prefWidth="154.0" styleClass="button2" stylesheets="@../style/myStyle.css" text="Зарегистрироваться" />
-            <Button layoutX="272.0" layoutY="386.0" mnemonicParsing="false" onAction="#cancelIsClicked" prefHeight="35.0" prefWidth="154.0" styleClass="button2" stylesheets="@../style/myStyle.css" text="Назад" />
+            <VBox layoutX="272.0" layoutY="342.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#signUpClicked" prefHeight="35.0" prefWidth="154.0" styleClass="button2" stylesheets="@../style/myStyle.css" text="Зарегистрироваться" />
+                  <Button mnemonicParsing="false" onAction="#cancelIsClicked" prefHeight="35.0" prefWidth="154.0" styleClass="button2" stylesheets="@../style/myStyle.css" text="Назад" />
+               </children>
+            </VBox>
             <Label fx:id="errorMes" alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="304.0" prefHeight="28.0" prefWidth="603.0" styleClass="labelMessage" stylesheets="@../style/myStyle.css" />
          </children></AnchorPane>
    </children>

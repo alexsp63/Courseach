@@ -7,8 +7,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import org.w3c.dom.Text;
 import program.Main;
+import program.models.Lesson;
 import program.models.User;
 import program.utils.RestAPI;
 import program.utils.StringToMap;
@@ -60,6 +60,21 @@ public class AdminPageController {
     @FXML
     private Label userOkMessage;
 
+    @FXML
+    private TableView<Lesson> lessonTable;
+
+    @FXML
+    private TableColumn<Lesson, String> lessonColumnName;
+
+    @FXML
+    private Label lessonName;
+
+    @FXML
+    private Label lessonText;
+
+    @FXML
+    private Label lessonQuestionType;
+
     private Main main;
     private RestAPI restAPI;
     private AnchorPane anchorPane;
@@ -76,6 +91,7 @@ public class AdminPageController {
         this.token = token;
 
         userTable.setItems(main.getUserData());
+        lessonTable.setItems(main.getLessonData());
     }
 
     @FXML
@@ -89,10 +105,17 @@ public class AdminPageController {
         userFirstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         userLastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
 
+        lessonColumnName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+
         showUserDetails(null);
+        showLessonDetails(null);
 
         userTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, olValue, newValue) -> showUserDetails(newValue)
+        );
+
+        lessonTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, olValue, newValue) -> showLessonDetails(newValue)
         );
 
         userRole.getItems().addAll("USER", "ADMIN");
@@ -120,6 +143,18 @@ public class AdminPageController {
             userLogin.setText("");
             userRole.setPromptText("");
             userStatus.setPromptText("");
+        }
+    }
+
+    public void showLessonDetails(Lesson lesson){
+        if (lesson != null){
+            lessonName.setText(lesson.getName());
+            lessonText.setText(lesson.getTextText());
+            lessonQuestionType.setText(lesson.getQuestionType());
+        } else {
+            lessonName.setText("");
+            lessonText.setText("");
+            lessonQuestionType.setText("");
         }
     }
 
@@ -185,7 +220,7 @@ public class AdminPageController {
                 PauseTransition pause = new PauseTransition(Duration.seconds(1));
                 pause.setOnFinished(e -> adminErrorMessage.setText(""));
                 pause.play();
-                main.updateTable(token);
+                main.updateUserTable(token);
             }
         }
     }
@@ -204,21 +239,31 @@ public class AdminPageController {
     @FXML
     public void userSave(){
         User selectedUser = userTable.getSelectionModel().getSelectedItem();
-        User oldUser = new User(selectedUser.getLogin(),
-                                selectedUser.getPassword(),
-                                selectedUser.getFirstName(),
-                                selectedUser.getLastName(),
-                                selectedUser.getRole(),
-                                selectedUser.getStatus());
-        selectedUser.setRole(userRole.getValue());
-        selectedUser.setStatus(userStatus.getValue());
-        if (oldUser.getRole() != selectedUser.getRole() || oldUser.getStatus() != selectedUser.getStatus()){
-            userOkMessage.setTextFill(Color.web("green"));
-            userOkMessage.setText("Информация обновлена");
-            PauseTransition pause = new PauseTransition(Duration.seconds(1));
-            pause.setOnFinished(e -> userOkMessage.setText(""));
-            pause.play();
-            restAPI.putUser(selectedUser, token);
+        if (selectedUser != null){
+            User oldUser = new User(selectedUser.getLogin(),
+                                    selectedUser.getPassword(),
+                                    selectedUser.getFirstName(),
+                                    selectedUser.getLastName(),
+                                    selectedUser.getRole(),
+                                    selectedUser.getStatus());
+            selectedUser.setRole(userRole.getValue());
+            selectedUser.setStatus(userStatus.getValue());
+            if (oldUser.getRole() != selectedUser.getRole() || oldUser.getStatus() != selectedUser.getStatus()) {
+                userOkMessage.setTextFill(Color.web("green"));
+                userOkMessage.setText("Информация обновлена");
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                pause.setOnFinished(e -> userOkMessage.setText(""));
+                pause.play();
+                restAPI.putUser(selectedUser, token);
+        }
+        }
+    }
+
+    @FXML
+    public void showQuestions(){
+        Lesson selectedLesson = lessonTable.getSelectionModel().getSelectedItem();
+        if (selectedLesson != null) {
+            main.showLessonQuestions(token, selectedLesson);
         }
     }
 
