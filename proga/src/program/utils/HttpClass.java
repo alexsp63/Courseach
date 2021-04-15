@@ -79,6 +79,29 @@ public class HttpClass {
         }
     }
 
+    public static String PostRequest(String urlString, String jsonString, String token){
+        try{
+            URL url = new URL(urlString);
+            URLConnection conn = url.openConnection();
+            HttpURLConnection httpURLConnection = (HttpURLConnection) conn;
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+            byte[] out = jsonString.getBytes(StandardCharsets.UTF_8);
+            int len = out.length;
+            httpURLConnection.setFixedLengthStreamingMode(len);
+            httpURLConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            httpURLConnection.setRequestProperty("Authorization", token);
+            httpURLConnection.connect();
+            try (OutputStream outputStream = httpURLConnection.getOutputStream()){
+                outputStream.write(out);
+            }
+            return getString(conn);
+        } catch (IOException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String PutRequest(String urlString, String jsonString, String token){
         try {
             URL url = new URL(urlString);
@@ -102,12 +125,13 @@ public class HttpClass {
         }
     }
 
-    public static boolean DeleteRequest(String urlString){
+    public static boolean DeleteRequest(String urlString, String token){
         try{
             URL url = new URL(urlString);
             URLConnection conn = url.openConnection();
             HttpURLConnection httpURLConnection = (HttpURLConnection) conn;
             httpURLConnection.setRequestMethod("DELETE");
+            httpURLConnection.setRequestProperty("Authorization", token);
             httpURLConnection.setDoOutput(true);
             httpURLConnection.connect();
             httpURLConnection.getResponseCode();

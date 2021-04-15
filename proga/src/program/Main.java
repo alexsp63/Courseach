@@ -13,10 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import program.controllers.AdminPageController;
-import program.controllers.AuthorizationController;
-import program.controllers.LessonQuestionsController;
-import program.controllers.SignUpController;
+import program.controllers.*;
 import program.models.Lesson;
 import program.models.Question;
 import program.models.User;
@@ -64,6 +61,7 @@ public class Main extends Application {
 
     public void updateLessonTable(String token){
         lessonData.clear();
+        //System.out.println(restAPI.getLessons(token));
         lessonData.addAll(restAPI.getLessons(token));
     }
 
@@ -168,6 +166,33 @@ public class Main extends Application {
             dialogueStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public boolean showLessonAddEditForm(Lesson lesson, String token) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/lessonAddEditForm.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage lessonStage = new Stage();
+            lessonStage.setTitle("Ввод данных урока");
+            lessonStage.initModality(Modality.WINDOW_MODAL);
+            lessonStage.initOwner(primaryStage);
+
+            Scene scene = new Scene(page);
+            lessonStage.setScene(scene);
+            LessonAddEditController controller = loader.getController();
+
+            controller.setStage(lessonStage, this, restAPI, token);
+            controller.setLesson(lesson);
+
+            lessonStage.showAndWait();
+
+            return controller.isSaveIsClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 

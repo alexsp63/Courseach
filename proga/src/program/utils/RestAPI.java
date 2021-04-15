@@ -126,4 +126,21 @@ public class RestAPI {
         return result;
     }
 
+    public boolean deleteLesson(Lesson lesson, String token){
+        Integer id = lesson.getId();
+        if (id == null){
+            return false;
+        }
+        return HttpClass.DeleteRequest(SERVER_GET_LESSONS + "/" + id, token);
+    }
+
+    public void postLesson(Lesson lesson, String token){
+
+        HttpClass.PostRequest(SERVER_GET_LESSONS, lesson.toJson(), token);
+    }
+
+    public void putLesson(Lesson lesson, String token){
+        String jsonString = lesson.toJson();
+        HttpClass.PutRequest(SERVER_GET_LESSONS + "/" + lesson.getId(), jsonString, token);
+    }
 }

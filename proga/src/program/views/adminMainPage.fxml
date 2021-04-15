@@ -152,16 +152,16 @@
                                                 <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="864.0" text="Информация об уроке" />
                                                 <GridPane layoutX="20.0" layoutY="57.0" prefHeight="319.0" prefWidth="823.0">
                                                   <columnConstraints>
-                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="407.0" minWidth="10.0" prefWidth="190.00001525878906" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="635.9999847412109" minWidth="10.0" prefWidth="632.9999847412109" />
                                                   </columnConstraints>
                                                   <rowConstraints>
-                                                    <RowConstraints maxHeight="89.4" minHeight="8.799992370605466" prefHeight="34.4" vgrow="SOMETIMES" />
-                                                    <RowConstraints maxHeight="260.2" minHeight="10.0" prefHeight="248.79999999999998" vgrow="SOMETIMES" />
+                                                    <RowConstraints maxHeight="89.4" minHeight="8.799992370605466" prefHeight="37.4" vgrow="SOMETIMES" />
+                                                    <RowConstraints maxHeight="260.2" minHeight="10.0" prefHeight="245.79999999999998" vgrow="SOMETIMES" />
                                                       <RowConstraints maxHeight="49.39999999999998" minHeight="10.0" prefHeight="34.80000000000001" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
-                                                      <Label alignment="TOP_LEFT" prefHeight="29.0" prefWidth="410.0" text="Название урока:" />
+                                                      <Label alignment="TOP_LEFT" prefHeight="30.0" prefWidth="411.0" text="Название урока:" />
                                                       <Label alignment="TOP_LEFT" prefHeight="247.0" prefWidth="412.0" text="Текст урока: " GridPane.rowIndex="1" />
                                                       <Label alignment="TOP_LEFT" prefHeight="33.0" prefWidth="410.0" text="Тип вопросов: " GridPane.rowIndex="2" />
                                                       <Label fx:id="lessonName" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="410.0" text="Label" GridPane.columnIndex="1" />
@@ -172,9 +172,9 @@
                                                 <Button layoutX="729.0" layoutY="388.0" mnemonicParsing="false" onAction="#showQuestions" prefHeight="30.0" prefWidth="123.0" text="Вопросы" />
                                                 <HBox layoutX="463.0" layoutY="428.3999938964844" spacing="10.0">
                                                    <children>
-                                                      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="123.0" text="Добавить" />
-                                                      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="123.0" text="Изменить" />
-                                                      <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="123.0" text="Удалить" />
+                                                      <Button mnemonicParsing="false" onAction="#addLesson" prefHeight="30.0" prefWidth="123.0" text="Добавить" />
+                                                      <Button mnemonicParsing="false" onAction="#editLesson" prefHeight="30.0" prefWidth="123.0" text="Изменить" />
+                                                      <Button mnemonicParsing="false" onAction="#deleteLesson" prefHeight="30.0" prefWidth="123.0" text="Удалить" />
                                                    </children>
                                                 </HBox>
                                              </children>

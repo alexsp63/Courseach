@@ -13,6 +13,8 @@ import program.models.User;
 import program.utils.RestAPI;
 import program.utils.StringToMap;
 
+import java.io.IOException;
+
 public class AdminPageController {
 
     @FXML
@@ -264,6 +266,55 @@ public class AdminPageController {
         Lesson selectedLesson = lessonTable.getSelectionModel().getSelectedItem();
         if (selectedLesson != null) {
             main.showLessonQuestions(token, selectedLesson);
+        }
+    }
+
+    public void showAlert(String mes1, String mes2, String mes3){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(main.getPrimaryStage());
+        alert.setTitle(mes1);
+        alert.setHeaderText(mes2);
+        alert.setContentText(mes3);
+
+        alert.showAndWait();
+    }
+
+    @FXML
+    public void addLesson() throws IOException {
+        //тут нам не важно, выбрана какая-то запись или нет: новый lesson есть новый lesson
+        Lesson newLesson = new Lesson();
+        boolean okIsClicked = main.showLessonAddEditForm(newLesson, token);
+        if (okIsClicked){
+            //значит, все данные заполнены корректно, и можно добавлять его к остальным
+            restAPI.postLesson(newLesson, token);
+            main.updateLessonTable(token);
+        }
+    }
+
+    @FXML
+    public void editLesson() throws IOException {
+        Lesson selectedLesson = lessonTable.getSelectionModel().getSelectedItem();
+        if (selectedLesson != null) {
+            boolean okIsClicked = main.showLessonAddEditForm(selectedLesson, token);
+            if (okIsClicked) {
+                restAPI.putLesson(selectedLesson, token);
+                main.updateLessonTable(token);
+                showLessonDetails(selectedLesson);
+            }
+        } else {
+            showAlert("Не выбран урок!", "Урок для изменеия не выбран!", "Пожалуйста, выберите урок!");
+        }
+    }
+
+    @FXML
+    public void deleteLesson(){
+        Lesson selectedLesson = lessonTable.getSelectionModel().getSelectedItem();
+        if (selectedLesson != null){
+            if (restAPI.deleteLesson(selectedLesson, token)){
+                lessonTable.getItems().remove(selectedLesson);
+            }
+        } else {
+            showAlert("Вы не выбрали урок!", "Урок для удаления не выбран!", "Пожалуйста, выберите урок и попробуйте снова!");
         }
     }
 

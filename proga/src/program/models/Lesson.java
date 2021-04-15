@@ -1,17 +1,14 @@
 package program.models;
 
 import com.google.gson.Gson;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Lesson implements JSONSerialize{
 
-    private IntegerProperty id;
+    private SimpleObjectProperty<Integer> id;
     private StringProperty name;
     private StringProperty text;
     private StringProperty questionType;
@@ -31,7 +28,7 @@ public class Lesson implements JSONSerialize{
         this.name = new SimpleStringProperty(name);
         this.text = new SimpleStringProperty(text);
         this.questionType = new SimpleStringProperty(questionType);
-        this.id = new SimpleIntegerProperty(id);
+        this.id = new SimpleObjectProperty<Integer>(id);
     }
 
     public int getId() {
