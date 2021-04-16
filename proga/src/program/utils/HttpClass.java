@@ -3,15 +3,12 @@ package program.utils;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
 
 public class HttpClass {
 
+
     private static String getString(URLConnection conn){
         try {
-            //если страница возвращается, значит, не произошёл переход в корень /, где у меня ничего нет,
-            //а именно туда и попадают после успешной авторизации
             StringBuilder sb = new StringBuilder();
             InputStream is = new BufferedInputStream(conn.getInputStream());
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -56,7 +53,7 @@ public class HttpClass {
         }
     }
 
-    //post для регистрации, тут нет никакого токена, опять же пермит у меня для всех на регистрацию
+    //post для регистрации и авторизации, тут нет никакого токена, опять же пермит у меня для всех на регистрацию
     public static String PostRequest(String urlString, String jsonString){
         try{
             URL url = new URL(urlString);

@@ -1,6 +1,8 @@
 package program.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -9,14 +11,65 @@ import program.models.Lesson;
 import program.models.Question;
 import program.utils.RestAPI;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class LessonQuestionsController {
 
     @FXML
-    private TableView<Question> questionTable4;
+    private TableView<Question> questionTable;
 
     @FXML
-    private TableColumn<Question, String> questionTable4Column;
+    private TableColumn<Question, String> questionTableColumn;
+
+    @FXML
+    private Label descriptionLabel;
+
+    @FXML
+    private Label lastLabel;
+
+    @FXML
+    private Label questionText;
+
+    @FXML
+    private Label questionDescription;
+
+    @FXML
+    private Label correctAnswer;
+
+    @FXML
+    private Label incorrect1;
+
+    @FXML
+    private Label incorrect2;
+
+    @FXML
+    private Label incorrect3;
+
+    @FXML
+    private Label incorrect1Label;
+
+    @FXML
+    private Label incorrect2Label;
+
+    @FXML
+    private Button addButton;
+
+    @FXML
+    private Button editButton;
+
+    @FXML
+    private Button deleteButton;
+
+    @FXML
+    private Label message;
+
+    @FXML
+    private Label textLabel;
+
+    @FXML
+    private Label corrLabel;
 
     private Lesson lesson;
     private RestAPI restAPI;
@@ -31,12 +84,80 @@ public class LessonQuestionsController {
         this.lesson = lesson;
         this.token = token;
 
-        questionTable4.setItems(main.getQuestions4Data());
+        questionTable.setItems(main.getQuestionsData());
+        descriptionLabel.setWrapText(true);
+        lastLabel.setWrapText(true);
+
+        if (restAPI.getQuestionsByLesson(token, lesson).size() == 10){
+            addButton.setDisable(true);
+        }
+
+        editButton.setDisable(true);
+        deleteButton.setDisable(true);
+
     }
 
     @FXML
     private void initialize(){
 
-        questionTable4Column.setCellValueFactory(cellData -> cellData.getValue().textProperty());
+        questionTableColumn.setCellValueFactory(cellData -> cellData.getValue().textProperty());
+        showQuestionDetails(null);
+
+        questionTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, olValue, newValue) -> showQuestionDetails(newValue)
+        );
+    }
+
+    public void showQuestionDetails(Question question){
+
+        if (question != null){
+            editButton.setDisable(false);
+            deleteButton.setDisable(false);
+            message.setText("Информация о вопросе");
+            textLabel.setText("Текст вопроса: ");
+            questionText.setText(question.getText());
+            descriptionLabel.setText("Описание (небольшое правило, которое будет показываться ученику при ответе на вопрос, обоснование ответа):");
+            questionDescription.setText(question.getDescription());
+            corrLabel.setText("Правильный ответ: ");
+            correctAnswer.setText(question.getCorrectAnswer());
+            if (question.getType().equals("2 варианта ответа")){
+                incorrect1Label.setText("Неправильный ответ:");
+                incorrect1.setText(question.getIncorrect1());
+            } else if (question.getType().equals("4 варианта ответа")){
+                incorrect1Label.setText("Неправильный ответ:");
+                incorrect1.setText(question.getIncorrect1());
+                incorrect2Label.setText("Ещё один неправильный ответ:");
+                incorrect2.setText(question.getIncorrect2());
+                incorrect2Label.setText("И ещё один неправильный ответ:");
+                incorrect3.setText(question.getIncorrect3());
+            }
+        } else {
+            message.setText("Выберите вопрос для отображения информации по нему");
+            textLabel.setText("");
+            questionText.setText("");
+            descriptionLabel.setText("");
+            descriptionLabel.setText("");
+            corrLabel.setText("");
+            correctAnswer.setText("");
+            incorrect1Label.setText("");
+            incorrect1.setText("");
+            incorrect2Label.setText("");
+            incorrect2.setText("");
+            lastLabel.setText("");
+            incorrect3.setText("");
+        }
+    }
+
+    @FXML
+    private void addQuestion(){
+
+    }
+
+    @FXML
+    private void editQuestion(){
+    }
+
+    @FXML
+    private void deleteQuestion(){
     }
 }

@@ -21,6 +21,7 @@ import program.utils.RestAPI;
 import program.utils.StringToMap;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main extends Application {
 
@@ -65,10 +66,12 @@ public class Main extends Application {
         lessonData.addAll(restAPI.getLessons(token));
     }
 
-    public void updateQuestion4Data(String token, Lesson lesson){
+    public void updateQuestionData(String token, Lesson lesson){
         questions4Data.clear();
         //System.out.println(restAPI.getQuestionsByLesson(token, lesson));
-        questions4Data.addAll(restAPI.getQuestionsByLesson(token, lesson));
+        List<Question> questions = restAPI.getQuestionsByLesson(token, lesson);
+
+        questions4Data.addAll(questions);
     }
 
 
@@ -161,7 +164,7 @@ public class Main extends Application {
             LessonQuestionsController controller = loader.getController();
 
             controller.setStage(dialogueStage, this, restAPI, lesson, token);
-            updateQuestion4Data(token, lesson);
+            updateQuestionData(token, lesson);
 
             dialogueStage.showAndWait();
         } catch (IOException e) {
@@ -204,7 +207,7 @@ public class Main extends Application {
         return lessonData;
     }
 
-    public ObservableList<Question> getQuestions4Data() {
+    public ObservableList<Question> getQuestionsData() {
         return questions4Data;
     }
 

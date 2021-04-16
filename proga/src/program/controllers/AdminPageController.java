@@ -77,6 +77,21 @@ public class AdminPageController {
     @FXML
     private Label lessonQuestionType;
 
+    @FXML
+    private Button userSaveButton;
+
+    @FXML
+    private Button userClearButton;
+
+    @FXML
+    private Button lessonQuestionsButton;
+
+    @FXML
+    private Button lessonEditButton;
+
+    @FXML
+    private Button lessonDeleteButton;
+
     private Main main;
     private RestAPI restAPI;
     private AnchorPane anchorPane;
@@ -103,6 +118,13 @@ public class AdminPageController {
         userFirstName.setEditable(false);
         userLastName.setEditable(false);
         userLogin.setEditable(false);
+
+        userSaveButton.setDisable(true);
+        userClearButton.setDisable(true);
+
+        lessonQuestionsButton.setDisable(true);
+        lessonEditButton.setDisable(true);
+        lessonDeleteButton.setDisable(true);
 
         userFirstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         userLastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
@@ -134,6 +156,8 @@ public class AdminPageController {
 
     public void showUserDetails(User user){
         if (user != null) {
+            userSaveButton.setDisable(false);
+            userClearButton.setDisable(false);
             userFirstName.setText(user.getFirstName());
             userLastName.setText(user.getLastName());
             userLogin.setText(user.getLogin());
@@ -150,6 +174,9 @@ public class AdminPageController {
 
     public void showLessonDetails(Lesson lesson){
         if (lesson != null){
+            lessonQuestionsButton.setDisable(false);
+            lessonEditButton.setDisable(false);
+            lessonDeleteButton.setDisable(false);
             lessonName.setText(lesson.getName());
             lessonText.setText(lesson.getTextText());
             lessonQuestionType.setText(lesson.getQuestionType());
@@ -266,17 +293,8 @@ public class AdminPageController {
         Lesson selectedLesson = lessonTable.getSelectionModel().getSelectedItem();
         if (selectedLesson != null) {
             main.showLessonQuestions(token, selectedLesson);
+
         }
-    }
-
-    public void showAlert(String mes1, String mes2, String mes3){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.initOwner(main.getPrimaryStage());
-        alert.setTitle(mes1);
-        alert.setHeaderText(mes2);
-        alert.setContentText(mes3);
-
-        alert.showAndWait();
     }
 
     @FXML
@@ -301,8 +319,6 @@ public class AdminPageController {
                 main.updateLessonTable(token);
                 showLessonDetails(selectedLesson);
             }
-        } else {
-            showAlert("Не выбран урок!", "Урок для изменеия не выбран!", "Пожалуйста, выберите урок!");
         }
     }
 
@@ -313,8 +329,6 @@ public class AdminPageController {
             if (restAPI.deleteLesson(selectedLesson, token)){
                 lessonTable.getItems().remove(selectedLesson);
             }
-        } else {
-            showAlert("Вы не выбрали урок!", "Урок для удаления не выбран!", "Пожалуйста, выберите урок и попробуйте снова!");
         }
     }
 

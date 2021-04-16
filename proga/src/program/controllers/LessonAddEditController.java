@@ -60,10 +60,11 @@ public class LessonAddEditController {
             lessonNameText.setText(lesson.getName());
             lessonTextText.setText(lesson.getTextText());
             lessonQuestionType.setPromptText(lesson.getQuestionType());
-        } else {
-            if (restAPI.getQuestionsByLesson(token, lesson).size() != 0){
+            if (restAPI.getQuestionsByLesson(token, this.lesson).size() != 0){
                 lessonQuestionType.setDisable(true); //если уже есть вопросы, удовлетворяющие одному типу, то нельзя его менять
             }
+        } else {
+            lessonQuestionType.setDisable(false);
             lessonNameText.setText("");
             lessonTextText.setText("");
             lessonQuestionType.setPromptText("");

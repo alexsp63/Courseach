@@ -83,6 +83,9 @@
                                               <TableColumn fx:id="userFirstNameColumn" prefWidth="138.60000878572464" text="Имя" />
                                               <TableColumn fx:id="userLastNameColumn" prefWidth="148.6000213623047" text="Фамилия" />
                                             </columns>
+                                              <columnResizePolicy>
+                                                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                              </columnResizePolicy>
                                           </TableView>
                                        </children></AnchorPane>
                                     <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="508.0" prefWidth="634.0">
@@ -117,8 +120,8 @@
                                                 </GridPane>
                                                 <VBox layoutX="277.0" layoutY="380.0" spacing="8.0">
                                                    <children>
-                                                      <Button mnemonicParsing="false" onAction="#userSave" prefHeight="36.0" prefWidth="161.0" text="Сохранить" />
-                                                      <Button mnemonicParsing="false" onAction="#userCancel" prefHeight="36.0" prefWidth="161.0" text="Очистить изменения" />
+                                                      <Button fx:id="userSaveButton" mnemonicParsing="false" onAction="#userSave" prefHeight="36.0" prefWidth="161.0" text="Сохранить" />
+                                                      <Button fx:id="userClearButton" mnemonicParsing="false" onAction="#userCancel" prefHeight="36.0" prefWidth="161.0" text="Очистить изменения" />
                                                    </children>
                                                 </VBox>
                                                 <Label fx:id="userOkMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="339.0" prefHeight="30.0" prefWidth="700.0" styleClass="labelMessage" stylesheets="@../style/myStyle.css" />
@@ -134,14 +137,17 @@
                            <content>
                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <SplitPane dividerPositions="0.1724470134874759" layoutX="204.0" layoutY="33.0" prefHeight="509.6" prefWidth="1040.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <SplitPane dividerPositions="0.17533718689788053" layoutX="204.0" layoutY="33.0" prefHeight="509.6" prefWidth="1040.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <items>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="508.0" prefWidth="188.0">
                                        <children>
-                                          <TableView fx:id="lessonTable" layoutX="14.0" layoutY="54.0" prefHeight="508.0" prefWidth="164.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
+                                          <TableView fx:id="lessonTable" layoutX="14.0" layoutY="54.0" prefHeight="508.0" prefWidth="175.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <columns>
                                                 <TableColumn fx:id="lessonColumnName" prefWidth="177.60000878572464" text="Название урока" />
                                              </columns>
+                                              <columnResizePolicy>
+                                                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                              </columnResizePolicy>
                                           </TableView>
                                        </children>
                                     </AnchorPane>
@@ -169,12 +175,12 @@
                                                       <Label fx:id="lessonQuestionType" alignment="TOP_LEFT" prefHeight="33.0" prefWidth="412.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                    </children>
                                                 </GridPane>
-                                                <Button layoutX="729.0" layoutY="388.0" mnemonicParsing="false" onAction="#showQuestions" prefHeight="30.0" prefWidth="123.0" text="Вопросы" />
+                                                <Button fx:id="lessonQuestionsButton" layoutX="729.0" layoutY="388.0" mnemonicParsing="false" onAction="#showQuestions" prefHeight="30.0" prefWidth="123.0" text="Вопросы" />
                                                 <HBox layoutX="463.0" layoutY="428.3999938964844" spacing="10.0">
                                                    <children>
                                                       <Button mnemonicParsing="false" onAction="#addLesson" prefHeight="30.0" prefWidth="123.0" text="Добавить" />
-                                                      <Button mnemonicParsing="false" onAction="#editLesson" prefHeight="30.0" prefWidth="123.0" text="Изменить" />
-                                                      <Button mnemonicParsing="false" onAction="#deleteLesson" prefHeight="30.0" prefWidth="123.0" text="Удалить" />
+                                                      <Button fx:id="lessonEditButton" mnemonicParsing="false" onAction="#editLesson" prefHeight="30.0" prefWidth="123.0" text="Изменить" />
+                                                      <Button fx:id="lessonDeleteButton" mnemonicParsing="false" onAction="#deleteLesson" prefHeight="30.0" prefWidth="123.0" text="Удалить" />
                                                    </children>
                                                 </HBox>
                                              </children>

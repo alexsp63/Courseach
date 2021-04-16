@@ -57,17 +57,23 @@ public class RestAPI {
         return HttpClass.PostRequest(AUTH, authorizationController.toJson());
     }
 
+
+
     public List<User> getUsers(String token){
         List<User> result = new ArrayList<>();
-        String buffer = HttpClass.getRequest(SERVER_GET_USERS, token);
-        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        try {
+            String buffer = HttpClass.getRequest(SERVER_GET_USERS, token);
+            JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
 
-        for (int i=0; i<jsonResult.size(); i++){
-            JsonObject thisUser = jsonResult.get(i).getAsJsonObject();
-            User newUser = parseUser(thisUser);
-            result.add(newUser);
+            for (int i = 0; i < jsonResult.size(); i++) {
+                JsonObject thisUser = jsonResult.get(i).getAsJsonObject();
+                User newUser = parseUser(thisUser);
+                result.add(newUser);
+            }
+            return result;
+        } catch (NullPointerException e){
+            return result;
         }
-        return result;
     }
 
     //это уже после авторизации
@@ -100,30 +106,39 @@ public class RestAPI {
 
     public List<Lesson> getLessons(String token){
         List<Lesson> result = new ArrayList<>();
-        String buffer = HttpClass.getRequest(SERVER_GET_LESSONS, token);
-        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        try {
+            String buffer = HttpClass.getRequest(SERVER_GET_LESSONS, token);
+            JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
 
-        for (int i=0; i<jsonResult.size(); i++){
-            JsonObject thisLesson = jsonResult.get(i).getAsJsonObject();
-            Lesson newLesson = parseLesson(thisLesson);
-            result.add(newLesson);
+            for (int i=0; i<jsonResult.size(); i++){
+                JsonObject thisLesson = jsonResult.get(i).getAsJsonObject();
+                Lesson newLesson = parseLesson(thisLesson);
+                result.add(newLesson);
+            }
+            return result;
+        } catch (NullPointerException e){
+            return result;
         }
-        return result;
     }
 
     public List<Question> getQuestionsByLesson(String token, Lesson lesson){
         List<Question> result = new ArrayList<>();
-        String buffer = HttpClass.getRequest(SERVER_GET_QUESTIONS + "?lessonId=" + lesson.getId(),
-                                                token);
-        JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        try {
+            String buffer = HttpClass.getRequest(SERVER_GET_QUESTIONS + "?lessonId=" + lesson.getId(),
+                    token);
 
-        for (int i=0; i<jsonResult.size(); i++){
-            JsonObject thisQuestion = jsonResult.get(i).getAsJsonObject();
-            Question question = parseQuestion(thisQuestion);
-            result.add(question);
+            JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+
+            for (int i = 0; i < jsonResult.size(); i++) {
+                JsonObject thisQuestion = jsonResult.get(i).getAsJsonObject();
+                Question question = parseQuestion(thisQuestion);
+                result.add(question);
+            }
+
+            return result;
+        } catch (NullPointerException e){
+            return result;
         }
-
-        return result;
     }
 
     public boolean deleteLesson(Lesson lesson, String token){
