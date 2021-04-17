@@ -1,13 +1,19 @@
 package program.models;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
+import javafx.beans.property.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class Question {
+import java.util.HashMap;
+import java.util.Map;
 
-    private IntegerProperty id;
+public class Question implements JSONSerialize{
+
+    private SimpleObjectProperty<Integer> id;
     private StringProperty text;
     private StringProperty correctAnswer;
     private StringProperty description;
@@ -15,10 +21,10 @@ public class Question {
     private StringProperty incorrect2;
     private StringProperty incorrect3;
     private Lesson lesson;
-    private StringProperty type;
+    private SimpleObjectProperty<String> type;
 
     public Question(){
-        this(null, null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null);
     }
 
     public Question(String text, String correctAnswer, String description, Lesson lesson){
@@ -31,12 +37,12 @@ public class Question {
         this.incorrect2 = null;
         this.incorrect3 = null;
         this.lesson = lesson;
-        this.type = new SimpleStringProperty(lesson.getQuestionType());
+        this.type = new SimpleObjectProperty<>(lesson.getQuestionType());
     }
 
     public Question(Integer id, String text, String correctAnswer, String description, Lesson lesson){
         //для получаения вопроса с открытым ответом
-        this.id = new SimpleIntegerProperty(id);
+        this.id = new SimpleObjectProperty<Integer>(id);
         this.text = new SimpleStringProperty(text);
         this.correctAnswer = new SimpleStringProperty(correctAnswer);
         this.description = new SimpleStringProperty(description);
@@ -44,7 +50,7 @@ public class Question {
         this.incorrect2 = null;
         this.incorrect3 = null;
         this.lesson = lesson;
-        this.type = new SimpleStringProperty(lesson.getQuestionType());
+        this.type = new SimpleObjectProperty<>(lesson.getQuestionType());
     }
 
     public Question(String text, String correctAnswer, String incorrect1, String description, Lesson lesson){
@@ -57,12 +63,12 @@ public class Question {
         this.incorrect2 = null;
         this.incorrect3 = null;
         this.lesson = lesson;
-        this.type = new SimpleStringProperty(lesson.getQuestionType());
+        this.type = new SimpleObjectProperty<>(lesson.getQuestionType());
     }
 
     public Question(Integer id, String text, String correctAnswer, String incorrect1, String description, Lesson lesson){
         //получение вопроса с двумя вариантами ответа
-        this.id = new SimpleIntegerProperty(id);
+        this.id = new SimpleObjectProperty<Integer>(id);
         this.text = new SimpleStringProperty(text);
         this.correctAnswer = new SimpleStringProperty(correctAnswer);
         this.description = new SimpleStringProperty(description);
@@ -70,7 +76,7 @@ public class Question {
         this.incorrect2 = null;
         this.incorrect3 = null;
         this.lesson = lesson;
-        this.type = new SimpleStringProperty(lesson.getQuestionType());
+        this.type = new SimpleObjectProperty<>(lesson.getQuestionType());
     }
 
     public Question(String text, String correctAnswer, String incorrect1, String incorrect2, String incorrect3, String description, Lesson lesson){
@@ -83,12 +89,16 @@ public class Question {
         this.incorrect2 = new SimpleStringProperty(incorrect2);
         this.incorrect3 = new SimpleStringProperty(incorrect3);
         this.lesson = lesson;
-        this.type = new SimpleStringProperty(lesson.getQuestionType());
+        try {
+            this.type = new SimpleObjectProperty<>(lesson.getQuestionType());
+        } catch (NullPointerException e){
+            this.type = null;
+        }
     }
 
     public Question(Integer id, String text, String correctAnswer, String incorrect1, String incorrect2, String incorrect3, String description, Lesson lesson){
         //получение вопроса с четырьмя вариантами ответа
-        this.id = new SimpleIntegerProperty(id);
+        this.id = new SimpleObjectProperty<Integer>(id);
         this.text = new SimpleStringProperty(text);
         this.correctAnswer = new SimpleStringProperty(correctAnswer);
         this.description = new SimpleStringProperty(description);
@@ -96,7 +106,11 @@ public class Question {
         this.incorrect2 = new SimpleStringProperty(incorrect2);
         this.incorrect3 = new SimpleStringProperty(incorrect3);
         this.lesson = lesson;
-        this.type = new SimpleStringProperty(lesson.getQuestionType());
+        this.type = new SimpleObjectProperty<>(lesson.getQuestionType());
+    }
+
+    public int getId() {
+        return id.get();
     }
 
     public StringProperty textProperty() {
@@ -131,6 +145,38 @@ public class Question {
         return type.get();
     }
 
+    public Lesson getLesson() {
+        return lesson;
+    }
+
+    public void setText(String text) {
+        this.text.set(text);
+    }
+
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
+
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer.set(correctAnswer);
+    }
+
+    public void setIncorrect1(String incorrect1) {
+        this.incorrect1.set(incorrect1);
+    }
+
+    public void setIncorrect2(String incorrect2) {
+        this.incorrect2.set(incorrect2);
+    }
+
+    public void setIncorrect3(String incorrect3) {
+        this.incorrect3.set(incorrect3);
+    }
+
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
@@ -143,5 +189,23 @@ public class Question {
                 ", incorrect3=" + incorrect3 +
                 ", lesson=" + lesson.toString() +
                 '}';
+    }
+
+    @Override
+    public String toJson() throws JSONException {
+        JSONObject map = new JSONObject();
+        map.put("text", text.getValue());
+        map.put("correctAnswer", correctAnswer.getValue());
+        map.put("description", description.getValue());
+        map.put("incorrect1", incorrect1.getValue());
+        map.put("incorrect2", incorrect2.getValue());
+        map.put("incorrect3", incorrect3.getValue());
+        JSONObject less = new JSONObject();
+        less.put("id", lesson.getId());
+        less.put("name", lesson.getName());
+        less.put("text", lesson.getTextText());
+        less.put("questionType", lesson.getQuestionType());
+        map.put("lessonId", less);
+        return map.toString();
     }
 }

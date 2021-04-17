@@ -1,11 +1,13 @@
 package program.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import org.json.JSONException;
 import program.Main;
 import program.models.Lesson;
 import program.models.Question;
@@ -136,7 +138,7 @@ public class LessonQuestionsController {
             textLabel.setText("");
             questionText.setText("");
             descriptionLabel.setText("");
-            descriptionLabel.setText("");
+            questionDescription.setText("");
             corrLabel.setText("");
             correctAnswer.setText("");
             incorrect1Label.setText("");
@@ -149,15 +151,40 @@ public class LessonQuestionsController {
     }
 
     @FXML
-    private void addQuestion(){
-
+    private void addQuestion() throws JSONException {
+        Question newQuestion = new Question();
+        boolean okIsClicked = main.showQuestionAddEditForm(newQuestion, token, lesson);
+        if (okIsClicked){
+            restAPI.postQuestion(newQuestion, token);
+            main.updateQuestionData(token, lesson);
+            if (restAPI.getQuestionsByLesson(token, lesson).size() >= 10){
+                addButton.setDisable(true);
+            }
+        }
     }
 
     @FXML
-    private void editQuestion(){
+    private void editQuestion() throws JsonProcessingException, JSONException {
+        Question selectedItem = questionTable.getSelectionModel().getSelectedItem();
+        if (selectedItem != null){
+            boolean okIsClicked = main.showQuestionAddEditForm(selectedItem, token, lesson);
+            if (okIsClicked){
+                restAPI.putQuestion(selectedItem, token);
+                main.updateQuestionData(token, lesson);
+            }
+        }
     }
 
     @FXML
     private void deleteQuestion(){
+        Question selectedItem = questionTable.getSelectionModel().getSelectedItem();
+        if (selectedItem != null){
+            if (restAPI.deleteQuestion(selectedItem, token)){
+                questionTable.getItems().remove(selectedItem);
+                if (restAPI.getQuestionsByLesson(token, lesson).size() < 10){
+                    addButton.setDisable(false);
+                }
+            }
+        }
     }
 }

@@ -1,8 +1,10 @@
 package program.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.json.JSONException;
 import program.controllers.AuthorizationController;
 import program.models.Lesson;
 import program.models.Question;
@@ -43,14 +45,21 @@ public class RestAPI {
         String text = thisQuestion.get("text").getAsString();
         String correctAnswer = thisQuestion.get("correctAnswer").getAsString();
         String description = thisQuestion.get("description").getAsString();
-        String incorrect1 = thisQuestion.get("incorrect1").toString();
-        String incorrect2 = thisQuestion.get("incorrect2").toString();
-        String incorrect3 = thisQuestion.get("incorrect3").toString();
+        String incorrect1 = null;
+        try {
+            incorrect1 = thisQuestion.get("incorrect1").getAsString();
+        } catch (UnsupportedOperationException e){}
+        String incorrect2 = null;
+        try {
+            incorrect2 = thisQuestion.get("incorrect2").getAsString();
+        } catch (UnsupportedOperationException e){}
+        String incorrect3 = null;
+        try {
+            incorrect3 = thisQuestion.get("incorrect3").getAsString();
+        } catch (UnsupportedOperationException e){}
         Lesson lesson = parseLesson(thisQuestion.get("lessonId").getAsJsonObject());
 
-        //System.out.println(new Question(id, text, correctAnswer, description, incorrect1, incorrect2, incorrect3, lesson));
-
-        return new Question(id, text, correctAnswer, description, incorrect1, incorrect2, incorrect3, lesson);
+        return new Question(id, text, correctAnswer, incorrect1, incorrect2, incorrect3, description, lesson);
     }
 
     public String auth(AuthorizationController authorizationController) {
@@ -157,5 +166,23 @@ public class RestAPI {
     public void putLesson(Lesson lesson, String token){
         String jsonString = lesson.toJson();
         HttpClass.PutRequest(SERVER_GET_LESSONS + "/" + lesson.getId(), jsonString, token);
+    }
+
+    public boolean deleteQuestion(Question question, String token){
+        Integer id = question.getId();
+        if (id == null){
+            return false;
+        }
+        return HttpClass.DeleteRequest(SERVER_GET_QUESTIONS + "/" + id, token);
+    }
+
+    public void postQuestion(Question question, String token) throws JSONException {
+
+        HttpClass.PostRequest(SERVER_GET_QUESTIONS, question.toJson(), token);
+    }
+
+    public void putQuestion(Question question, String token) throws JSONException {
+        String jsonString = question.toJson();
+        HttpClass.PutRequest(SERVER_GET_QUESTIONS + "/" + question.getId(), jsonString, token);
     }
 }

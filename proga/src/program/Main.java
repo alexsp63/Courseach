@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -12,7 +11,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import program.controllers.*;
 import program.models.Lesson;
 import program.models.Question;
@@ -191,6 +189,33 @@ public class Main extends Application {
             controller.setLesson(lesson);
 
             lessonStage.showAndWait();
+
+            return controller.isSaveIsClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean showQuestionAddEditForm(Question question, String token, Lesson lesson){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/questionsAddEditForm.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage questionStage = new Stage();
+            questionStage.setTitle("Вопрос урока " + lesson.getName());
+            questionStage.initModality(Modality.WINDOW_MODAL);
+            questionStage.initOwner(primaryStage);
+
+            Scene scene = new Scene(page);
+            questionStage.setScene(scene);
+            QuestionsAddEditController controller = loader.getController();
+
+            controller.setStage(questionStage, this, restAPI, token, lesson);
+            controller.setQuestion(question);
+
+            questionStage.showAndWait();
 
             return controller.isSaveIsClicked();
         } catch (IOException e) {
