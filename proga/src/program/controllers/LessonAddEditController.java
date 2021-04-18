@@ -6,14 +6,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import program.Main;
 import program.models.Lesson;
 import program.utils.RestAPI;
-
-import java.util.List;
 
 import static program.controllers.SignUpController.isDouble;
 import static program.controllers.SignUpController.isInteger;

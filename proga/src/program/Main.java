@@ -19,6 +19,7 @@ import program.utils.RestAPI;
 import program.utils.StringToMap;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class Main extends Application {
@@ -242,8 +243,29 @@ public class Main extends Application {
         }
     }
 
-    public void showTestWindow(String token, List<Question> questions, Lesson lesson){
+    public void showTestWindow(String token, List<Question> questions, Lesson lesson, User user){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/testWindow.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
 
+            Stage testStage = new Stage();
+            testStage.setTitle("Тест урока " + lesson.getName());
+            testStage.initModality(Modality.WINDOW_MODAL);
+            testStage.initOwner(primaryStage);
+
+            Scene scene = new Scene(page);
+            testStage.setScene(scene);
+            TestWindowController controller = loader.getController();
+            Collections.shuffle(questions);
+
+            controller.setStage(testStage, this, restAPI, token, questions, user, lesson);
+
+            testStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public ObservableList<User> getUserData() {

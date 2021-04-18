@@ -104,6 +104,7 @@ public class UserPageController {
                 pause.setOnFinished(e -> lessonTestMessage.setText(""));
                 pause.play();
             } else {
+                lessonTestMessage.setText("");
                 lessonQuestionsButton.setDisable(false);
             }
             lessonName.setText(lesson.getName());
@@ -211,7 +212,7 @@ public class UserPageController {
         Lesson selectedLesson = lessonTable.getSelectionModel().getSelectedItem();
         if (selectedLesson != null){
             List<Question> questions = restAPI.getQuestionsByLesson(token, selectedLesson);
-            main.showTestWindow(token, questions, selectedLesson);
+            main.showTestWindow(token, questions, selectedLesson, user);
         }
     }
 
