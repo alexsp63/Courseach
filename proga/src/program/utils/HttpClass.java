@@ -1,11 +1,16 @@
 package program.utils;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HttpClass {
-
 
     private static String getString(URLConnection conn){
         try {
@@ -20,6 +25,13 @@ public class HttpClass {
         } catch (IOException e){
             return null;
         }
+    }
+
+    public static HttpResponse<String> PostStatisticsRequest(String url, String jsonString, String token) throws UnirestException {
+        Map<String, String> requestHeaders = new HashMap<>();
+        requestHeaders.put("Content-Type", "application/json; charset=UTF-8");
+        requestHeaders.put("Authorization", token);
+        return Unirest.post(url).headers(requestHeaders).body(jsonString).asString();
     }
 
     //это для неавторизованного пользователя, тут токена нет, сюда у меня разрешение всем на сервере

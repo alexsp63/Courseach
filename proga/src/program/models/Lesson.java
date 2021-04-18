@@ -76,6 +76,7 @@ public class Lesson implements JSONSerialize{
     @Override
     public String toJson() {
         Map<String, String> map = new HashMap<>();
+
         map.put("name", name.getValue());
         map.put("text", text.getValue());
         map.put("questionType", questionType.getValue());

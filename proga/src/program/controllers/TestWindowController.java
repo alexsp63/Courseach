@@ -1,5 +1,6 @@
 package program.controllers;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.animation.PauseTransition;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
@@ -12,15 +13,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.json.JSONException;
 import program.Main;
-import program.models.Lesson;
-import program.models.Question;
-import program.models.User;
+import program.models.*;
 import program.utils.RestAPI;
 
 import javax.swing.*;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class TestWindowController {
@@ -68,6 +71,8 @@ public class TestWindowController {
 
     private Stage questionStage;
     private String token;
+    private Statistics statistics;
+    private List<AnswerHistory> answerHistoryList;
 
     public void setStage(Stage questionStage,
                                 Main main,
@@ -84,6 +89,13 @@ public class TestWindowController {
         this.questionList = questionList;
         this.user = user;
         this.lesson = lesson;
+
+        this.statistics = new Statistics();
+
+        this.answerHistoryList = new ArrayList<>();
+        for (int i=0; i<10; i++){
+            this.answerHistoryList.add(new AnswerHistory());
+        }
 
         closeButton.setVisible(false);
         closeButton.setDisable(true);
@@ -160,11 +172,28 @@ public class TestWindowController {
         }
     }
 
-    private void compareAnswer(String usersAnswer, Button clickedButton){
+    private void postThisStatistics() throws JSONException, ParseException, UnirestException {
+        this.statistics.setDate(LocalDate.now());
+        this.statistics.setScore(score);
+        this.statistics.setUser(user);
+        this.statistics.setLesson(lesson);
+        Statistics statisticsForHistory = restAPI.postStatistics(this.statistics, token);
+        for (AnswerHistory answerHistory: answerHistoryList){
+            answerHistory.setStatistics(statisticsForHistory);
+        }
+        for (AnswerHistory answerHistory: answerHistoryList){
+            restAPI.postAnswerHistory(answerHistory, token);
+        }
+    }
+
+    private void compareAnswer(String usersAnswer, Button clickedButton) {
+        AnswerHistory currentAnswerHistory = answerHistoryList.get(n);
         if (usersAnswer == questionList.get(n).getCorrectAnswer()){
+            currentAnswerHistory.setIsCorrect(true);
             score += 1;
             clickedButton.setStyle("-fx-background-color: #72ff72");
         } else {
+            currentAnswerHistory.setIsCorrect(false);
             clickedButton.setStyle("-fx-background-color: #ff3737");
         }
         descriptionText.setText(questionList.get(n).getDescription());
@@ -194,6 +223,11 @@ public class TestWindowController {
                     clickedButton.setStyle("-fx-background-color: #e0e0e0");
                     setTestQuestion();
                 } else {
+                    try {
+                        postThisStatistics();
+                    } catch (JSONException | ParseException | UnirestException e) {
+                        e.printStackTrace();
+                    }
                     endTestButton.setDisable(false);
                     endTestButton.setVisible(true);
                 }
@@ -202,7 +236,7 @@ public class TestWindowController {
         new Thread(sleeper).start();
     }
 
-    private void compareAnswer(String usersAnswer){
+    private void compareAnswer(String usersAnswer) {
         //для открытого ответа
         if (usersAnswer.equals(questionList.get(n).getCorrectAnswer())) {
             score += 1;
@@ -233,7 +267,11 @@ public class TestWindowController {
                     openAnswer.setStyle("-fx-background-color: white");
                     setTestQuestion();
                 } else {
-
+                    try {
+                        postThisStatistics();
+                    } catch (JSONException | ParseException | UnirestException e) {
+                        e.printStackTrace();
+                    }
                     nextQuestionButton.setDisable(true);
                     nextQuestionButton.setVisible(false);
                     endTestButton.setDisable(false);
@@ -247,6 +285,8 @@ public class TestWindowController {
     private void setTestQuestion(){
         descriptionText.setText("");
         Question currentQuestion = questionList.get(n);
+        AnswerHistory currentAnswerHistory = answerHistoryList.get(n);
+        currentAnswerHistory.setQuestion(currentQuestion);
         questionText.setText(currentQuestion.getText());
         if (lesson.getQuestionType().equals("2 варианта ответа")){
             List<String> possibleAnswers = new ArrayList<>();

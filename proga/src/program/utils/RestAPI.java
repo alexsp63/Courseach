@@ -1,17 +1,20 @@
 package program.utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONException;
 import program.controllers.AuthorizationController;
-import program.models.Lesson;
-import program.models.Question;
-import program.models.User;
+import program.models.*;
 
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static program.utils.HttpClass.PostStatisticsRequest;
 
 public class RestAPI {
 
@@ -20,6 +23,8 @@ public class RestAPI {
     private static final String AUTH = SERVER_URL + "/login";
     private static final String SERVER_GET_LESSONS = SERVER_URL + "/lesson";
     private static final String SERVER_GET_QUESTIONS = SERVER_URL + "/question";
+    private static final String SERVER_GET_STATISTICS = SERVER_URL + "/statistic";
+    private static final String SERVER_GET_ANSWER_HISTORIES = SERVER_URL + "/answer_history";
 
     public User parseUser(JsonObject thisUser){
         String login = thisUser.get("login").getAsString();
@@ -60,6 +65,16 @@ public class RestAPI {
         Lesson lesson = parseLesson(thisQuestion.get("lessonId").getAsJsonObject());
 
         return new Question(id, text, correctAnswer, incorrect1, incorrect2, incorrect3, description, lesson);
+    }
+    
+    public Statistics parseStatistics(JsonObject thisStatistics) throws ParseException {
+        Integer id = thisStatistics.get("id").getAsInt();
+        LocalDate date = DateUtil.parse(thisStatistics.get("date").getAsString());
+        Integer score = thisStatistics.get("score").getAsInt();
+        User user = parseUser(thisStatistics.get("user").getAsJsonObject());
+        Lesson lesson = parseLesson(thisStatistics.get("lesson").getAsJsonObject());
+
+        return new Statistics(id, date, score, user, lesson);
     }
 
     public String auth(AuthorizationController authorizationController) {
@@ -184,5 +199,16 @@ public class RestAPI {
     public void putQuestion(Question question, String token) throws JSONException {
         String jsonString = question.toJson();
         HttpClass.PutRequest(SERVER_GET_QUESTIONS + "/" + question.getId(), jsonString, token);
+    }
+
+    public Statistics postStatistics(Statistics statistics, String token) throws JSONException, ParseException, UnirestException {
+        String jsonString = statistics.toJson();
+        HttpResponse<String> response = PostStatisticsRequest(SERVER_GET_STATISTICS, jsonString, token);
+        JsonObject jsonResult = JsonParser.parseString(response.getBody()).getAsJsonObject();
+        return parseStatistics(jsonResult);
+    }
+
+    public void postAnswerHistory(AnswerHistory answerHistory, String token) throws JSONException {
+        HttpClass.PostRequest(SERVER_GET_ANSWER_HISTORIES, answerHistory.toJson(), token);
     }
 }

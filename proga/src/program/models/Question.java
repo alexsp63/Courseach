@@ -1,17 +1,10 @@
 package program.models;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.google.gson.Gson;
 import javafx.beans.property.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class Question implements JSONSerialize{
+public class Question{
 
     private SimpleObjectProperty<Integer> id;
     private StringProperty text;
@@ -188,9 +181,9 @@ public class Question implements JSONSerialize{
                 '}';
     }
 
-    @Override
     public String toJson() throws JSONException {
         JSONObject map = new JSONObject();
+        map.put("id", id.getValue());
         map.put("text", text.getValue());
         map.put("correctAnswer", correctAnswer.getValue());
         map.put("description", description.getValue());
