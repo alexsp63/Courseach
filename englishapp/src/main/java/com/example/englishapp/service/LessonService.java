@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Service
@@ -15,7 +16,10 @@ public class LessonService {
     private LessonRepository lessonRepository;
 
 
-    public List<Lesson> findAll(){
+    public List<Lesson> findAll(Integer questionId){
+        if (questionId != null){
+            return lessonRepository.findByQuestions_Id(questionId);
+        }
         return lessonRepository.findAll();
     }
 

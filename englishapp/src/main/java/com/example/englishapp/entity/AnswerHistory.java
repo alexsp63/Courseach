@@ -17,12 +17,7 @@ public class AnswerHistory {
     private int id;
 
     @NotNull
-    private boolean isCorrect;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_login")
-    @NotNull
-    private User userId;
+    private Boolean isCorrect;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "question_id")
@@ -34,4 +29,7 @@ public class AnswerHistory {
     @NotNull
     private Statistic statistic;
 
+    public boolean isCorrect() {
+        return isCorrect;
+    }
 }

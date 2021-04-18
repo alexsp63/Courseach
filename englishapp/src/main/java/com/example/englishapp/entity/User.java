@@ -39,10 +39,6 @@ public class User {
     @JsonBackReference(value = "user_statistics")
     private List<Statistic> statistics;
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
-    @JsonBackReference(value = "user_answerHistories")
-    private List<AnswerHistory> answerHistories;
-
     public void setLogin(String login) {
         this.login = login;
     }

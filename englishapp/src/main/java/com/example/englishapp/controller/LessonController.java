@@ -23,8 +23,10 @@ public class LessonController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('table:read')")
-    public ResponseEntity<List<Lesson>> readAll(){
-        final List<Lesson> lessonList = lessonService.findAll();
+    public ResponseEntity<List<Lesson>> readAll(
+            @RequestParam(required=false) Integer questionId
+    ){
+        final List<Lesson> lessonList = lessonService.findAll(questionId);
         return lessonList != null && !lessonList.isEmpty()
                 ? new ResponseEntity<>(lessonList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

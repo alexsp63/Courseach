@@ -22,7 +22,7 @@ public class Statistic {
     private int id;
 
     @NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate date;
 
     @NotNull

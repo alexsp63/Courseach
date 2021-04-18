@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/answer_history")
 public class AnswerHistoryController {
 
     private final AnswerHistoryService answerHistoryService;
