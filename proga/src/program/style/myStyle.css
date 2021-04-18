@@ -25,6 +25,17 @@
     border-radius: 20px;
 }
 
+.backgroundUser {
+    -fx-background-image: url("images/userBackground.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 10;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 10;
+    border-radius: 20px;
+}
+
 .label1 {
     -fx-text-fill: #5050fd;
     -fx-font-size: 14;

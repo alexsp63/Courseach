@@ -15,6 +15,9 @@ import program.utils.RestAPI;
 
 import java.util.List;
 
+import static program.controllers.SignUpController.isDouble;
+import static program.controllers.SignUpController.isInteger;
+
 public class LessonAddEditController {
 
     @FXML
@@ -71,24 +74,6 @@ public class LessonAddEditController {
         }
     }
 
-    public static boolean isDouble(String str) {
-        try {
-            Double.parseDouble(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    public static boolean isInteger(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
     private String errorMessage(){
         if (lessonNameText.getText() == null || lessonNameText.getText().length() == 0){
             return "Недопустимое название урока!";
@@ -97,7 +82,7 @@ public class LessonAddEditController {
                 || isInteger(lessonTextText.getText()) == true || lessonTextText.getText().length() == 0){
             return "Недопустимый текст урока!";
         }
-        if (lessonQuestionType.getValue() == null || lessonQuestionType.getValue().length() == 0){
+        if ((lessonQuestionType.getValue() == null || lessonQuestionType.getValue().length() == 0) && lesson.getQuestionType() == null){
             return "Выберите тип вопросов из списка!";
         }
         return "";
@@ -122,7 +107,9 @@ public class LessonAddEditController {
         if (inputCheck()){
             lesson.setName(lessonNameText.getText());
             lesson.setTextText(lessonTextText.getText());
-            lesson.setQuestionType(lessonQuestionType.getValue());
+            if (lesson.getQuestionType() == null || restAPI.getQuestionsByLesson(token, lesson).size() == 0) {
+                lesson.setQuestionType(lessonQuestionType.getValue());
+            }
 
             saveIsClicked = true;
             lessonStage.close();

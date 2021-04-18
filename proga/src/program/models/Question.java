@@ -24,7 +24,7 @@ public class Question implements JSONSerialize{
     private SimpleObjectProperty<String> type;
 
     public Question(){
-        this(null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, new Lesson());
     }
 
     public Question(String text, String correctAnswer, String description, Lesson lesson){
@@ -89,11 +89,8 @@ public class Question implements JSONSerialize{
         this.incorrect2 = new SimpleStringProperty(incorrect2);
         this.incorrect3 = new SimpleStringProperty(incorrect3);
         this.lesson = lesson;
-        try {
-            this.type = new SimpleObjectProperty<>(lesson.getQuestionType());
-        } catch (NullPointerException e){
-            this.type = null;
-        }
+        this.type = new SimpleObjectProperty<>(lesson.getQuestionType());
+
     }
 
     public Question(Integer id, String text, String correctAnswer, String incorrect1, String incorrect2, String incorrect3, String description, Lesson lesson){

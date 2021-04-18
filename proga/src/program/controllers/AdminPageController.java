@@ -11,9 +11,11 @@ import program.Main;
 import program.models.Lesson;
 import program.models.User;
 import program.utils.RestAPI;
-import program.utils.StringToMap;
 
 import java.io.IOException;
+
+import static program.controllers.SignUpController.isDouble;
+import static program.controllers.SignUpController.isInteger;
 
 public class AdminPageController {
 
@@ -95,16 +97,14 @@ public class AdminPageController {
     private Main main;
     private RestAPI restAPI;
     private AnchorPane anchorPane;
-    private StringToMap stringToMap;
     private User admin;
     private String token;
 
-    public void setMain(User admin, Main main, RestAPI restAPI, AnchorPane anchorPane, StringToMap stringToMap, String token) {
+    public void setMain(User admin, Main main, RestAPI restAPI, AnchorPane anchorPane, String token) {
         this.admin = admin;
         this.main = main;
         this.restAPI = restAPI;
         this.anchorPane = anchorPane;
-        this.stringToMap = stringToMap;
         this.token = token;
 
         userTable.setItems(main.getUserData());
@@ -181,27 +181,12 @@ public class AdminPageController {
             lessonText.setText(lesson.getTextText());
             lessonQuestionType.setText(lesson.getQuestionType());
         } else {
+            lessonQuestionsButton.setDisable(true);
+            lessonEditButton.setDisable(true);
+            lessonDeleteButton.setDisable(true);
             lessonName.setText("");
             lessonText.setText("");
             lessonQuestionType.setText("");
-        }
-    }
-
-    public static boolean isDouble(String str) {
-        try {
-            Double.parseDouble(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    public static boolean isInteger(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
         }
     }
 
@@ -244,12 +229,7 @@ public class AdminPageController {
                 oldAdmin.getPassword() != admin.getPassword()){
                 restAPI.putUser(admin, token);
                 setAdmin(admin);
-                adminErrorMessage.setTextFill(Color.web("green"));
-                adminErrorMessage.setText("Информация обновлена");
-                PauseTransition pause = new PauseTransition(Duration.seconds(1));
-                pause.setOnFinished(e -> adminErrorMessage.setText(""));
-                pause.play();
-                main.updateUserTable(token);
+                UserPageController.setErrorMessage(adminErrorMessage, main, token);
             }
         }
     }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.controllers.TestWindowController">
+   <children>
+      <Label fx:id="questionText" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="20.0" prefHeight="122.0" prefWidth="670.0" text="Label" textAlignment="CENTER" />
+      <Label fx:id="descriptionText" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="327.0" prefHeight="94.0" prefWidth="670.0" text="Label" textAlignment="CENTER" />
+      <TextField layoutX="21.0" layoutY="217.0" prefHeight="40.0" prefWidth="339.0" promptText="Введите сюда Ваш ответ" />
+      <Button layoutX="41.0" layoutY="217.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="299.0" text="Button" />
+      <Button layoutX="360.00000000000006" layoutY="217.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="299.0" text="Button" AnchorPane.rightAnchor="40.799999999999955" />
+      <Button layoutX="41.0" layoutY="275.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="299.0" text="Button" />
+      <Button layoutX="360.0" layoutY="275.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="299.0" text="Button" />
+      <Button layoutX="607.0" layoutY="443.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="143.0" text="Следующий вопрос" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+      <Button layoutX="618.0" layoutY="441.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="87.0" text="Завершить" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+   </children>
+</AnchorPane>

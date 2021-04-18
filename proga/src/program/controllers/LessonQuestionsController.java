@@ -164,7 +164,7 @@ public class LessonQuestionsController {
     }
 
     @FXML
-    private void editQuestion() throws JsonProcessingException, JSONException {
+    private void editQuestion() throws JSONException {
         Question selectedItem = questionTable.getSelectionModel().getSelectedItem();
         if (selectedItem != null){
             boolean okIsClicked = main.showQuestionAddEditForm(selectedItem, token, lesson);

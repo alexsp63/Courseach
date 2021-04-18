@@ -136,9 +136,27 @@ public class Main extends Application {
             rootLayout.setCenter(adminForm);
 
             AdminPageController controller = loader.getController();
-            controller.setMain(admin, this, restAPI, adminForm, stringToMap, token);
+            controller.setMain(admin, this, restAPI, adminForm, token);
             controller.setAdmin(admin);
             updateUserTable(token);
+            updateLessonTable(token);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showUserForm(User user, String token){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/userMainPage.fxml"));
+            AnchorPane userForm = (AnchorPane) loader.load();
+
+            rootLayout.setCenter(userForm);
+
+            UserPageController controller = loader.getController();
+            controller.setMain(user, this, restAPI, userForm, token);
+            controller.setUser(user);
             updateLessonTable(token);
 
         } catch (IOException e) {
@@ -222,6 +240,10 @@ public class Main extends Application {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public void showTestWindow(String token, List<Question> questions, Lesson lesson){
+
     }
 
     public ObservableList<User> getUserData() {

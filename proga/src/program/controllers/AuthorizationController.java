@@ -20,6 +20,7 @@ import program.utils.RestAPI;
 import program.utils.StringToMap;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,29 +59,32 @@ public class AuthorizationController implements JSONSerialize {
 
     @FXML
     public void signInButton() throws IOException {
-        message.setText("");
-        String response = restAPI.auth(this);
-        //System.out.println(response);
-        if (response == null){
+        try {
+            message.setText("");
+            String response = restAPI.auth(this);
+            //System.out.println(response);
+            if (response == null) {
 
-            message.setTextFill(Color.web("red"));
-            message.setText("Неверный логин или пароль!");
-            PauseTransition pause = new PauseTransition(Duration.seconds(2));
-            pause.setOnFinished(e -> message.setText(""));
-            pause.play();
+                message.setTextFill(Color.web("red"));
+                message.setText("Неверный логин или пароль!");
+                PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                pause.setOnFinished(e -> message.setText(""));
+                pause.play();
 
-        } else {
-            String login = stringToMap.createMap(response).get("login");
-            String token = stringToMap.createMap(response).get("token");
-            User currentUser = restAPI.getOneUser(login, token);
-            String role = currentUser.getRole();
-            if (role.equals("ADMIN")){
-                main.hideOverview(anchorPane);
-                main.showAdminForm(currentUser, token);
-            } else if (role.equals("USER")){
-                System.out.println(role);
+            } else {
+                String login = stringToMap.createMap(response).get("login");
+                String token = stringToMap.createMap(response).get("token");
+                User currentUser = restAPI.getOneUser(login, token);
+                String role = currentUser.getRole();
+                if (role.equals("ADMIN")) {
+                    main.hideOverview(anchorPane);
+                    main.showAdminForm(currentUser, token);
+                } else if (role.equals("USER")) {
+                    main.hideOverview(anchorPane);
+                    main.showUserForm(currentUser, token);
+                }
             }
-        }
+        } catch (ConnectException e){}
     }
 
     @FXML
