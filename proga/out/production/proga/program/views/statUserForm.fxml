@@ -71,6 +71,9 @@
                                 </GridPane>
                             </children>
                         </Group>
+                        <Label fx:id="minLabel" contentDisplay="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="30.0" prefWidth="898.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="avgLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="30.0" prefWidth="898.0" text="Label" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <Label fx:id="maxLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="0.0" layoutY="0.0" prefHeight="30.0" prefWidth="890.0" text="Label" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
                     </children>
                 </AnchorPane>
             </items>

@@ -2,7 +2,11 @@ package program.controllers;
 
 
 import javafx.animation.PauseTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -94,6 +98,49 @@ public class AdminPageController {
     @FXML
     private Button lessonDeleteButton;
 
+    @FXML
+    private TableView<User> usTable;
+
+    @FXML
+    private TableColumn<User, String> usLogin;
+
+    @FXML
+    private TableColumn<User, String> usFirstName;
+
+    @FXML
+    private TableColumn<User, String> usLastName;
+
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private ChoiceBox<String> chosenType;
+
+    @FXML
+    private ChoiceBox<String> chooseStatType;
+
+    @FXML
+    private Group userGroup;
+
+    @FXML
+    private Group lessonGroup;
+
+    @FXML
+    private TableView<Lesson> lessTable;
+
+    @FXML
+    private TableColumn<Lesson, String> lessName;
+
+    @FXML
+    private TableColumn<Lesson, String> lessQuestionType;
+
+    @FXML
+    private TextField lessonSearchField;
+
+    private FilteredList<User> filteredList;
+    private FilteredList<Lesson> filteredLessonList;
+
+
     private Main main;
     private RestAPI restAPI;
     private AnchorPane anchorPane;
@@ -109,6 +156,12 @@ public class AdminPageController {
 
         userTable.setItems(main.getUserData());
         lessonTable.setItems(main.getLessonData());
+
+        filteredList = new FilteredList(main.getUserData(), p -> true);
+        usTable.setItems(filteredList);
+
+        filteredLessonList = new FilteredList(main.getLessonData(), p -> true);
+        lessTable.setItems(filteredLessonList);
     }
 
     @FXML
@@ -119,6 +172,11 @@ public class AdminPageController {
         userLastName.setEditable(false);
         userLogin.setEditable(false);
 
+        chosenType.getItems().addAll("Поиск по логину",
+                "Поиск по имени",
+                "Поиск по фамилии");
+        chosenType.getSelectionModel().select(0);
+
         userSaveButton.setDisable(true);
         userClearButton.setDisable(true);
 
@@ -126,10 +184,72 @@ public class AdminPageController {
         lessonEditButton.setDisable(true);
         lessonDeleteButton.setDisable(true);
 
+        chooseStatType.getItems().addAll("Отобразить по пользователю", "Отобразить по уроку");
+        chooseStatType.getSelectionModel().select(0);
+
+        lessonGroup.setVisible(false);
+        lessonGroup.setDisable(true);
+
+        searchField.setPromptText("Поиск по логину");
+
+        chosenType.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+                if (chosenType.getItems().get((Integer) number2) == "Поиск по логину"){
+                    searchField.setPromptText("Введите логин");
+                }
+                if (chosenType.getItems().get((Integer) number2) == "Поиск по имени"){
+                    searchField.setPromptText("Введите имя");
+                }
+                if (chosenType.getItems().get((Integer) number2) == "Поиск по фамилии"){
+                    searchField.setPromptText("Введите фамилию");
+                }
+            }
+        });
+
+        searchField.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (chosenType.getValue().equals("Поиск по логину")){
+                filteredList.setPredicate(p -> p.getLogin().toLowerCase().contains(newValue.toLowerCase().trim()));
+            } else if (chosenType.getValue().equals("Поиск по имени")) {
+                filteredList.setPredicate(p -> p.getFirstName().toLowerCase().contains(newValue.toLowerCase().trim()));
+            } else if (chosenType.getValue().equals("Поиск по фамилии")) {
+                filteredList.setPredicate(p -> p.getLastName().toLowerCase().contains(newValue.toLowerCase().trim()));
+            }
+        });
+
+        chooseStatType.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+                if (chooseStatType.getItems().get((Integer) number2) == "Отобразить по пользователю"){
+                    userGroup.setVisible(true);
+                    userGroup.setDisable(false);
+                    lessonGroup.setVisible(false);
+                    lessonGroup.setDisable(true);
+                }
+                if (chooseStatType.getItems().get((Integer) number2) == "Отобразить по уроку"){
+                    userGroup.setVisible(false);
+                    userGroup.setDisable(true);
+                    lessonGroup.setVisible(true);
+                    lessonGroup.setDisable(false);
+                }
+            }
+        });
+
+        lessonSearchField.textProperty().addListener((obs, oldValue, newValue) -> {
+            filteredLessonList.setPredicate(p -> p.getName().toLowerCase().contains(newValue.toLowerCase().trim()));
+        });
+
         userFirstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         userLastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
 
         lessonColumnName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+
+        usLogin.setCellValueFactory(cellData -> cellData.getValue().loginProperty());
+        usFirstName.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        usLastName.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+
+        lessName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        lessQuestionType.setCellValueFactory(cellData -> cellData.getValue().questionTypeProperty());
 
         showUserDetails(null);
         showLessonDetails(null);
@@ -188,6 +308,10 @@ public class AdminPageController {
             lessonText.setText("");
             lessonQuestionType.setText("");
         }
+    }
+
+    public void showStatForAdmin(User user){
+        main.showStatAdminForm(token, user, chooseStatType.getValue());
     }
 
     private String adminErrorMessage(){

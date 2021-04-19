@@ -63,6 +63,10 @@ public class Lesson implements JSONSerialize{
         this.questionType.set(questionType);
     }
 
+    public StringProperty questionTypeProperty() {
+        return questionType;
+    }
+
     @Override
     public String toString() {
         return "Lesson{" +

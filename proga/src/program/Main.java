@@ -303,6 +303,30 @@ public class Main extends Application {
         }
     }
 
+    public void showStatAdminForm(String token, User user, String type){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/statAdminForm.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage statAdminStage = new Stage();
+            statAdminStage.setTitle("Результаты пользователя " + user.getLogin());
+            statAdminStage.initModality(Modality.WINDOW_MODAL);
+            statAdminStage.initOwner(primaryStage);
+
+            Scene scene = new Scene(page);
+            statAdminStage.setScene(scene);
+            StatAdminController controller = loader.getController();
+
+            controller.setMain(statAdminStage, this, restAPI, token, user, type);
+
+            statAdminStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public ObservableList<Statistics> getStatisticsData() {
         return statisticsData;
     }

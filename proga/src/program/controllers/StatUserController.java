@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class StatUserController {
 
@@ -90,6 +91,15 @@ public class StatUserController {
     @FXML
     private TableColumn<Statistics, String> statScore;
 
+    @FXML
+    private Label minLabel;
+
+    @FXML
+    private Label avgLabel;
+
+    @FXML
+    private Label maxLabel;
+
     private Main main;
     private Stage stage;
     private RestAPI restAPI;
@@ -108,6 +118,22 @@ public class StatUserController {
         statTable.setItems(main.getStatisticsData());
 
         main.updateStatisticsData(token, lesson, user);
+
+        List<Statistics> statistics = restAPI.getStatiscticsByLessonAndUser(token, lesson, user);
+        List<Integer> scores = new ArrayList<>();
+        for (Statistics statistics1: statistics){
+            scores.add(statistics1.getScore());
+        }
+        double sum = 0;
+        int min = 10*Collections.min(scores);
+        int max = 10*Collections.max(scores);
+        for (int el: scores){
+            sum += el;
+        }
+        double avg = 10*(sum/scores.size());
+        minLabel.setText("MIN: " + min + "%");
+        avgLabel.setText("AVERAGE: " + Math.round(avg) + "%");
+        maxLabel.setText("MAX: " + max + "%");
     }
 
     @FXML
