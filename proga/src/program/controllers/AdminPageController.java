@@ -165,7 +165,7 @@ public class AdminPageController {
     }
 
     @FXML
-    private void initialize() {
+    private void initialize() throws NullPointerException{
 
         adminLogin.setEditable(false);
         userFirstName.setEditable(false);
@@ -262,6 +262,21 @@ public class AdminPageController {
                 (observable, olValue, newValue) -> showLessonDetails(newValue)
         );
 
+        usTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, olValue, newValue) ->
+                        showStatForAdmin(newValue)
+        );
+
+        usTable.setOnMouseClicked(event -> {
+            int index = usTable.getSelectionModel().getSelectedIndex();
+            usTable.getSelectionModel().clearSelection(index);
+            System.out.println("!");
+        });
+
+        lessTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, olValue, newValue) -> showStatForAdmin(newValue)
+        );
+
         userRole.getItems().addAll("USER", "ADMIN");
         userStatus.getItems().addAll("ACTIVE", "BANNED");
     }
@@ -311,7 +326,13 @@ public class AdminPageController {
     }
 
     public void showStatForAdmin(User user){
-        main.showStatAdminForm(token, user, chooseStatType.getValue());
+
+        main.showStatAdminForm(token, user, null);
+    }
+
+    public void showStatForAdmin(Lesson lesson){
+
+        main.showStatAdminForm(token, null, lesson);
     }
 
     private String adminErrorMessage(){

@@ -44,6 +44,14 @@ public class Statistics {
         return new SimpleStringProperty(Integer.toString(this.getScore()*10) + "%");
     }
 
+    public SimpleStringProperty lessonProperty(){
+        return new SimpleStringProperty(lesson.getName());
+    }
+
+    public SimpleStringProperty userProperty(){
+        return new SimpleStringProperty(user.getLogin());
+    }
+
     public void setDate(LocalDate date) {
         this.date.set(date);
     }

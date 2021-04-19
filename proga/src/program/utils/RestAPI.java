@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.json.JSONArray;
 import org.json.JSONException;
 import program.controllers.AuthorizationController;
 import program.models.*;
@@ -221,14 +222,30 @@ public class RestAPI {
         HttpClass.PostRequest(SERVER_GET_ANSWER_HISTORIES, answerHistory.toJson(), token);
     }
 
-    public List<Statistics> getStatiscticsByLessonAndUser(String token, Lesson lesson, User user){
-        List<Statistics> result = new ArrayList<>();
-        try {
+    public JsonArray jsonRes(String token, Lesson lesson, User user){
+        JsonArray jsonResult = new JsonArray();
+
+        if (lesson != null && user != null) {
             String buffer = HttpClass.getRequest(SERVER_GET_STATISTICS +
                     "?userLogin=" + user.getLogin() +
                     "&lessonId=" + lesson.getId(), token);
+            jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        } else if (lesson == null && user != null){
+            String buffer = HttpClass.getRequest(SERVER_GET_STATISTICS +
+                    "?userLogin=" + user.getLogin(), token);
+            jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        } else if (lesson != null && user == null){
+            String buffer = HttpClass.getRequest(SERVER_GET_STATISTICS +
+                    "?lessonId=" + lesson.getId(), token);
+            jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+        }
+        return jsonResult;
+    }
 
-            JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+    public List<Statistics> getStatiscticsByLessonAndUser(String token, Lesson lesson, User user){
+        List<Statistics> result = new ArrayList<>();
+        try {
+            JsonArray jsonResult = jsonRes(token, lesson, user);
 
             for (int i = 0; i < jsonResult.size(); i++) {
                 JsonObject thisStatistics = jsonResult.get(i).getAsJsonObject();

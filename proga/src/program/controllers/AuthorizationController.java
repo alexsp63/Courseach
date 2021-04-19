@@ -84,7 +84,7 @@ public class AuthorizationController implements JSONSerialize {
                     main.showUserForm(currentUser, token);
                 }
             }
-        } catch (ConnectException e){}
+        } catch (ConnectException | IndexOutOfBoundsException e){}
     }
 
     @FXML

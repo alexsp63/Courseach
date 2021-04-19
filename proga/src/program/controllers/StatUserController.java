@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import program.Main;
 import program.models.AnswerHistory;
@@ -169,9 +170,11 @@ public class StatUserController {
             for (int i = 0; i < 10; i++) {
                 textLabels1.get(i).setText(answerHistoryList.get(i).getQuestion().getText());
                 if (answerHistoryList.get(i).getIsCorrect() == true){
-                    answerLabels1.get(i).setText("Верный");
+                    answerLabels1.get(i).setText("Верно");
+                    answerLabels1.get(i).setTextFill(Color.web("green"));
                 } else {
-                    answerLabels1.get(i).setText("Неверный");
+                    answerLabels1.get(i).setText("Неверно");
+                    answerLabels1.get(i).setTextFill(Color.web("red"));
                 }
             }
         } else {

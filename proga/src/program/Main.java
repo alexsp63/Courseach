@@ -303,14 +303,18 @@ public class Main extends Application {
         }
     }
 
-    public void showStatAdminForm(String token, User user, String type){
+    public void showStatAdminForm(String token, User user, Lesson lesson){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("views/statAdminForm.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage statAdminStage = new Stage();
-            statAdminStage.setTitle("Результаты пользователя " + user.getLogin());
+            if (user != null) {
+                statAdminStage.setTitle("Результаты пользователя " + user.getLogin());
+            } else if (lesson != null){
+                statAdminStage.setTitle("Результаты по уроку " + lesson.getName());
+            }
             statAdminStage.initModality(Modality.WINDOW_MODAL);
             statAdminStage.initOwner(primaryStage);
 
@@ -318,7 +322,7 @@ public class Main extends Application {
             statAdminStage.setScene(scene);
             StatAdminController controller = loader.getController();
 
-            controller.setMain(statAdminStage, this, restAPI, token, user, type);
+            controller.setMain(statAdminStage, this, restAPI, token, user, lesson);
 
             statAdminStage.showAndWait();
 
