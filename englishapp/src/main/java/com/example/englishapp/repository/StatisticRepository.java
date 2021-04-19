@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface StatisticRepository extends JpaRepository<Statistic, Integer> {
     List<Statistic> findAllByUser_LoginAndLesson_Id(String userLogin, Integer lessonId);
+    List<Statistic> findAllByUser_Login(String userLogin);
+    List<Statistic> findAllByLesson_Id(Integer lessonId);
 }
