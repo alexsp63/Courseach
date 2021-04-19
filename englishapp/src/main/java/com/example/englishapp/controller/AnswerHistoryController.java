@@ -21,8 +21,10 @@ public class AnswerHistoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AnswerHistory>> readAll(){
-        final List<AnswerHistory> answerHistoryList = answerHistoryService.findAll();
+    public ResponseEntity<List<AnswerHistory>> readAll(
+            @RequestParam(required=false) Integer statisticsId
+    ){
+        final List<AnswerHistory> answerHistoryList = answerHistoryService.findAll(statisticsId);
         return answerHistoryList != null && !answerHistoryList.isEmpty()
                 ? new ResponseEntity<>(answerHistoryList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

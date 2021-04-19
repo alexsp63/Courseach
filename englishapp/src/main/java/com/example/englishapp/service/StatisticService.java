@@ -15,7 +15,10 @@ public class StatisticService {
     private StatisticRepository statisticRepository;
 
 
-    public List<Statistic> findAll(){
+    public List<Statistic> findAll(String userLogin, Integer lessonId){
+        if (userLogin != null && lessonId != null){
+            return statisticRepository.findAllByUser_LoginAndLesson_Id(userLogin, lessonId);
+        }
         return statisticRepository.findAll();
     }
 

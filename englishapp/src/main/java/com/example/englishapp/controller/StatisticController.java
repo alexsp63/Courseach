@@ -22,8 +22,11 @@ public class StatisticController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Statistic>> readAll(){
-        final List<Statistic> statisticList = statisticService.findAll();
+    public ResponseEntity<List<Statistic>> readAll(
+            @RequestParam(required=false) String userLogin,
+            @RequestParam(required=false) Integer lessonId
+    ){
+        final List<Statistic> statisticList = statisticService.findAll(userLogin, lessonId);
         return statisticList != null && !statisticList.isEmpty()
                 ? new ResponseEntity<>(statisticList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

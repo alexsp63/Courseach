@@ -15,7 +15,10 @@ public class AnswerHistoryService {
     private AnswerHistoryRepository answerHistoryRepository;
 
 
-    public List<AnswerHistory> findAll(){
+    public List<AnswerHistory> findAll(Integer statisticsId){
+        if (statisticsId != null){
+            return answerHistoryRepository.findAllByStatistic_Id(statisticsId);
+        }
         return answerHistoryRepository.findAll();
     }
 
