@@ -108,6 +108,8 @@ public class LessonQuestionsController {
         questionTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, olValue, newValue) -> showQuestionDetails(newValue)
         );
+
+        incorrect2Label.setWrapText(true);
     }
 
     public void showQuestionDetails(Question question){
@@ -130,7 +132,7 @@ public class LessonQuestionsController {
                 incorrect1.setText(question.getIncorrect1());
                 incorrect2Label.setText("Ещё один неправильный ответ:");
                 incorrect2.setText(question.getIncorrect2());
-                incorrect2Label.setText("И ещё один неправильный ответ:");
+                lastLabel.setText("И ещё один неправильный ответ:");
                 incorrect3.setText(question.getIncorrect3());
             }
         } else {

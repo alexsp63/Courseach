@@ -109,7 +109,12 @@
                                                 </GridPane>
                                              </children>
                                           </Group>
-                                                <Button fx:id="lessonQuestionsButton" layoutX="729.0" layoutY="388.0" mnemonicParsing="false" onAction="#startTest" prefHeight="30.0" prefWidth="123.0" text="Пройти тест" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                                          <HBox layoutX="581.0" layoutY="457.6000061035156" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                                             <children>
+                                                <Button fx:id="showStatisticsButton" mnemonicParsing="false" onAction="#showStat" prefHeight="30.0" prefWidth="150.0" text="Показать статистику" />
+                                                 <Button fx:id="lessonQuestionsButton" mnemonicParsing="false" onAction="#startTest" prefHeight="30.0" prefWidth="150.0" text="Пройти тест" />
+                                             </children>
+                                          </HBox>
                                             </children>
                                         </AnchorPane>
                                     </items>

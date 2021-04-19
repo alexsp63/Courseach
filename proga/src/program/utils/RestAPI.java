@@ -77,6 +77,15 @@ public class RestAPI {
         return new Statistics(id, date, score, user, lesson);
     }
 
+    public AnswerHistory parseAnswerHistory(JsonObject thisAnswerHistory) throws ParseException {
+        Integer id = thisAnswerHistory.get("id").getAsInt();
+        boolean isCorrect = thisAnswerHistory.get("isCorrect").getAsBoolean();
+        Statistics statistics = parseStatistics(thisAnswerHistory.get("statistic").getAsJsonObject());
+        Question question = parseQuestion(thisAnswerHistory.get("question").getAsJsonObject());
+
+        return new AnswerHistory(id, isCorrect, statistics, question);
+    }
+
     public String auth(AuthorizationController authorizationController) {
         return HttpClass.PostRequest(AUTH, authorizationController.toJson());
     }
@@ -210,5 +219,44 @@ public class RestAPI {
 
     public void postAnswerHistory(AnswerHistory answerHistory, String token) throws JSONException {
         HttpClass.PostRequest(SERVER_GET_ANSWER_HISTORIES, answerHistory.toJson(), token);
+    }
+
+    public List<Statistics> getStatiscticsByLessonAndUser(String token, Lesson lesson, User user){
+        List<Statistics> result = new ArrayList<>();
+        try {
+            String buffer = HttpClass.getRequest(SERVER_GET_STATISTICS +
+                    "?userLogin=" + user.getLogin() +
+                    "&lessonId=" + lesson.getId(), token);
+
+            JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+
+            for (int i = 0; i < jsonResult.size(); i++) {
+                JsonObject thisStatistics = jsonResult.get(i).getAsJsonObject();
+                Statistics statistics = parseStatistics(thisStatistics);
+                result.add(statistics);
+            }
+            return result;
+        } catch (NullPointerException | ParseException e){
+            return result;
+        }
+    }
+
+    public List<AnswerHistory> getAnswerHistoryByStatistics(String token, Statistics statistics){
+        List<AnswerHistory> result = new ArrayList<>();
+        try {
+            String buffer = HttpClass.getRequest(SERVER_GET_ANSWER_HISTORIES +
+                    "?statisticsId=" + statistics.getId(), token);
+
+            JsonArray jsonResult = JsonParser.parseString(buffer).getAsJsonArray();
+
+            for (int i = 0; i < jsonResult.size(); i++) {
+                JsonObject thisAnswerHistory = jsonResult.get(i).getAsJsonObject();
+                AnswerHistory answerHistory = parseAnswerHistory(thisAnswerHistory);
+                result.add(answerHistory);
+            }
+            return result;
+        } catch (NullPointerException | ParseException e){
+            return result;
+        }
     }
 }

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import program.controllers.*;
 import program.models.Lesson;
 import program.models.Question;
+import program.models.Statistics;
 import program.models.User;
 import program.utils.DateUtil;
 import program.utils.RestAPI;
@@ -33,6 +34,7 @@ public class Main extends Application {
     private ObservableList<User> userData = FXCollections.observableArrayList();
     private ObservableList<Lesson> lessonData = FXCollections.observableArrayList();
     private ObservableList<Question> questions4Data = FXCollections.observableArrayList();
+    private ObservableList<Statistics> statisticsData = FXCollections.observableArrayList();
 
     public Main() {
 
@@ -73,6 +75,13 @@ public class Main extends Application {
         List<Question> questions = restAPI.getQuestionsByLesson(token, lesson);
 
         questions4Data.addAll(questions);
+    }
+
+    public void updateStatisticsData(String token, Lesson lesson, User user){
+        statisticsData.clear();
+        List<Statistics> statistics = restAPI.getStatiscticsByLessonAndUser(token, lesson, user);
+
+        statisticsData.addAll(statistics);
     }
 
 
@@ -268,6 +277,34 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void showStatUserForm(String token, Lesson lesson, User user){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/statUserForm.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage statUserStage = new Stage();
+            statUserStage.setTitle("Результаты пользователя " + user.getLogin() + " по уроку " + lesson.getName());
+            statUserStage.initModality(Modality.WINDOW_MODAL);
+            statUserStage.initOwner(primaryStage);
+
+            Scene scene = new Scene(page);
+            statUserStage.setScene(scene);
+            StatUserController controller = loader.getController();
+
+            controller.setMain(statUserStage, this, restAPI, token, lesson, user);
+
+            statUserStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ObservableList<Statistics> getStatisticsData() {
+        return statisticsData;
     }
 
     public ObservableList<User> getUserData() {

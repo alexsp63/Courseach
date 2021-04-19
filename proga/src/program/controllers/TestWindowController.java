@@ -238,10 +238,13 @@ public class TestWindowController {
 
     private void compareAnswer(String usersAnswer) {
         //для открытого ответа
+        AnswerHistory currentAnswerHistory = answerHistoryList.get(n);
         if (usersAnswer.equals(questionList.get(n).getCorrectAnswer())) {
+            currentAnswerHistory.setIsCorrect(true);
             score += 1;
             openAnswer.setStyle("-fx-background-color: #72ff72");
         } else {
+            currentAnswerHistory.setIsCorrect(false);
             openAnswer.setStyle("-fx-background-color: #ff3737");
         }
         descriptionText.setText(questionList.get(n).getDescription());

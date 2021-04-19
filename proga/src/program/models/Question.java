@@ -183,7 +183,7 @@ public class Question{
 
     public String toJson() throws JSONException {
         JSONObject map = new JSONObject();
-        map.put("id", id.getValue());
+
         map.put("text", text.getValue());
         map.put("correctAnswer", correctAnswer.getValue());
         map.put("description", description.getValue());

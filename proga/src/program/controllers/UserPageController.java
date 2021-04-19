@@ -58,6 +58,9 @@ public class UserPageController {
     @FXML
     private TableColumn<Lesson, String> lessonColumnName;
 
+    @FXML
+    private Button showStatisticsButton;
+
     private Main main;
     private RestAPI restAPI;
     private AnchorPane anchorPane;
@@ -79,6 +82,8 @@ public class UserPageController {
 
         userLogin.setEditable(false);
         lessonQuestionsButton.setDisable(true);
+        showStatisticsButton.setDisable(true);
+        showStatisticsButton.setVisible(false);
 
         lessonColumnName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
 
@@ -117,6 +122,15 @@ public class UserPageController {
             }
             if (lesson.getQuestionType().equals("4 варианта ответа")){
                 lessonQuestionType.setText("Вопросы в тесте этого урока содержат 4 варианта ответа, и только один из них правильный. Ваша задача - выбрать верный.");
+            }
+            if (restAPI.getStatiscticsByLessonAndUser(token, lesson, user).size() > 0){
+                lessonQuestionsButton.setText("Пройти тест снова");
+                showStatisticsButton.setDisable(false);
+                showStatisticsButton.setVisible(true);
+            } else {
+                lessonQuestionsButton.setText("Пройти тест");
+                showStatisticsButton.setDisable(true);
+                showStatisticsButton.setVisible(false);
             }
         } else {
             lessonQuestionsButton.setDisable(true);
@@ -214,6 +228,12 @@ public class UserPageController {
             List<Question> questions = restAPI.getQuestionsByLesson(token, selectedLesson);
             main.showTestWindow(token, questions, selectedLesson, user);
         }
+    }
+
+    @FXML
+    public void showStat(){
+        Lesson selectedLesson = lessonTable.getSelectionModel().getSelectedItem();
+        main.showStatUserForm(token, selectedLesson, this.user);
     }
 
     @FXML

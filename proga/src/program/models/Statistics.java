@@ -1,6 +1,7 @@
 package program.models;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import org.json.JSONException;
 import org.json.JSONObject;
 import program.utils.DateUtil;
@@ -33,6 +34,14 @@ public class Statistics {
         this.score = new SimpleObjectProperty<Integer>(score);
         this.user = user;
         this.lesson = lesson;
+    }
+
+    public SimpleStringProperty dateProperty() {
+        return new SimpleStringProperty(DateUtil.format(this.getDate()));
+    }
+
+    public SimpleStringProperty scoreProperty(){
+        return new SimpleStringProperty(Integer.toString(this.getScore()*10) + "%");
     }
 
     public void setDate(LocalDate date) {
