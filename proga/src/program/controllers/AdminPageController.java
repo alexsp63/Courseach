@@ -2,6 +2,7 @@ package program.controllers;
 
 
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.transformation.FilteredList;
@@ -262,20 +263,19 @@ public class AdminPageController {
                 (observable, olValue, newValue) -> showLessonDetails(newValue)
         );
 
-        usTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, olValue, newValue) ->
-                        showStatForAdmin(newValue)
-        );
-
         usTable.setOnMouseClicked(event -> {
             int index = usTable.getSelectionModel().getSelectedIndex();
+            User curUser = usTable.getSelectionModel().getSelectedItem();
             usTable.getSelectionModel().clearSelection(index);
-            System.out.println("!");
+            showStatForAdmin(curUser);
         });
 
-        lessTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, olValue, newValue) -> showStatForAdmin(newValue)
-        );
+        lessTable.setOnMouseClicked(event -> {
+            int index = lessTable.getSelectionModel().getSelectedIndex();
+            Lesson curLesson = lessTable.getSelectionModel().getSelectedItem();
+            lessTable.getSelectionModel().clearSelection(index);
+            showStatForAdmin(curLesson);
+        });
 
         userRole.getItems().addAll("USER", "ADMIN");
         userStatus.getItems().addAll("ACTIVE", "BANNED");
@@ -333,6 +333,7 @@ public class AdminPageController {
     public void showStatForAdmin(Lesson lesson){
 
         main.showStatAdminForm(token, null, lesson);
+
     }
 
     private String adminErrorMessage(){
