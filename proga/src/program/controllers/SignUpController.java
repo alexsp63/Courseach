@@ -1,5 +1,6 @@
 package program.controllers;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -120,7 +121,7 @@ public class SignUpController {
     }
 
     @FXML
-    private void signUpClicked() {
+    private void signUpClicked() throws UnirestException {
         if (InputCheck()) {
             User newUser = new User();
             newUser.setFirstName(firstNameText.getText());

@@ -1,16 +1,30 @@
 package program;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import program.controllers.*;
 import program.models.Lesson;
 import program.models.Question;
@@ -20,6 +34,7 @@ import program.utils.DateUtil;
 import program.utils.RestAPI;
 import program.utils.StringToMap;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
@@ -53,6 +68,45 @@ public class Main extends Application {
 
         showAuthorizationForm(); //потом форму авторизации
     }
+
+    /*
+    @Override
+    public void start(Stage primaryStage) {
+        Group root = new Group();
+        Scene scene = new Scene(root, 600, 500, Color.BLACK);
+        primaryStage.setTitle("JavaFX Scene Graph Demo");
+
+        Pane pane = new Pane();
+        Rectangle rec1 = new Rectangle(0, 0, 600,500);
+        rec1.setFill(Color.RED);
+        Rectangle rec2 = new Rectangle(200, 100, 200,200);
+
+        rec2.setStyle("-fx-fill: linear-gradient(to right, left-col, right-col);");
+
+        final DoubleProperty leftEdgeOpacity = new SimpleDoubleProperty(0);
+        final DoubleProperty rightEdgeOpacity = new SimpleDoubleProperty(0);
+
+        root.styleProperty().bind(
+                Bindings.format("left-col: rgba(0,128,0,%f); right-col: rgba(0,128,0,%f);", leftEdgeOpacity, rightEdgeOpacity)
+        );
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(leftEdgeOpacity, 0)),
+                new KeyFrame(Duration.ZERO, new KeyValue(rightEdgeOpacity, 0)),
+                new KeyFrame(Duration.millis(300), new KeyValue(rightEdgeOpacity, 0)),
+                new KeyFrame(Duration.millis(380), new KeyValue(leftEdgeOpacity, 1)),
+                new KeyFrame(Duration.millis(460), new KeyValue(rightEdgeOpacity, 1)),
+                new KeyFrame(Duration.millis(540), new KeyValue(leftEdgeOpacity, 1))
+        );
+        timeline.play();
+        pane.getChildren().addAll(rec1,rec2);
+        root.getChildren().add(pane);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+    }
+
+     */
 
     public void hideOverview(AnchorPane form) {
         form.setVisible(false);

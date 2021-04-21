@@ -1,12 +1,10 @@
 package program.controllers;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -43,12 +41,13 @@ public class AuthorizationController implements JSONSerialize {
 
 
     @FXML
-    private void initialize() {
+    private void initialize() throws UnirestException {
         message.setText("");
         showDefaultText();
     }
 
     public void showDefaultText() {
+
         loginText.setPromptText("Логин");
         passwordText.setPromptText("Пароль");
     }
@@ -63,7 +62,6 @@ public class AuthorizationController implements JSONSerialize {
         String firstName = stringToMap.createMap(response).get("firstName");
         String lastName = stringToMap.createMap(response).get("lastName");
         String status = stringToMap.createMap(response).get("status");
-        String token = stringToMap.createMap(response).get("token");
         return new User(login, password, firstName, lastName, role, status);
     }
 
@@ -71,25 +69,21 @@ public class AuthorizationController implements JSONSerialize {
     public void signInButton() throws IOException {
         try {
             message.setText("");
-            long start = System.currentTimeMillis();
+
             String response = restAPI.auth(this);
 
-            System.out.println("Авторизация за " + (System.currentTimeMillis() - start));
-            //System.out.println(response);
-            if (response == null) {
-                System.out.println("Неверный логин или пароль " + (System.currentTimeMillis() - start));
+            if (response.equals("Неверные учетные данные пользователя")
+            || response.equals("Учетная запись пользователя заблокирована")) {
 
                 message.setTextFill(Color.web("red"));
-                message.setText("Неверный логин или пароль!");
+                message.setText(response);
                 PauseTransition pause = new PauseTransition(Duration.seconds(2));
                 pause.setOnFinished(e -> message.setText(""));
                 pause.play();
 
             } else {
                 main.hideOverview(anchorPane);
-                System.out.println("Закрыли форму " + (System.currentTimeMillis() - start));
                 String role = stringToMap.createMap(response).get("role");
-                System.out.println("Получили роль " + (System.currentTimeMillis() - start));
                 if (role.equals("ADMIN")) {
                     User currentUser = formUser(response, role);
                     String token = stringToMap.createMap(response).get("token");

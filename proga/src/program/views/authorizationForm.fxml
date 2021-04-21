@@ -6,14 +6,21 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.controllers.AuthorizationController">
     <children>
-      <Group layoutX="10.0" layoutY="411.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+      <AnchorPane layoutX="52.0" layoutY="220.0" prefHeight="340.0" prefWidth="344.0" styleClass="backgroundW" stylesheets="@../style/myStyle.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
          <children>
-              <PasswordField fx:id="passwordText" layoutY="39.0" prefHeight="32.0" prefWidth="234.0" />
-              <Button layoutX="60.0" layoutY="113.79998779296875" mnemonicParsing="false" onAction="#signInButton" prefHeight="32.0" prefWidth="114.0" stylesheets="@../style/myStyle.css" text="Вход" />
-              <Button layoutX="60.0" layoutY="145.79998779296875" mnemonicParsing="false" onAction="#signUpButton" prefHeight="32.0" prefWidth="114.0" styleClass="button1" stylesheets="@../style/myStyle.css" text="Регистрация" />
-              <TextField fx:id="loginText" prefHeight="32.0" prefWidth="233.0" />
-              <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="74.0" prefHeight="32.0" prefWidth="233.0" styleClass="labelMessage" stylesheets="@../style/myStyle.css" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
-         </children>
-      </Group>
+            <AnchorPane layoutX="14.0" layoutY="67.0" prefHeight="252.0" prefWidth="315.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0">
+               <children>
+                  <Group AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+                     <children>
+                          <PasswordField fx:id="passwordText" layoutY="39.0" prefHeight="32.0" prefWidth="234.0" />
+                          <Button layoutX="60.0" layoutY="113.79998779296875" mnemonicParsing="false" onAction="#signInButton" prefHeight="32.0" prefWidth="114.0" stylesheets="@../style/myStyle.css" text="Вход" />
+                          <Button layoutX="60.0" layoutY="145.79998779296875" mnemonicParsing="false" onAction="#signUpButton" prefHeight="32.0" prefWidth="114.0" styleClass="button1" stylesheets="@../style/myStyle.css" text="Регистрация" />
+                          <TextField fx:id="loginText" prefHeight="32.0" prefWidth="233.0" />
+                          <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="0.0" layoutY="74.0" prefHeight="32.0" prefWidth="233.0" styleClass="labelMessage" stylesheets="@../style/myStyle.css" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
+                     </children>
+                  </Group>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
     </children>
 </AnchorPane>

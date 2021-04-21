@@ -13,7 +13,9 @@ import program.models.*;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static program.utils.HttpClass.PostStatisticsRequest;
 
@@ -91,8 +93,6 @@ public class RestAPI {
         return HttpClass.PostRequest(AUTH, authorizationController.toJson());
     }
 
-
-
     public List<User> getUsers(String token){
         List<User> result = new ArrayList<>();
         try {
@@ -129,7 +129,8 @@ public class RestAPI {
         return logins;
     }
 
-    public void postUser(User newUser){
+    public void postUser(User newUser) throws UnirestException {
+
         HttpClass.PostRequest(SERVER_GET_USERS, newUser.toJson());
     }
 
