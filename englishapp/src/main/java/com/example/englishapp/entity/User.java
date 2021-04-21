@@ -47,6 +47,10 @@ public class User {
         return login;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
