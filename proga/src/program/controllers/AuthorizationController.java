@@ -57,13 +57,27 @@ public class AuthorizationController implements JSONSerialize {
         return signInIsClicked;
     }
 
+    public User formUser(String response, String role) throws IOException {
+        String login = stringToMap.createMap(response).get("login");
+        String password = stringToMap.createMap(response).get("password");
+        String firstName = stringToMap.createMap(response).get("firstName");
+        String lastName = stringToMap.createMap(response).get("lastName");
+        String status = stringToMap.createMap(response).get("status");
+        String token = stringToMap.createMap(response).get("token");
+        return new User(login, password, firstName, lastName, role, status);
+    }
+
     @FXML
     public void signInButton() throws IOException {
         try {
             message.setText("");
+            long start = System.currentTimeMillis();
             String response = restAPI.auth(this);
+
+            System.out.println("Авторизация за " + (System.currentTimeMillis() - start));
             //System.out.println(response);
             if (response == null) {
+                System.out.println("Неверный логин или пароль " + (System.currentTimeMillis() - start));
 
                 message.setTextFill(Color.web("red"));
                 message.setText("Неверный логин или пароль!");
@@ -72,15 +86,17 @@ public class AuthorizationController implements JSONSerialize {
                 pause.play();
 
             } else {
-                String login = stringToMap.createMap(response).get("login");
-                String token = stringToMap.createMap(response).get("token");
-                User currentUser = restAPI.getOneUser(login, token);
-                String role = currentUser.getRole();
+                main.hideOverview(anchorPane);
+                System.out.println("Закрыли форму " + (System.currentTimeMillis() - start));
+                String role = stringToMap.createMap(response).get("role");
+                System.out.println("Получили роль " + (System.currentTimeMillis() - start));
                 if (role.equals("ADMIN")) {
-                    main.hideOverview(anchorPane);
+                    User currentUser = formUser(response, role);
+                    String token = stringToMap.createMap(response).get("token");
                     main.showAdminForm(currentUser, token);
                 } else if (role.equals("USER")) {
-                    main.hideOverview(anchorPane);
+                    User currentUser = formUser(response, role);
+                    String token = stringToMap.createMap(response).get("token");
                     main.showUserForm(currentUser, token);
                 }
             }
