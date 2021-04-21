@@ -5,15 +5,21 @@
     -fx-background-position: center center;
     -fx-background-radius: 6;
 }
+
 .backgroundW {
-    -fx-background-color: rgba(255, 255, 255, 0.7);
-}
-.background1 {
-    -fx-background-color: #fae7e7;
+    -fx-background-color: rgba(255, 255, 255, 0.95);
     -fx-background-radius: 20;
-    -fx-border-color: #d7d7fd;
-    -fx-border-width: 20;
-    -fx-border-radius: 10;
+}
+
+.backgroundUser {
+    -fx-background-image: url("images/userBackground.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 10;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 10;
+    border-radius: 20px;
 }
 
 .backgroundAdmin {
@@ -27,6 +33,36 @@
     border-radius: 20px;
 }
 
+.text-field {
+    -fx-border-color: #84cdff;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-color: transparent;
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 18;
+}
+
+.text-field:focused{
+    -fx-border-color: #14a9ff;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
+}
+
+.labelAuth {
+    -fx-font-size: 40;
+    -fx-font-weight: 600;
+    -fx-text-fill: #14a9ff;
+    -fx-font-family: "Bookman Old Style";
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
+}
+
+.labelAuthMess {
+    -fx-font-size: 13;
+    -fx-font-family: "Bookman Old Style";
+    -fx-effect: dropshadow( gaussian , rgb(176, 2, 2), 0,0,1,0 );
+    -fx-font-weight: bold;
+}
+
 .backgroundUser {
     -fx-background-image: url("images/userBackground.jpg");
     -fx-background-repeat: stretch;
@@ -36,6 +72,37 @@
     -fx-border-color: #ffffff;
     -fx-border-width: 10;
     border-radius: 20px;
+}
+
+.button {
+    -fx-font-size: 18;
+    -fx-font-family: "Bookman Old Style";
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-background-color: #6fc7ff;
+    -fx-text-fill: #0086d4;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: #5ec1ff;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 4,0,0,1 );
+}
+
+.buttonReg {
+    -fx-background-color: transparent;
+    -fx-text-fill: #0086d4;
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+}
+
+.buttonReg:hover {
+    -fx-background-color: transparent;
+    -fx-font-size: 16;
+    -fx-text-fill: #00639b;
+    -fx-font-weight: bold;
+    -fx-effect: none;
 }
 
 .label1 {
@@ -60,18 +127,7 @@
     -fx-font-size: 14;
 }
 
-.button {
-    -fx-background-radius: 10;
-    -fx-background-color: #a2d6ff;
-    -fx-border-color: #7272fa;
-    -fx-border-radius: 9;
-    -fx-text-fill: #4040f8;
-    -fx-font-weight: bold;
-}
 
-.button:hover {
-    -fx-background-color: #6fbffd;
-}
 
 .button1 {
     -fx-background-color: transparent;
