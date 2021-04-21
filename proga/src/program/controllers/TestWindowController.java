@@ -1,7 +1,7 @@
 package program.controllers;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
-import javafx.animation.PauseTransition;
+import javafx.animation.*;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -197,16 +197,25 @@ public class TestWindowController {
             clickedButton.setStyle("-fx-background-color: #ff3737");
         }
         descriptionText.setText(questionList.get(n).getDescription());
+        createAppearEffect(descriptionText);
         n += 1;
         Task<Void> sleeper = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 try {
-                    var1.setDisable(true);
-                    var2.setDisable(true);
-                    var3.setDisable(true);
-                    var4.setDisable(true);
-                    Thread.sleep(5000);
+                    Button[] buttons = {var1, var2, var3, var4};
+                    for (Button button: buttons) {
+                        button.setDisable(true);
+                    }
+                    Thread.sleep(4000);
+                    if (n != 10) {
+                        createDisappearEffect(questionText);
+                        for (Button button : buttons) {
+                            createDisappearEffect(button);
+                        }
+                        createDisappearEffect(descriptionText);
+                    }
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                 }
                 return null;
@@ -216,10 +225,10 @@ public class TestWindowController {
             @Override
             public void handle(WorkerStateEvent event) {
                 if (n != 10) {
-                    var1.setDisable(false);
-                    var2.setDisable(false);
-                    var3.setDisable(false);
-                    var4.setDisable(false);
+                    Button[] buttons = {var1, var2, var3, var4};
+                    for (Button button: buttons) {
+                        button.setDisable(false);
+                    }
                     clickedButton.setStyle("-fx-background-color: #e0e0e0");
                     setTestQuestion();
                 } else {
@@ -248,6 +257,7 @@ public class TestWindowController {
             openAnswer.setStyle("-fx-background-color: #ff3737");
         }
         descriptionText.setText(questionList.get(n).getDescription());
+        createAppearEffect(descriptionText);
         n += 1;
         Task<Void> sleeper = new Task<Void>() {
             @Override
@@ -255,7 +265,12 @@ public class TestWindowController {
                 try {
                     openAnswer.setDisable(true);
                     nextQuestionButton.setDisable(true);
-                    Thread.sleep(5000);
+                    Thread.sleep(4000);
+                    if (n != 10) {
+                        createDisappearEffect(questionText);
+                        createDisappearEffect(descriptionText);
+                    }
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                 }
                 return null;
@@ -285,12 +300,59 @@ public class TestWindowController {
         new Thread(sleeper).start();
     }
 
+    public void createAppearEffect(Button button){
+        KeyValue initKeyValue = new KeyValue(button.opacityProperty(), 0.0);
+        KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
+        KeyValue endKeyValue = new KeyValue(button.opacityProperty(), 1.0);
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(1), endKeyValue);
+
+        Timeline timeline = new Timeline(initFrame, endFrame);
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+
+    public void createAppearEffect(Label label){
+        KeyValue initKeyValue = new KeyValue(label.opacityProperty(), 0.0);
+        KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
+        KeyValue endKeyValue = new KeyValue(label.opacityProperty(), 1.0);
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(1), endKeyValue);
+
+        Timeline timeline = new Timeline(initFrame, endFrame);
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+
+    public void createDisappearEffect(Label label){
+        KeyValue initKeyValue = new KeyValue(label.opacityProperty(), 1.0);
+        KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
+        KeyValue endKeyValue = new KeyValue(label.opacityProperty(), 0.0);
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(1), endKeyValue);
+
+        Timeline timeline1 = new Timeline(initFrame, endFrame);
+        timeline1.setCycleCount(1);
+        timeline1.play();
+    }
+
+    public void createDisappearEffect(Button button){
+        KeyValue initKeyValue = new KeyValue(button.opacityProperty(), 1.0);
+        KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
+        KeyValue endKeyValue = new KeyValue(button.opacityProperty(), 0.0);
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(1), endKeyValue);
+
+        Timeline timeline1 = new Timeline(initFrame, endFrame);
+        timeline1.setCycleCount(1);
+        timeline1.play();
+    }
+
     private void setTestQuestion(){
         descriptionText.setText("");
+        createAppearEffect(descriptionText);
         Question currentQuestion = questionList.get(n);
         AnswerHistory currentAnswerHistory = answerHistoryList.get(n);
         currentAnswerHistory.setQuestion(currentQuestion);
+
         questionText.setText(currentQuestion.getText());
+
         if (lesson.getQuestionType().equals("2 варианта ответа")){
             List<String> possibleAnswers = new ArrayList<>();
             possibleAnswers.add(currentQuestion.getCorrectAnswer());
@@ -298,6 +360,10 @@ public class TestWindowController {
             Collections.shuffle(possibleAnswers);
             var1.setText(possibleAnswers.get(0));
             var2.setText(possibleAnswers.get(1));
+            Button[] allButtons = {var1, var2};
+            for (Button button: allButtons) {
+                createAppearEffect(button);
+            }
         } else if (lesson.getQuestionType().equals("4 варианта ответа")){
             List<String> possibleAnswers = new ArrayList<>();
             possibleAnswers.add(currentQuestion.getCorrectAnswer());
@@ -309,7 +375,13 @@ public class TestWindowController {
             var2.setText(possibleAnswers.get(1));
             var3.setText(possibleAnswers.get(2));
             var4.setText(possibleAnswers.get(3));
+            Button[] allButtons = {var1, var2, var3, var4};
+            for (Button button: allButtons) {
+                createAppearEffect(button);
+            }
         }
+
+        createAppearEffect(questionText);
     }
 
     @FXML
@@ -320,6 +392,7 @@ public class TestWindowController {
     @FXML
     public void end(){
         questionText.setText("Тест закончен! Ваша оценка: " + score + "/" + questionList.size());
+        createAppearEffect(questionText);
         openAnswer.setVisible(false);
         var1.setVisible(false);
         var2.setVisible(false);
