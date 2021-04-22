@@ -8,9 +8,9 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.controllers.AdminPageController">
    <children>
-       <AnchorPane layoutX="118.0" layoutY="126.0" prefHeight="560.0" prefWidth="1060.0" styleClass="backgroundAdmin" stylesheets="@../style/myStyle.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+       <AnchorPane fx:id="adminAnchorPane" layoutX="118.0" layoutY="126.0" prefHeight="560.0" prefWidth="1060.0" styleClass="backgroundW" stylesheets="@../style/myStyle.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
            <children>
-               <TabPane prefHeight="550.4" prefWidth="1050.4" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <TabPane fx:id="adminTab" prefHeight="550.4" prefWidth="1050.4" stylesheets="@../style/myStyle.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                    <tabs>
                        <Tab text="Личный кабинет">
                            <content>
@@ -61,7 +61,7 @@
                                      </Label>
                                     <VBox layoutX="193.0" layoutY="348.0" spacing="8.0">
                                        <children>
-                                          <Button mnemonicParsing="false" onAction="#adminSave" prefHeight="36.0" prefWidth="161.0" text="Сохранить" />
+                                          <Button fx:id="b1" mnemonicParsing="false" onAction="#adminSave" prefHeight="36.0" prefWidth="161.0" text="Сохранить" />
                                            <Button mnemonicParsing="false" onAction="#adminCancel" prefHeight="36.0" prefWidth="161.0" text="Очистить изменения" />
                                        </children>
                                     </VBox>

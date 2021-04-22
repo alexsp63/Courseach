@@ -1,6 +1,7 @@
 package program;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
+import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.animation.KeyFrame;
@@ -39,6 +40,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 public class Main extends Application {
 
@@ -57,6 +60,7 @@ public class Main extends Application {
         stringToMap = new StringToMap();
     }
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -67,59 +71,58 @@ public class Main extends Application {
         initRootLayout(); //сначала показываем root
 
         showAuthorizationForm(); //потом форму авторизации
+        //showAdminForm(new User(), "jmnd");
     }
 
-    /*
-    @Override
-    public void start(Stage primaryStage) {
-        Group root = new Group();
-        Scene scene = new Scene(root, 600, 500, Color.BLACK);
-        primaryStage.setTitle("JavaFX Scene Graph Demo");
-
-        Pane pane = new Pane();
-        Rectangle rec1 = new Rectangle(0, 0, 600,500);
-        rec1.setFill(Color.RED);
-        Rectangle rec2 = new Rectangle(200, 100, 200,200);
-
-        rec2.setStyle("-fx-fill: linear-gradient(to right, left-col, right-col);");
-
-        final DoubleProperty leftEdgeOpacity = new SimpleDoubleProperty(0);
-        final DoubleProperty rightEdgeOpacity = new SimpleDoubleProperty(0);
-
-        root.styleProperty().bind(
-                Bindings.format("left-col: rgba(0,128,0,%f); right-col: rgba(0,128,0,%f);", leftEdgeOpacity, rightEdgeOpacity)
-        );
-
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(leftEdgeOpacity, 0)),
-                new KeyFrame(Duration.ZERO, new KeyValue(rightEdgeOpacity, 0)),
-                new KeyFrame(Duration.millis(300), new KeyValue(rightEdgeOpacity, 0)),
-                new KeyFrame(Duration.millis(380), new KeyValue(leftEdgeOpacity, 1)),
-                new KeyFrame(Duration.millis(460), new KeyValue(rightEdgeOpacity, 1)),
-                new KeyFrame(Duration.millis(540), new KeyValue(leftEdgeOpacity, 1))
-        );
+    public void hideOverview(AnchorPane anchorPane) {
+        KeyValue initKeyValue = new KeyValue(anchorPane.opacityProperty(), 1.0);
+        KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
+        KeyValue endKeyValue = new KeyValue(anchorPane.opacityProperty(), 0.0);
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(1), endKeyValue);
+        Timeline timeline = new Timeline(initFrame, endFrame);
+        timeline.setCycleCount(1);
         timeline.play();
-        pane.getChildren().addAll(rec1,rec2);
-        root.getChildren().add(pane);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
     }
 
-     */
+    public void createAppearEffect(AnchorPane anchorPane, double sec){
+        KeyValue initKeyValue = new KeyValue(anchorPane.opacityProperty(), 0.0);
+        KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
+        KeyValue endKeyValue = new KeyValue(anchorPane.opacityProperty(), 1.0);
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(sec), endKeyValue);
+        Timeline timeline = new Timeline(initFrame, endFrame);
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
 
-    public void hideOverview(AnchorPane form) {
-        form.setVisible(false);
+    public void createAppearEffect(TabPane tabPane){
+        KeyValue initKeyValue = new KeyValue(tabPane.opacityProperty(), 0.0);
+        KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
+        KeyValue endKeyValue = new KeyValue(tabPane.opacityProperty(), 1.0);
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(1), endKeyValue);
+        Timeline timeline = new Timeline(initFrame, endFrame);
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+
+    public void createAppearEffect(Button tabPane){
+        KeyValue initKeyValue = new KeyValue(tabPane.opacityProperty(), 0.0);
+        KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
+        KeyValue endKeyValue = new KeyValue(tabPane.opacityProperty(), 1.0);
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(1), endKeyValue);
+        Timeline timeline = new Timeline(initFrame, endFrame);
+        timeline.setCycleCount(1);
+        timeline.play();
     }
 
     public void updateUserTable(String token){
+        long start = System.currentTimeMillis();
         userData.clear();
         userData.addAll(restAPI.getUsers(token));
+        System.out.println("Конец: " + (System.currentTimeMillis() - start));
     }
 
     public void updateLessonTable(String token){
         lessonData.clear();
-        //System.out.println(restAPI.getLessons(token));
         lessonData.addAll(restAPI.getLessons(token));
     }
 
@@ -166,7 +169,6 @@ public class Main extends Application {
 
             rootLayout.setCenter(authorization);  //устанавливаем форму авторизации
 
-
             AuthorizationController controller = loader.getController();
             controller.setMain(this, restAPI, authorization, stringToMap);
 
@@ -192,6 +194,7 @@ public class Main extends Application {
         }
         return false;
     }
+
 
     public void showAdminForm(User admin, String token){
         try {

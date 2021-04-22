@@ -2,9 +2,19 @@ package program.controllers;
 
 import com.google.gson.Gson;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -35,6 +45,9 @@ public class AuthorizationController implements JSONSerialize {
     @FXML
     private Label message;
 
+    @FXML
+    private Group authGroup;
+
     private boolean signInIsClicked = false;
     private Main main;
     private RestAPI restAPI;
@@ -44,8 +57,10 @@ public class AuthorizationController implements JSONSerialize {
 
     @FXML
     private void initialize() throws UnirestException {
+
         message.setText("");
         showDefaultText();
+
     }
 
     public void showDefaultText() {
@@ -65,6 +80,31 @@ public class AuthorizationController implements JSONSerialize {
         String lastName = stringToMap.createMap(response).get("lastName");
         String status = stringToMap.createMap(response).get("status");
         return new User(login, password, firstName, lastName, role, status);
+    }
+
+    private void createSleeper(User currentUser, String mayBeToken){
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    main.hideOverview(anchorPane);
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                if (currentUser.getRole().equals("ADMIN")) {
+                    main.showAdminForm(currentUser, mayBeToken);
+                } else if (currentUser.getRole().equals("USER")){
+                    main.showAdminForm(currentUser, mayBeToken);
+                }
+            }
+        });
+        new Thread(sleeper).start();
     }
 
     @FXML
@@ -93,21 +133,31 @@ public class AuthorizationController implements JSONSerialize {
                 pause.play();
 
             } else {
-                main.hideOverview(anchorPane);
-                if (currentUser.getRole().equals("ADMIN")) {
-                    System.out.println("Авторизован, мс: " + (System.currentTimeMillis()-start));
-                    main.showAdminForm(currentUser, mayBeToken);
-                } else if (currentUser.getRole().equals("USER")) {
-                    main.showUserForm(currentUser, mayBeToken);
-                }
+                createSleeper(currentUser, mayBeToken);
             }
-        } catch ( IndexOutOfBoundsException e){}
+        } catch (IndexOutOfBoundsException e){}
     }
 
     @FXML
     public void signUpButton(ActionEvent actionEvent) {
-        main.hideOverview(anchorPane);
-        main.showSignUpForm();
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    main.hideOverview(anchorPane);
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                main.showSignUpForm();
+            }
+        });
+        new Thread(sleeper).start();
     }
 
     public void setMain(Main main, RestAPI restAPI, AnchorPane anchorPane, StringToMap stringToMap) {
@@ -115,6 +165,8 @@ public class AuthorizationController implements JSONSerialize {
         this.restAPI = restAPI;
         this.anchorPane = anchorPane;
         this.stringToMap = stringToMap;
+
+        main.createAppearEffect(anchorPane, 1);
     }
 
     public AnchorPane getAnchorPane() {

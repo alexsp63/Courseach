@@ -1,6 +1,9 @@
 package program.controllers;
 
 import javafx.animation.PauseTransition;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -75,6 +78,7 @@ public class UserPageController {
         this.token = token;
 
         lessonTable.setItems(main.getLessonData());
+        main.createAppearEffect(anchorPane, 1.5);
     }
 
     @FXML
@@ -239,7 +243,23 @@ public class UserPageController {
     @FXML
     public void logOut(){
         //TODO: прописать logout в restAPI
-        main.hideOverview(anchorPane);
-        main.showAuthorizationForm();
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    main.hideOverview(anchorPane);
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                main.showAuthorizationForm();
+            }
+        });
+        new Thread(sleeper).start();
     }
 }

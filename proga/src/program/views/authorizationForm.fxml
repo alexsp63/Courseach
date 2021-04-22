@@ -9,13 +9,13 @@
     <children>
       <AnchorPane layoutX="52.0" layoutY="220.0" prefHeight="298.0" prefWidth="344.0" styleClass="backgroundW" stylesheets="@../style/myStyle.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
          <children>
-            <Group layoutX="8.0" layoutY="17.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="8.0">
+            <Group fx:id="authGroup" layoutX="8.0" layoutY="17.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="8.0">
                <children>
-                    <PasswordField fx:id="passwordText" layoutX="2.0" layoutY="111.60000610351562" prefHeight="45.0" prefWidth="325.0" promptText="Пароль" />
+                    <PasswordField fx:id="passwordText" layoutX="2.0" layoutY="107.60000610351562" prefHeight="45.0" prefWidth="325.0" promptText="Пароль" />
                     <Button layoutX="5.0" layoutY="197.0" mnemonicParsing="false" onAction="#signInButton" prefHeight="46.0" prefWidth="319.0" stylesheets="@../style/myStyle.css" text="Вход" />
                     <Button layoutX="6.0" layoutY="246.0" mnemonicParsing="false" onAction="#signUpButton" prefHeight="32.0" prefWidth="319.0" styleClass="buttonReg" stylesheets="@../style/myStyle.css" text="Регистрация" />
-                    <TextField fx:id="loginText" layoutX="1.0" layoutY="59.0" prefHeight="49.0" prefWidth="325.0" promptText="Логин" styleClass="text-field" stylesheets="@../style/myStyle.css" />
-                    <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="161.0" prefHeight="32.0" prefWidth="326.0" styleClass="labelMessage" stylesheets="@../style/myStyle.css" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
+                    <TextField fx:id="loginText" layoutX="1.0" layoutY="55.0" prefHeight="49.0" prefWidth="325.0" promptText="Логин" styleClass="text-field" stylesheets="@../style/myStyle.css" />
+                    <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="159.0" prefHeight="32.0" prefWidth="326.0" styleClass="labelMessage" stylesheets="@../style/myStyle.css" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="326.0" styleClass="labelAuth" stylesheets="@../style/myStyle.css" text="Авторизация">
                      <font>
                         <Font name="Segoe UI Bold Italic" size="12.0" />

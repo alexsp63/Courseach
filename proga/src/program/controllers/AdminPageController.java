@@ -6,6 +6,9 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.transformation.FilteredList;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.*;
@@ -124,6 +127,9 @@ public class AdminPageController {
     private Group userGroup;
 
     @FXML
+    private TabPane adminTab;
+
+    @FXML
     private Group lessonGroup;
 
     @FXML
@@ -138,9 +144,11 @@ public class AdminPageController {
     @FXML
     private TextField lessonSearchField;
 
+    @FXML
+    private AnchorPane adminAnchorPane;
+
     private FilteredList<User> filteredList;
     private FilteredList<Lesson> filteredLessonList;
-
 
     private Main main;
     private RestAPI restAPI;
@@ -163,6 +171,8 @@ public class AdminPageController {
 
         filteredLessonList = new FilteredList(main.getLessonData(), p -> true);
         lessTable.setItems(filteredLessonList);
+
+        main.createAppearEffect(anchorPane,2);
     }
 
     @FXML
@@ -476,8 +486,24 @@ public class AdminPageController {
     @FXML
     public void logOut(){
         //TODO: прописать logout в restAPI
-        main.hideOverview(anchorPane);
-        main.showAuthorizationForm();
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    main.hideOverview(anchorPane);
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                main.showAuthorizationForm();
+            }
+        });
+        new Thread(sleeper).start();
     }
 
 

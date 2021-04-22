@@ -2,6 +2,9 @@ package program.controllers;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.animation.PauseTransition;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -45,6 +48,8 @@ public class SignUpController {
         this.main = main;
         this.restAPI = restAPI;
         this.anchorPane = anchorPane;
+
+        main.createAppearEffect(anchorPane, 1);
     }
 
     public boolean isCloseISClicked() {
@@ -53,8 +58,24 @@ public class SignUpController {
 
     @FXML
     private void cancelIsClicked(){
-        main.hideOverview(anchorPane);
-        main.showAuthorizationForm();
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    main.hideOverview(anchorPane);
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                main.showAuthorizationForm();
+            }
+        });
+        new Thread(sleeper).start();
     }
 
     public static boolean isDouble(String str) {
@@ -131,8 +152,7 @@ public class SignUpController {
             restAPI.postUser(newUser);
 
             closeISClicked = true;
-            main.hideOverview(anchorPane);
-            main.showAuthorizationForm();
+            cancelIsClicked();
         }
     }
 }
