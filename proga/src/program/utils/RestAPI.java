@@ -3,10 +3,12 @@ package program.utils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import program.controllers.AuthorizationController;
 import program.models.*;
 
@@ -89,8 +91,20 @@ public class RestAPI {
         return new AnswerHistory(id, isCorrect, statistics, question);
     }
 
-    public String auth(AuthorizationController authorizationController) {
-        return HttpClass.PostRequest(AUTH, authorizationController.toJson());
+    public Map<String, User> auth(AuthorizationController authorizationController) {
+        String responseString = HttpClass.PostRequest(AUTH, authorizationController.toJson());
+        User responseUser = new User();
+        try {
+            JsonObject stringToParse = JsonParser.parseString(responseString).getAsJsonObject();
+            responseUser = parseUser(stringToParse);
+            responseString = stringToParse.get("token").getAsString();
+        } catch (JsonSyntaxException e){ }
+        User finalResponseUser = responseUser;
+        String finalResponseString = responseString;
+        Map<String, User> responseMap = new HashMap<>(){{
+            put(finalResponseString, finalResponseUser);
+        }};
+        return responseMap;
     }
 
     public List<User> getUsers(String token){

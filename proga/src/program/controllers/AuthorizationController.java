@@ -19,7 +19,9 @@ import program.utils.StringToMap;
 
 import java.io.IOException;
 import java.net.ConnectException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AuthorizationController implements JSONSerialize {
@@ -70,31 +72,36 @@ public class AuthorizationController implements JSONSerialize {
         try {
             message.setText("");
 
-            String response = restAPI.auth(this);
+            long start = System.currentTimeMillis();
+            List<String> respKey = new ArrayList<>();
+            Map<String, User> response = restAPI.auth(this);
+            for (String key: response.keySet()){
+                respKey.add(key);
+            }
+            String mayBeToken = respKey.get(0);
+            User currentUser = response.get(mayBeToken);
 
-            if (response.equals("Неверные учетные данные пользователя")
-            || response.equals("Учетная запись пользователя заблокирована")) {
+            if (mayBeToken.equals("Неверные учетные данные пользователя")
+            || mayBeToken.equals("Учетная запись пользователя заблокирована")) {
+
+                //то это сообщение об ошибке, а не токен
 
                 message.setTextFill(Color.web("red"));
-                message.setText(response);
+                message.setText(mayBeToken);
                 PauseTransition pause = new PauseTransition(Duration.seconds(2));
                 pause.setOnFinished(e -> message.setText(""));
                 pause.play();
 
             } else {
                 main.hideOverview(anchorPane);
-                String role = stringToMap.createMap(response).get("role");
-                if (role.equals("ADMIN")) {
-                    User currentUser = formUser(response, role);
-                    String token = stringToMap.createMap(response).get("token");
-                    main.showAdminForm(currentUser, token);
-                } else if (role.equals("USER")) {
-                    User currentUser = formUser(response, role);
-                    String token = stringToMap.createMap(response).get("token");
-                    main.showUserForm(currentUser, token);
+                if (currentUser.getRole().equals("ADMIN")) {
+                    System.out.println("Авторизован, мс: " + (System.currentTimeMillis()-start));
+                    main.showAdminForm(currentUser, mayBeToken);
+                } else if (currentUser.getRole().equals("USER")) {
+                    main.showUserForm(currentUser, mayBeToken);
                 }
             }
-        } catch (ConnectException | IndexOutOfBoundsException e){}
+        } catch ( IndexOutOfBoundsException e){}
     }
 
     @FXML
