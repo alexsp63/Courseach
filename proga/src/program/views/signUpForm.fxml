@@ -32,13 +32,13 @@
                   <TextField fx:id="lastNameText" prefHeight="45.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <VBox layoutX="272.0" layoutY="342.0" prefHeight="82.0" prefWidth="378.0" spacing="10.0" AnchorPane.leftAnchor="160272.0">
+            <VBox layoutX="158.0" layoutY="342.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="160.0">
                <children>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#signUpClicked" prefHeight="45.0" prefWidth="376.0" stylesheets="@../style/myStyle.css" text="Зарегистрироваться" />
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelIsClicked" prefHeight="455.0" prefWidth="380.0" styleClass="buttonReg" stylesheets="@../style/myStyle.css" text="Назад" textAlignment="CENTER" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#cancelIsClicked" prefHeight="45.0" prefWidth="380.0" styleClass="buttonReg" stylesheets="@../style/myStyle.css" text="Назад" textAlignment="CENTER" />
                </children>
             </VBox>
-            <Label fx:id="errorMes" alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="309.0" prefHeight="28.0" prefWidth="603.0" styleClass="labelMessage" stylesheets="@../style/myStyle.css" />
+            <Label fx:id="errorMes" alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="311.0" prefHeight="34.0" prefWidth="603.0" styleClass="labelMessage" stylesheets="@../style/myStyle.css" />
          </children></AnchorPane>
    </children>
 </AnchorPane>
