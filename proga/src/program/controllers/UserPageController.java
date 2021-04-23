@@ -84,6 +84,18 @@ public class UserPageController {
     @FXML
     private void initialize() {
 
+        TextField[] textFields = {userFirstName, userLastName, userNewPassword, userRepeatedPassword};
+        for (TextField textField: textFields){
+            textField.setOnMouseClicked(mouseEvent -> {
+                textField.setStyle("-fx-border-color: #14a9ff; -fx-border-width: 0 0 2 0;");
+                for (TextField textField1: textFields){
+                    if (textField1 != textField){
+                        textField1.setStyle("-fx-border-color: #84cdff; -fx-border-width: 0 0 2 0;");
+                    }
+                }
+            });
+        }
+
         userLogin.setEditable(false);
         lessonQuestionsButton.setDisable(true);
         showStatisticsButton.setDisable(true);
@@ -156,15 +168,19 @@ public class UserPageController {
         if (userFirstName.getText() == null || isDouble(userFirstName.getText()) == true
                 || isInteger(userFirstName.getText()) == true || userFirstName.getText().length() == 0
                 || userFirstName.getText().equals("")){
+            SignUpController.makeRed(userFirstName);
             return "Недопустимый формат имени!";
         }
         if (userLastName.getText() == null || isDouble(userLastName.getText()) == true
                 || isInteger(userLastName.getText()) == true || userLastName.getText().length() == 0
                 || userLastName.getText().equals("")){
+            SignUpController.makeRed(userLastName);
             return "Недопустимый формат фамилии!";
         }
         if (userNewPassword.getText() != null || !userNewPassword.getText().equals("")) {
             if (!userRepeatedPassword.getText().equals(userNewPassword.getText())){
+                SignUpController.makeRed(userNewPassword);
+                SignUpController.makeRed(userRepeatedPassword);
                 return "Подтвердите новый пароль!";
             }
         }
