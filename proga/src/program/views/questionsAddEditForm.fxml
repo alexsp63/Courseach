@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="520.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.controllers.QuestionsAddEditController">
+<AnchorPane prefHeight="520.0" prefWidth="500.0" styleClass="backgroundAnother" stylesheets="@../style/myStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.controllers.QuestionsAddEditController">
    <children>
       <Group layoutX="0.0" layoutY="20.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="15.0">
          <children>
@@ -21,21 +21,21 @@
                   <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="questionText" alignment="TOP_LEFT" prefHeight="95.0" prefWidth="452.0" promptText="Введите текст вопроса" />
-                  <TextField fx:id="questionDescription" alignment="TOP_LEFT" prefHeight="75.0" prefWidth="452.0" promptText="Введите пояснение к ответу" GridPane.rowIndex="1" />
-                  <TextField fx:id="questionCorrect" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="452.0" promptText="Введите правильный ответ" GridPane.rowIndex="2" />
-                  <TextField fx:id="questionIncorrect1" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="452.0" promptText="Введите неправильный ответ" GridPane.rowIndex="3" />
-                  <TextField fx:id="questionIncorrect2" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="452.0" promptText="Введите ещё один неправильный ответ" GridPane.rowIndex="4" />
-                  <TextField fx:id="questionIncorrect3" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="452.0" promptText="И ещё один неправильный ответ" GridPane.rowIndex="5" />
+                  <TextField fx:id="questionText" alignment="TOP_LEFT" prefHeight="95.0" prefWidth="452.0" promptText="Введите текст вопроса (до 100 символов)" styleClass="text-fieldLesson" stylesheets="@../style/myStyle.css" />
+                  <TextField fx:id="questionDescription" alignment="TOP_LEFT" prefHeight="75.0" prefWidth="452.0" promptText="Введите пояснение к ответу (до 50 символов)" styleClass="text-fieldLesson" GridPane.rowIndex="1" />
+                  <TextField fx:id="questionCorrect" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="452.0" promptText="Введите правильный ответ (до 20 символов)" styleClass="text-fieldLesson" GridPane.rowIndex="2" />
+                  <TextField fx:id="questionIncorrect1" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="452.0" promptText="Введите неправильный ответ (до 20 символов)" styleClass="text-fieldLesson" GridPane.rowIndex="3" />
+                  <TextField fx:id="questionIncorrect2" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="452.0" promptText="Введите ещё один неправильный ответ (до 20 символов)" styleClass="text-fieldLesson" GridPane.rowIndex="4" />
+                  <TextField fx:id="questionIncorrect3" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="452.0" promptText="И ещё один неправильный ответ (до 20 символов)" styleClass="text-fieldLesson" GridPane.rowIndex="5" />
                </children>
             </GridPane>
-            <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="408.0" prefHeight="41.0" prefWidth="476.0" />
+            <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="405.0" prefHeight="41.0" prefWidth="483.0" styleClass="labelAuthMess" stylesheets="@../style/myStyle.css" />
          </children>
       </Group>
-      <HBox layoutX="336.0" layoutY="473.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0">
+      <HBox layoutX="336.0" layoutY="473.0" prefHeight="34.0" prefWidth="268.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#saveQ" prefHeight="30.0" prefWidth="106.0" text="Сохранить" />
-            <Button mnemonicParsing="false" onAction="#cancelQ" prefHeight="30.0" prefWidth="106.0" text="Отмена" />
+            <Button mnemonicParsing="false" onAction="#saveQ" prefHeight="34.0" prefWidth="160.0" text="Сохранить" />
+            <Button mnemonicParsing="false" onAction="#cancelQ" prefHeight="37.0" prefWidth="106.0" styleClass="buttonReg" stylesheets="@../style/myStyle.css" text="Отмена" />
          </children>
       </HBox>
    </children>

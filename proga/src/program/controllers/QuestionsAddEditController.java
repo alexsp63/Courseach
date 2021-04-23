@@ -98,24 +98,56 @@ public class QuestionsAddEditController {
 
     public String errorMessage(){
         if (questionText.getText() == null || questionText.getText().length() == 0 || questionText.getText().equals("")){
+            LessonAddEditController.makeRed(questionText);
             return "Введите текст вопроса!";
-        } else if (questionDescription.getText() == null || questionDescription.getText().length() == 0 || questionDescription.getText().equals("")){
+        } else if (questionText.getText().length() > 100) {
+            LessonAddEditController.makeRed(questionText);
+            return "Текст вопроса не должен превышать 100 символов!";
+        }
+        else if (questionDescription.getText() == null || questionDescription.getText().length() == 0 || questionDescription.getText().equals("")){
+            LessonAddEditController.makeRed(questionDescription);
             return "Введите пояснение к ответу!";
-        } else if (questionCorrect.getText() == null || questionCorrect.getText().length() == 0 || questionCorrect.getText().equals("")){
+        } else if (questionDescription.getText().length() > 50){
+            LessonAddEditController.makeRed(questionDescription);
+            return "Пояснение не должно превышать 50 символов!";
+        }
+        else if (questionCorrect.getText() == null || questionCorrect.getText().length() == 0 || questionCorrect.getText().equals("")){
+            LessonAddEditController.makeRed(questionCorrect);
             return "Введите правильный ответ!";
+        } else if (questionCorrect.getText().length() > 20){
+            LessonAddEditController.makeRed(questionCorrect);
+            return "Правильный ответ не должен превышать 20 символов!";
         }
         if (lesson.getQuestionType().equals("2 варианта ответа")) {
             if (questionIncorrect1.getText() == null || questionIncorrect1.getText().length() == 0 || questionIncorrect1.getText().equals("")) {
+                LessonAddEditController.makeRed(questionIncorrect1);
                 return "Введите неправильный вариант ответа!";
+            } else if (questionIncorrect1.getText().length() > 20){
+                LessonAddEditController.makeRed(questionIncorrect1);
+                return "Неправильный ответ не должен превышать 20 символов!";
             }
         }
         if (lesson.getQuestionType().equals("4 варианта ответа")) {
             if (questionIncorrect1.getText() == null || questionIncorrect1.getText().length() == 0 || questionIncorrect1.getText().equals("")) {
+                LessonAddEditController.makeRed(questionIncorrect1);
                 return "Введите первый неправильный вариант ответа!";
-            } else if (questionIncorrect2.getText() == null || questionIncorrect2.getText().length() == 0 || questionIncorrect2.getText().equals("")) {
+            }  else if (questionIncorrect1.getText().length() > 20){
+                LessonAddEditController.makeRed(questionIncorrect1);
+                return "Неправильный ответ не должен превышать 20 символов!";
+            }
+            else if (questionIncorrect2.getText() == null || questionIncorrect2.getText().length() == 0 || questionIncorrect2.getText().equals("")) {
+                LessonAddEditController.makeRed(questionIncorrect2);
                 return "Введите второй неправильный вариант ответа!";
-            } else if (questionIncorrect3.getText() == null || questionIncorrect3.getText().length() == 0 || questionIncorrect3.getText().equals("")) {
+            }  else if (questionIncorrect2.getText().length() > 20){
+                LessonAddEditController.makeRed(questionIncorrect2);
+                return "Неправильный ответ не должен превышать 20 символов!";
+            }
+            else if (questionIncorrect3.getText() == null || questionIncorrect3.getText().length() == 0 || questionIncorrect3.getText().equals("")) {
+                LessonAddEditController.makeRed(questionIncorrect3);
                 return "Введите третий неправильный вариант ответа!";
+            }  else if (questionIncorrect3.getText().length() > 20){
+                LessonAddEditController.makeRed(questionIncorrect3);
+                return "Неправильный ответ не должен превышать 20 символов!";
             }
         }
         return "";

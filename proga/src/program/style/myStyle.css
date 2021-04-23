@@ -118,6 +118,10 @@
     -fx-faint-focus-color: transparent;
 }
 
+.tab:hover {
+    -fx-background-color: #f3f3f3;
+}
+
 .button {
     -fx-font-size: 18;
     -fx-font-family: "Bookman Old Style";
@@ -169,12 +173,20 @@
     -fx-background-color: linear-gradient(to bottom, white, #dfecff);
 }
 
+.table-view:hover {
+    -fx-background-color: linear-gradient(to bottom, white, #dfecff);
+}
+
 .table-view .column-header-background {
     -fx-background-color: transparent;
 }
 
 .table-view .column-header {
     -fx-font-size: 22;
+}
+
+.table-view1 .column-header1{
+    -fx-font-size: 18;
 }
 
 .table-view .column-header .label {
@@ -254,4 +266,49 @@
 .combo-box:hover {
     -fx-background-color: #b2d1ff;
     -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0, 1, 1 ,0 );
+}
+
+.text-fieldLesson {
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-border-color: #84cdff;
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 14;
+    -fx-background-color: white;
+}
+
+.text-fieldLesson:focused{
+    -fx-border-color: #14a9ff;
+    -fx-border-width: 2;
+    -fx-background-color: white;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,0.5,0 );
+}
+
+.text-areaLesson {
+    -fx-border-width: 2;
+    -fx-border-color: #84cdff;
+    -fx-border-radius: 4;
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 14;
+    -fx-background-color: white;
+}
+
+.text-areaLesson:focused{
+    -fx-border-color: #14a9ff;
+    -fx-border-width: 2;
+    -fx-background-color: white;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,0.5,0 );
+}
+
+.labelLQ {
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 14;
+    -fx-text-fill: black;
+}
+
+.labelDark {
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 18;
+    -fx-text-fill: #1269ff;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
 }

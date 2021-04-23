@@ -501,7 +501,6 @@ public class AdminPageController {
 
     @FXML
     public void logOut(){
-        //TODO: прописать logout в restAPI
         Task<Void> sleeper = new Task<Void>() {
             @Override
             protected Void call() throws Exception {

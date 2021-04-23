@@ -123,7 +123,7 @@ public class StatAdminController {
             statEnt.setText("Урок");
             statEnt.setCellValueFactory(cellData -> cellData.getValue().lessonProperty());
         } else if (user == null){
-            statEnt.setText("Пользователь");
+            statEnt.setText("Ученик");
             statEnt.setCellValueFactory(cellData -> cellData.getValue().userProperty());
         }
 

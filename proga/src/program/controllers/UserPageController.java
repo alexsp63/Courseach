@@ -119,9 +119,9 @@ public class UserPageController {
         if (lesson != null){
             if (restAPI.getQuestionsByLesson(token, lesson).size() < 10){
                 lessonQuestionsButton.setDisable(true);
-                lessonTestMessage.setTextFill(Color.web("yellow"));
+                lessonTestMessage.setStyle("-fx-text-fill: #ff5900; -fx-font-size: 14");
                 lessonTestMessage.setText("Тест по этому уроку сейчас недоступен, так как вопросы находятся в разработке. Вы сможете пройти тест очень скоро, а в данный момент можете внимательно ознакомиться с текстом урока.");
-                PauseTransition pause = new PauseTransition(Duration.seconds(3));
+                PauseTransition pause = new PauseTransition(Duration.seconds(5));
                 pause.setOnFinished(e -> lessonTestMessage.setText(""));
                 pause.play();
             } else {
@@ -258,7 +258,6 @@ public class UserPageController {
 
     @FXML
     public void logOut(){
-        //TODO: прописать logout в restAPI
         Task<Void> sleeper = new Task<Void>() {
             @Override
             protected Void call() throws Exception {

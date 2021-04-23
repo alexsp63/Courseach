@@ -194,8 +194,9 @@ public class TestWindowController {
             clickedButton.setStyle("-fx-background-color: #72ff72");
         } else {
             currentAnswerHistory.setIsCorrect(false);
-            clickedButton.setStyle("-fx-background-color: #ff3737");
+            clickedButton.setStyle("-fx-background-color: #ff5a5a");
         }
+        descriptionText.setStyle("-fx-text-fill: #9951ff");
         descriptionText.setText(questionList.get(n).getDescription());
         createAppearEffect(descriptionText);
         n += 1;
@@ -254,8 +255,9 @@ public class TestWindowController {
             openAnswer.setStyle("-fx-background-color: #72ff72");
         } else {
             currentAnswerHistory.setIsCorrect(false);
-            openAnswer.setStyle("-fx-background-color: #ff3737");
+            openAnswer.setStyle("-fx-background-color: #ff5a5a");
         }
+        descriptionText.setStyle("-fx-text-fill: #9951ff");
         descriptionText.setText(questionList.get(n).getDescription());
         createAppearEffect(descriptionText);
         n += 1;

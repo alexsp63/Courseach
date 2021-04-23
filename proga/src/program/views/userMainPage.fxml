@@ -99,7 +99,7 @@
                                             <children>
                                           <Group layoutX="-8.0" layoutY="24.0">
                                              <children>
-                                                        <Label fx:id="lessonName" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" prefHeight="30.0" prefWidth="844.0" />
+                                                        <Label fx:id="lessonName" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" prefHeight="30.0" prefWidth="844.0" styleClass="labelProf" stylesheets="@../style/myStyle.css" />
                                                         <Label fx:id="lessonTestMessage" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="355.0" prefHeight="70.0" prefWidth="848.0" textAlignment="CENTER" />
                                                 <GridPane layoutX="29.0" layoutY="63.0" prefHeight="302.0" prefWidth="810.0">
                                                   <columnConstraints>
@@ -110,8 +110,8 @@
                                                     <RowConstraints maxHeight="146.4" minHeight="10.0" prefHeight="60.80000000000001" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
-                                                      <Label fx:id="lessonText" alignment="TOP_LEFT" prefHeight="238.0" prefWidth="807.0" text="Label" />
-                                                      <Label fx:id="lessonQuestionType" prefHeight="51.0" prefWidth="810.0" text="Label" GridPane.rowIndex="1" />
+                                                      <Label fx:id="lessonText" alignment="TOP_LEFT" prefHeight="238.0" prefWidth="807.0" styleClass="labelLQ" stylesheets="@../style/myStyle.css" text="Label" />
+                                                      <Label fx:id="lessonQuestionType" prefHeight="51.0" prefWidth="810.0" styleClass="labelLQ" text="Label" GridPane.rowIndex="1" />
                                                    </children>
                                                 </GridPane>
                                              </children>
@@ -119,7 +119,7 @@
                                           <HBox layoutX="387.00000000000006" layoutY="444.0" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
                                              <children>
                                                 <Button fx:id="showStatisticsButton" mnemonicParsing="false" onAction="#showStat" prefHeight="34.0" prefWidth="289.0" text="Показать статистику" />
-                                                 <Button fx:id="lessonQuestionsButton" mnemonicParsing="false" onAction="#startTest" prefHeight="30.0" prefWidth="150.0" text="Пройти тест" />
+                                                 <Button fx:id="lessonQuestionsButton" mnemonicParsing="false" onAction="#startTest" prefHeight="34.0" prefWidth="259.0" text="Пройти тест" />
                                              </children>
                                           </HBox>
                                             </children>

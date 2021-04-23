@@ -120,7 +120,7 @@ public class LessonQuestionsController {
             message.setText("Информация о вопросе");
             textLabel.setText("Текст вопроса: ");
             questionText.setText(question.getText());
-            descriptionLabel.setText("Описание (небольшое правило, которое будет показываться ученику при ответе на вопрос, обоснование ответа):");
+            descriptionLabel.setText("Описание (обоснование ответа):");
             questionDescription.setText(question.getDescription());
             corrLabel.setText("Правильный ответ: ");
             correctAnswer.setText(question.getCorrectAnswer());

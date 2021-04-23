@@ -183,9 +183,9 @@
                                                       <Label alignment="TOP_LEFT" prefHeight="36.0" prefWidth="185.0" styleClass="labelRegs" stylesheets="@../style/myStyle.css" text="Название урока:" />
                                                       <Label alignment="TOP_LEFT" prefHeight="247.0" prefWidth="412.0" styleClass="labelRegs" text="Текст урока: " GridPane.rowIndex="1" />
                                                       <Label alignment="TOP_LEFT" prefHeight="33.0" prefWidth="410.0" styleClass="labelRegs" text="Тип вопросов: " GridPane.rowIndex="2" />
-                                                      <Label fx:id="lessonName" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="633.0" text="Label" GridPane.columnIndex="1" />
-                                                      <Label fx:id="lessonText" alignment="TOP_LEFT" prefHeight="236.0" prefWidth="629.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                      <Label fx:id="lessonQuestionType" alignment="TOP_LEFT" prefHeight="31.0" prefWidth="629.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <Label fx:id="lessonName" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="633.0" styleClass="labelLQ" stylesheets="@../style/myStyle.css" text="Label" GridPane.columnIndex="1" />
+                                                      <Label fx:id="lessonText" alignment="TOP_LEFT" prefHeight="236.0" prefWidth="629.0" styleClass="labelLQ" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <Label fx:id="lessonQuestionType" alignment="TOP_LEFT" prefHeight="31.0" prefWidth="629.0" styleClass="labelLQ" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                    </children>
                                                 </GridPane>
                                                 <Button fx:id="lessonQuestionsButton" layoutX="677.0" layoutY="384.0" mnemonicParsing="false" onAction="#showQuestions" prefHeight="34.0" prefWidth="150.0" stylesheets="@../style/myStyle.css" text="Вопросы" />
