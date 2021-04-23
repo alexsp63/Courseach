@@ -178,6 +178,18 @@ public class AdminPageController {
     @FXML
     private void initialize() throws NullPointerException{
 
+        TextField[] textFields = {adminFirstName, adminLastName, adminNewPassword, adminRepeatedPassword};
+        for (TextField textField: textFields){
+            textField.setOnMouseClicked(mouseEvent -> {
+                textField.setStyle("-fx-border-color: #14a9ff; -fx-border-width: 0 0 2 0;");
+                for (TextField textField1: textFields){
+                    if (textField1 != textField){
+                        textField1.setStyle("-fx-border-color: #84cdff; -fx-border-width: 0 0 2 0;");
+                    }
+                }
+            });
+        }
+
         adminLogin.setEditable(false);
         userFirstName.setEditable(false);
         userLastName.setEditable(false);
@@ -350,15 +362,19 @@ public class AdminPageController {
         if (adminFirstName.getText() == null || isDouble(adminFirstName.getText()) == true
                 || isInteger(adminFirstName.getText()) == true || adminFirstName.getText().length() == 0
                 || adminFirstName.getText().equals("")){
+            SignUpController.makeRed(adminFirstName);
             return "Недопустимый формат имени!";
         }
         if (adminLastName.getText() == null || isDouble(adminLastName.getText()) == true
                 || isInteger(adminLastName.getText()) == true || adminLastName.getText().length() == 0
                 || adminLastName.getText().equals("")){
+            SignUpController.makeRed(adminLastName);
             return "Недопустимый формат фамилии!";
         }
         if (adminNewPassword.getText() != null || !adminNewPassword.getText().equals("")) {
             if (!adminRepeatedPassword.getText().equals(adminNewPassword.getText())){
+                SignUpController.makeRed(adminNewPassword);
+                SignUpController.makeRed(adminRepeatedPassword);
                 return "Подтвердите новый пароль!";
             }
         }
@@ -490,8 +506,8 @@ public class AdminPageController {
             @Override
             protected Void call() throws Exception {
                 try {
-                    main.hideOverview(anchorPane);
-                    Thread.sleep(1000);
+                    main.hideOverview(anchorPane, 0.5);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                 }
                 return null;

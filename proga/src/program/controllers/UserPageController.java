@@ -247,8 +247,8 @@ public class UserPageController {
             @Override
             protected Void call() throws Exception {
                 try {
-                    main.hideOverview(anchorPane);
-                    Thread.sleep(1000);
+                    main.hideOverview(anchorPane, 0.5);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                 }
                 return null;

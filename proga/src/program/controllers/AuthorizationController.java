@@ -87,8 +87,8 @@ public class AuthorizationController implements JSONSerialize {
             @Override
             protected Void call() throws Exception {
                 try {
-                    main.hideOverview(anchorPane);
-                    Thread.sleep(1000);
+                    main.hideOverview(anchorPane, 0.5);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                 }
                 return null;
@@ -100,7 +100,7 @@ public class AuthorizationController implements JSONSerialize {
                 if (currentUser.getRole().equals("ADMIN")) {
                     main.showAdminForm(currentUser, mayBeToken);
                 } else if (currentUser.getRole().equals("USER")){
-                    main.showAdminForm(currentUser, mayBeToken);
+                    main.showUserForm(currentUser, mayBeToken);
                 }
             }
         });
@@ -112,7 +112,6 @@ public class AuthorizationController implements JSONSerialize {
         try {
             message.setText("");
 
-            long start = System.currentTimeMillis();
             List<String> respKey = new ArrayList<>();
             Map<String, User> response = restAPI.auth(this);
             for (String key: response.keySet()){
@@ -121,8 +120,7 @@ public class AuthorizationController implements JSONSerialize {
             String mayBeToken = respKey.get(0);
             User currentUser = response.get(mayBeToken);
 
-            if (mayBeToken.equals("Неверные учетные данные пользователя")
-            || mayBeToken.equals("Учетная запись пользователя заблокирована")) {
+            if (currentUser.getLogin() == null) {
 
                 //то это сообщение об ошибке, а не токен
 
@@ -144,8 +142,8 @@ public class AuthorizationController implements JSONSerialize {
             @Override
             protected Void call() throws Exception {
                 try {
-                    main.hideOverview(anchorPane);
-                    Thread.sleep(1000);
+                    main.hideOverview(anchorPane, 0.5);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                 }
                 return null;
@@ -166,7 +164,7 @@ public class AuthorizationController implements JSONSerialize {
         this.anchorPane = anchorPane;
         this.stringToMap = stringToMap;
 
-        main.createAppearEffect(anchorPane, 1);
+        main.createAppearEffect(anchorPane, 0.5);
     }
 
     public AnchorPane getAnchorPane() {

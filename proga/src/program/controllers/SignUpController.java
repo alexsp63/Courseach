@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import program.Main;
 import program.models.User;
@@ -49,7 +50,29 @@ public class SignUpController {
         this.restAPI = restAPI;
         this.anchorPane = anchorPane;
 
-        main.createAppearEffect(anchorPane, 1);
+        main.createAppearEffect(anchorPane, 0.5);
+    }
+
+    @FXML
+    private void initialize(){
+        TextField[] textFields = {firstNameText, lastNameText, loginText, passwordText, repeatPasswordText};
+        for (TextField textField: textFields){
+            textField.setOnMouseClicked(mouseEvent -> {
+                textField.setStyle("-fx-border-color: #14a9ff; -fx-border-width: 0 0 2 0;");
+                for (TextField textField1: textFields){
+                    if (textField1 != textField){
+                        textField1.setStyle("-fx-border-color: #84cdff; -fx-border-width: 0 0 2 0;");
+                    }
+                }
+            });
+        }
+    }
+
+    public static void makeRed(TextField textField){
+        textField.setStyle("-fx-border-color: #ff0000; -fx-border-width: 0 0 2 0;");
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(e -> textField.setStyle("-fx-border-color: #84cdff; -fx-border-width: 0 0 2 0;"));
+        pause.play();
     }
 
     public boolean isCloseISClicked() {
@@ -62,8 +85,8 @@ public class SignUpController {
             @Override
             protected Void call() throws Exception {
                 try {
-                    main.hideOverview(anchorPane);
-                    Thread.sleep(1000);
+                    main.hideOverview(anchorPane, 0.5);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                 }
                 return null;
@@ -103,26 +126,33 @@ public class SignUpController {
         if (firstNameText.getText() == null || isDouble(firstNameText.getText()) == true
                 || isInteger(firstNameText.getText()) == true || firstNameText.getText().length() == 0
                 || firstNameText.getText().equals("")){
+            makeRed(firstNameText);
             return "Недопустимый формат имени!";
         }
         if (lastNameText.getText() == null || isDouble(lastNameText.getText()) == true
                 || isInteger(lastNameText.getText()) == true || lastNameText.getText().length() == 0
                 || lastNameText.getText().equals("")){
+            makeRed(lastNameText);
             return "Недопустимый формат фамилии!";
         }
         if (loginText.getText() == null || loginText.getText().equals("")) {
+            makeRed(loginText);
             return "Поле логина не может быть пустым!";
         }
         if (passwordText.getText() == null || passwordText.getText().equals("")) {
+            makeRed(passwordText);
             return "Поле пароля не может быть пустым!";
         }
         if (repeatPasswordText.getText() == null || repeatPasswordText.getText().equals("")){
+            makeRed(repeatPasswordText);
             return "Подтвердите пароль повторным вводом!";
         }
         if (!passwordText.getText().equals(repeatPasswordText.getText())){
+            makeRed(repeatPasswordText);
             return "Пароли не совпадают!";
         }
         if (unavailableLogins.contains(loginText.getText())) {
+            makeRed(loginText);
             return "Введённый логин уже используется другим пользователем!";
         }
         return "";

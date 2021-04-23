@@ -74,11 +74,11 @@ public class Main extends Application {
         //showAdminForm(new User(), "jmnd");
     }
 
-    public void hideOverview(AnchorPane anchorPane) {
+    public void hideOverview(AnchorPane anchorPane, double sec) {
         KeyValue initKeyValue = new KeyValue(anchorPane.opacityProperty(), 1.0);
         KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
         KeyValue endKeyValue = new KeyValue(anchorPane.opacityProperty(), 0.0);
-        KeyFrame endFrame = new KeyFrame(Duration.seconds(1), endKeyValue);
+        KeyFrame endFrame = new KeyFrame(Duration.seconds(sec), endKeyValue);
         Timeline timeline = new Timeline(initFrame, endFrame);
         timeline.setCycleCount(1);
         timeline.play();
@@ -115,10 +115,8 @@ public class Main extends Application {
     }
 
     public void updateUserTable(String token){
-        long start = System.currentTimeMillis();
         userData.clear();
         userData.addAll(restAPI.getUsers(token));
-        System.out.println("Конец: " + (System.currentTimeMillis() - start));
     }
 
     public void updateLessonTable(String token){
@@ -167,6 +165,7 @@ public class Main extends Application {
             loader.setLocation(Main.class.getResource("views/authorizationForm.fxml"));
             AnchorPane authorization = (AnchorPane) loader.load();
 
+
             rootLayout.setCenter(authorization);  //устанавливаем форму авторизации
 
             AuthorizationController controller = loader.getController();
@@ -200,6 +199,7 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("views/adminMainPage.fxml"));
+
             AnchorPane adminForm = (AnchorPane) loader.load();
 
             rootLayout.setCenter(adminForm);

@@ -11,26 +11,9 @@
     -fx-background-radius: 20;
 }
 
-.backgroundUser {
-    -fx-background-image: url("images/userBackground.jpg");
-    -fx-background-repeat: stretch;
-    -fx-background-size: cover;
-    -fx-background-position: center center;
-    -fx-background-radius: 10;
-    -fx-border-color: #ffffff;
-    -fx-border-width: 10;
-    border-radius: 20px;
-}
-
-.backgroundAdmin {
-    -fx-background-image: url("images/adminBackground.jpg");
-    -fx-background-repeat: stretch;
-    -fx-background-size: cover;
-    -fx-background-position: center center;
-    -fx-background-radius: 10;
-    -fx-border-color: #ffffff;
-    -fx-border-width: 10;
-    border-radius: 20px;
+.backgroundWS {
+    -fx-background-color: rgba(255, 255, 255, 0.99);
+    -fx-background-radius: 0;
 }
 
 .text-field {
@@ -48,6 +31,21 @@
     -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
 }
 
+.text-fieldBlocked {
+    -fx-border-color: #929292;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-color: transparent;
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 18;
+}
+
+.text-fieldBlocked:focused{
+    -fx-border-color: #929292;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-color: transparent;
+    -fx-effect: none;
+}
+
 .labelAuth {
     -fx-font-size: 40;
     -fx-font-weight: 600;
@@ -59,24 +57,54 @@
 .labelAuthMess {
     -fx-font-size: 14;
     -fx-font-family: "Bookman Old Style";
-    -fx-effect: dropshadow( gaussian , rgb(176, 2, 2), 0,0,1,0 );
-    -fx-font-weight: bold;
+    -fx-text-fill: red;
+    -fx-effect: none;
 }
 
-.tab-pane {
+#adminTab {
     -fx-border-radius: 20;
     -fx-background-color: transparent;
+    -fx-background-radius: 20;
+    -fx-tab-min-height: 45;
+    -fx-tab-max-height: 45;
+    -fx-tab-min-width: 150;
+    -fx-tab-max-width: 305;
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 14;
 }
 
-.backgroundUser {
-    -fx-background-image: url("images/userBackground.jpg");
-    -fx-background-repeat: stretch;
-    -fx-background-size: cover;
-    -fx-background-position: center center;
-    -fx-background-radius: 10;
-    -fx-border-color: #ffffff;
-    -fx-border-width: 10;
-    border-radius: 20px;
+.tab-header-background {
+    -fx-background-color: #f3f3f3;
+}
+
+.tab .tab-label {
+    -fx-border-radius: 20;
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-text-fill: #0086d4;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,0.5,0 );
+}
+
+.tab {
+    -fx-background-color: #f8f8f8;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-width: 0 0 0 0;
+    -fx-border-color: #bebebe;
+}
+
+.tab:selected {
+    -fx-background-color: #eeeeee;
+    -fx-border-width: 4 0 0 0;
+    -fx-border-color: #65cbff;
+    -fx-focus-traversable: false;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab:focused{
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 .button {
@@ -113,5 +141,14 @@
 .labelRegs {
     -fx-font-family: "Bookman Old Style";
     -fx-font-size: 18;
+    -fx-text-fill: #14a9ff;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
 }
 
+.labelProf {
+    -fx-font-size: 20;
+    -fx-font-weight: 600;
+    -fx-text-fill: #14a9ff;
+    -fx-font-family: "Bookman Old Style";
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
+}
