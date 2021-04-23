@@ -55,11 +55,4 @@ public class AuthController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.OK); //всё равно токена не возвращается
         }
     }
-
-
-    @PostMapping("/logout")
-    public void logout(HttpServletRequest request, HttpServletResponse response) {
-        SecurityContextLogoutHandler securityContextLogoutHandler = new SecurityContextLogoutHandler();
-        securityContextLogoutHandler.logout(request, response, null);
-    }
 }
