@@ -277,4 +277,9 @@ public class UserPageController {
         });
         new Thread(sleeper).start();
     }
+
+    @FXML
+    public void showInfo(){
+        main.showInfo("user");
+    }
 }

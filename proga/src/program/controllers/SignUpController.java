@@ -123,27 +123,27 @@ public class SignUpController {
 
     private String errorMessage(){
         List<String> unavailableLogins = restAPI.getAllLogins();
-        if (firstNameText.getText() == null || isDouble(firstNameText.getText()) == true
+        if (firstNameText.getText().trim() == null || isDouble(firstNameText.getText()) == true
                 || isInteger(firstNameText.getText()) == true || firstNameText.getText().length() == 0
-                || firstNameText.getText().equals("")){
+                || firstNameText.getText().trim().equals("")){
             makeRed(firstNameText);
             return "Недопустимый формат имени!";
         }
         if (lastNameText.getText() == null || isDouble(lastNameText.getText()) == true
                 || isInteger(lastNameText.getText()) == true || lastNameText.getText().length() == 0
-                || lastNameText.getText().equals("")){
+                || lastNameText.getText().trim().equals("")){
             makeRed(lastNameText);
             return "Недопустимый формат фамилии!";
         }
-        if (loginText.getText() == null || loginText.getText().equals("")) {
+        if (loginText.getText() == null || loginText.getText().trim().equals("")) {
             makeRed(loginText);
             return "Поле логина не может быть пустым!";
         }
-        if (passwordText.getText() == null || passwordText.getText().equals("")) {
+        if (passwordText.getText() == null || passwordText.getText().trim().equals("")) {
             makeRed(passwordText);
             return "Поле пароля не может быть пустым!";
         }
-        if (repeatPasswordText.getText() == null || repeatPasswordText.getText().equals("")){
+        if (repeatPasswordText.getText() == null || repeatPasswordText.getText().trim().equals("")){
             makeRed(repeatPasswordText);
             return "Подтвердите пароль повторным вводом!";
         }

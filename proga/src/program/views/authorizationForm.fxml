@@ -24,5 +24,6 @@
                </children>
             </Group>
          </children></AnchorPane>
+      <Button layoutX="1021.0" layoutY="14.0" mnemonicParsing="false" onAction="#showAuthInfo" styleClass="buttonReg" stylesheets="@../style/myStyle.css" text="Об авторе" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
     </children>
 </AnchorPane>

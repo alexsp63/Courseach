@@ -68,6 +68,7 @@
                                         </VBox>
                                     </children>
                                 </Group>
+                              <Button layoutX="841.0" layoutY="14.0" mnemonicParsing="false" onAction="#showInfo" styleClass="buttonReg" stylesheets="@../style/myStyle.css" text="Как это работает?" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="2.0" />
                             </children></AnchorPane>
                     </content>
                      <graphic>

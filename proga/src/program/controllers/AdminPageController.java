@@ -521,5 +521,8 @@ public class AdminPageController {
         new Thread(sleeper).start();
     }
 
-
+    @FXML
+    private void showInfo(){
+        main.showInfo("admin");
+    }
 }

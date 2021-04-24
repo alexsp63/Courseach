@@ -167,6 +167,11 @@ public class AuthorizationController implements JSONSerialize {
         main.createAppearEffect(anchorPane, 0.5);
     }
 
+    @FXML
+    public void showAuthInfo(){
+        main.showInfo("author");
+    }
+
     public AnchorPane getAnchorPane() {
         return anchorPane;
     }

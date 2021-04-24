@@ -58,6 +58,9 @@ public class TestWindowController {
     @FXML
     private Button closeButton;
 
+    @FXML
+    private Label questNumb;
+
     private int n = 0;
     private int score = 0;
 
@@ -147,7 +150,7 @@ public class TestWindowController {
     @FXML
     private void initialize(){
 
-        openAnswer.setStyle("-fx-background-color: white");
+        openAnswer.setStyle("-fx-border-color: #14a9ff; -fx-border-width: 0 0 2 0;");
         openAnswer.textProperty().addListener( (observable, oldValue, newValue) -> {
             if (!newValue.equals("") && !(newValue == null) && !(newValue.length() == 0)){
                 nextQuestionButton.setDisable(false);
@@ -159,10 +162,6 @@ public class TestWindowController {
         Button[] buttons = {var1, var2, var3, var4};
         for (Button button: buttons){
             button.setStyle("-fx-background-color: #e0e0e0");
-//            button.setOnMouseEntered(event -> {
-//                button.setStyle("-fx-background-color: grey");
-//            });
-//            button.setOnMouseExited(event -> button.setStyle(""));
             button.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -196,7 +195,7 @@ public class TestWindowController {
             currentAnswerHistory.setIsCorrect(false);
             clickedButton.setStyle("-fx-background-color: #ff5a5a");
         }
-        descriptionText.setStyle("-fx-text-fill: #9951ff");
+        descriptionText.setStyle("-fx-text-fill: blue");
         descriptionText.setText(questionList.get(n).getDescription());
         createAppearEffect(descriptionText);
         n += 1;
@@ -252,12 +251,12 @@ public class TestWindowController {
         if (usersAnswer.equals(questionList.get(n).getCorrectAnswer())) {
             currentAnswerHistory.setIsCorrect(true);
             score += 1;
-            openAnswer.setStyle("-fx-background-color: #72ff72");
+            openAnswer.setStyle("-fx-border-color: green; -fx-border-width: 0 0 4 0;");
         } else {
             currentAnswerHistory.setIsCorrect(false);
-            openAnswer.setStyle("-fx-background-color: #ff5a5a");
+            openAnswer.setStyle("-fx-border-color: red; -fx-border-width: 0 0 4 0;");
         }
-        descriptionText.setStyle("-fx-text-fill: #9951ff");
+        descriptionText.setStyle("-fx-text-fill: blue");
         descriptionText.setText(questionList.get(n).getDescription());
         createAppearEffect(descriptionText);
         n += 1;
@@ -284,7 +283,7 @@ public class TestWindowController {
                 if (n != 10) {
                     openAnswer.setDisable(false);
                     openAnswer.setText("");
-                    openAnswer.setStyle("-fx-background-color: white");
+                    openAnswer.setStyle("-fx-border-color: #14a9ff; -fx-border-width: 0 0 2 0;");
                     setTestQuestion();
                 } else {
                     try {
@@ -347,6 +346,7 @@ public class TestWindowController {
     }
 
     private void setTestQuestion(){
+        questNumb.setText("Вопрос: " + (n+1) + "/10");
         descriptionText.setText("");
         createAppearEffect(descriptionText);
         Question currentQuestion = questionList.get(n);
@@ -388,7 +388,7 @@ public class TestWindowController {
 
     @FXML
     public void next(){
-        compareAnswer(openAnswer.getText());
+        compareAnswer(openAnswer.getText().trim());
     }
 
     @FXML

@@ -240,6 +240,7 @@ public class Main extends Application {
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage dialogueStage = new Stage();
+            dialogueStage.getIcons().add(new Image("program/style/images/lessonIcon.png"));
             dialogueStage.setTitle("Вопросы урока " + lesson.getName());
             dialogueStage.initModality(Modality.WINDOW_MODAL);
             dialogueStage.initOwner(primaryStage);
@@ -264,6 +265,7 @@ public class Main extends Application {
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage lessonStage = new Stage();
+            lessonStage.getIcons().add(new Image("program/style/images/editLesson.png"));
             lessonStage.setTitle("Ввод данных урока");
             lessonStage.initModality(Modality.WINDOW_MODAL);
             lessonStage.initOwner(primaryStage);
@@ -291,6 +293,7 @@ public class Main extends Application {
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage questionStage = new Stage();
+            questionStage.getIcons().add(new Image("program/style/images/testIcon.png"));
             questionStage.setTitle("Вопрос урока " + lesson.getName());
             questionStage.initModality(Modality.WINDOW_MODAL);
             questionStage.initOwner(primaryStage);
@@ -318,6 +321,7 @@ public class Main extends Application {
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage testStage = new Stage();
+            testStage.getIcons().add(new Image("program/style/images/testIcon.png"));
             testStage.setTitle("Тест урока " + lesson.getName());
             testStage.initModality(Modality.WINDOW_MODAL);
             testStage.initOwner(primaryStage);
@@ -343,6 +347,7 @@ public class Main extends Application {
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage statUserStage = new Stage();
+            statUserStage.getIcons().add(new Image("program/style/images/statistics.png"));
             statUserStage.setTitle("Результаты пользователя " + user.getLogin() + " по уроку " + lesson.getName());
             statUserStage.initModality(Modality.WINDOW_MODAL);
             statUserStage.initOwner(primaryStage);
@@ -367,6 +372,7 @@ public class Main extends Application {
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage statAdminStage = new Stage();
+            statAdminStage.getIcons().add(new Image("program/style/images/statistics.png"));
             if (user != null) {
                 statAdminStage.setTitle("Результаты пользователя " + user.getLogin());
             } else if (lesson != null){
@@ -382,6 +388,37 @@ public class Main extends Application {
             controller.setMain(statAdminStage, this, restAPI, token, user, lesson);
 
             statAdminStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showInfo(String type){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("views/info.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage infoStage = new Stage();
+            infoStage.getIcons().add(new Image("program/style/images/info.png"));
+            if (type == "author") {
+                infoStage.setTitle("Об авторе");
+            } else if (type == "admin"){
+                infoStage.setTitle("Руководство для администратора");
+            } else if (type == "user"){
+                infoStage.setTitle("Руководство для пользователя");
+            }
+            infoStage.initModality(Modality.WINDOW_MODAL);
+            infoStage.initOwner(primaryStage);
+
+            Scene scene = new Scene(page);
+            infoStage.setScene(scene);
+            InfoController controller = loader.getController();
+
+            controller.setInfo(type);
+
+            infoStage.showAndWait();
 
         } catch (IOException e) {
             e.printStackTrace();
