@@ -9,6 +9,16 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
+
+/**
+ * Отражает сущность пользователя с атрибутами:
+ * уникальный логин,
+ * пароль (хранится в захешированном виде для безопасности),
+ * имя,
+ * фамилию,
+ * роль (пользователь или администратор),
+ * статус (только активный статус позволяет войти пользователю в ситему)
+ */
 @Entity
 @Table(name = "k_user")
 @Data
@@ -39,48 +49,68 @@ public class User {
     @JsonBackReference(value = "user_statistics")
     private List<Statistic> statistics;
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
+    /**
+     * получение логина пользователя
+     * @return логин
+     */
     public String getLogin() {
         return login;
     }
 
+    /**
+     * получение фамилии пользователя
+     * @return фамилию пользователя
+     */
     public String getLastName() {
         return lastName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
+    /**
+     * получение имени пользователя
+     * @return имя пользователя
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * установка пользователю пароля
+     * @param password - новый пароль пользователя
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * получение пароля пользователя
+     * @return пароль
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * установка пользователю определённой роли
+     * @param role - роль, которую надо установить пользователя
+     */
     public void setRole(Role role) {
         this.role = role;
     }
 
+    /**
+     * получение роли пользователя
+     * @return роль пользователя
+     */
     public Role getRole() {
         return role;
     }
 
+    /**
+     * получение статуса пользователя
+     * @return статус пользователя
+     */
     public Status getStatus() {
         return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 }
 

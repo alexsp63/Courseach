@@ -3,23 +3,22 @@ package com.example.englishapp.controller;
 import com.example.englishapp.entity.User;
 import com.example.englishapp.repository.UserRepository;
 import com.example.englishapp.security.JWTTokenProvider;
-import com.example.englishapp.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * контроллер, отвечающий за авторизацию
+ */
 @RestController
 public class AuthController {
 
@@ -27,12 +26,25 @@ public class AuthController {
     private final UserRepository userRepository;
     private final JWTTokenProvider jwtTokenProvider;
 
+    /**
+     * конструктор
+     * @param authenticationManager - секьюрный менеджер аутентификации
+     * @param userRepository - созданный пользовательский репозиторий
+     * @param jwtTokenProvider - созданный компонент token provider
+     */
     public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, JWTTokenProvider jwtTokenProvider) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+    /**
+     * обработка запросов на авторизацию
+     * @param request - данные, с которыми человек хочет авторизоваться
+     * @return словарь данных пользователя и созданный ему токен на основе его логина и роли,
+     * или же сущность ответа, имеющую в виде тела конкретное сообщение об ошибке (неверные данные или аккаунт заблокирован)
+     * и хороший статус ответа (чтобы мой клиент мог прочитать переданное сообщение об ошибке)
+     */
     @PostMapping("/login")
     public ResponseEntity<?> authenticate(@RequestBody AuthRequest request) {
         try {

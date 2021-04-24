@@ -1,11 +1,18 @@
 package com.example.englishapp.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ *Сущность истории ответов с атрибутами:
+ * автоматически генерируемый уникальный идентификатор,
+ * булевая правильность ответа пользователя на вопрос,
+ * внешний ключ - вопрос, на который и был дан ответ,
+ * внешний ключ - пользователь, который дал этот ответ.
+ * Служит для хранения истории правильности данных ответов
+ */
 @Entity
 @Table(name = "k_answer_history")
 @Data
@@ -28,8 +35,4 @@ public class AnswerHistory {
     @JoinColumn(name = "statistics_id")
     @NotNull
     private Statistic statistic;
-
-    public boolean isCorrect() {
-        return isCorrect;
-    }
 }

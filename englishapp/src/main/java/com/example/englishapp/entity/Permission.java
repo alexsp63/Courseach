@@ -1,5 +1,6 @@
 package com.example.englishapp.entity;
 
+
 public enum Permission {
 
     TABLE_READ("table:read"),
