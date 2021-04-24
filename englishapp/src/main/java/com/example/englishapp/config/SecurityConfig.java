@@ -1,24 +1,20 @@
 package com.example.englishapp.config;
 
-import com.example.englishapp.security.JWTTokenProvider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+/**
+ * Класс кофигурации security
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -26,10 +22,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JWTConfig jwtConfig;
 
+    /**
+     * Конструктор
+     * @param jwtConfig - экземпляр созданного JWTConfig
+     */
     public SecurityConfig(JWTConfig jwtConfig) {
         this.jwtConfig = jwtConfig;
     }
 
+    /**
+     * Кастомная конфигурация
+     * здесь отключаем сессию, указываем доступ,
+     * в корень проекта доступ имеют все (у меня там всё равно пусто, так что вернётся 404),
+     * на авторизацию доступ также есть у всех,
+     * POST на таблицу пользователей тоже разрешён всем (так как это регистрация),
+     * получать уже занятые логины тоже могут все, это нужно для регистрации,
+     * вместо стандартной секьюрной странички применяю созданные конфигурации
+     * @param http - так как использую http security
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
@@ -47,12 +58,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .apply(jwtConfig);
     }
 
+    /**
+     * Для хеширования паролей с силой 12
+     * @return
+     */
     @Bean
     protected PasswordEncoder passwordEncoder(){
         //не хранить же пароли в виде строки
         return new BCryptPasswordEncoder(12);
     }
 
+    /**
+     * Переопределние бина менеджера аутентификации
+     * @return дефолтное
+     * @throws Exception
+     */
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {

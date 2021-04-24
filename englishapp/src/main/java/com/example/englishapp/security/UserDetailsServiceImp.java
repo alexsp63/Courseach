@@ -8,16 +8,29 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * Получение данных пользователя
+ */
 @Service("userDetailsServiceImp")
 public class UserDetailsServiceImp implements UserDetailsService {
 
     private final UserRepository userRepository;
 
+    /**
+     * Конструктор
+     * @param userRepository - созданный пользовательский репозиторий
+     */
     @Autowired
     public UserDetailsServiceImp(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Поиск пользователя в базе данных по логину
+     * @param login - логин, по которому надо попробовать авторизовать пользователя
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         User user = userRepository.findByLogin(login).orElseThrow(() ->

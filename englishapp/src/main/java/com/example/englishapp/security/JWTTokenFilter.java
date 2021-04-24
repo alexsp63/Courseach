@@ -9,15 +9,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Фильтр пропускает через себя запросы от клиента
+ */
 @Component
 public class JWTTokenFilter extends GenericFilter {
 
     private final JWTTokenProvider jwtTokenProvider;
 
+    /**
+     * Конструктор
+     * @param jwtTokenProvider - экземпляр созданного класса
+     */
     public JWTTokenFilter(JWTTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+    /**
+     * Фильтрвция токена
+     * @param servletRequest - запрос из переопределния
+     * @param servletResponse - ответ
+     * @param filterChain - фильтрация из переопределения
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String token = jwtTokenProvider.resolveToken((HttpServletRequest) servletRequest);
