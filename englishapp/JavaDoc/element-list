@@ -1,0 +1,7 @@
+com.example.englishapp
+com.example.englishapp.config
+com.example.englishapp.controller
+com.example.englishapp.entity
+com.example.englishapp.repository
+com.example.englishapp.security
+com.example.englishapp.service
