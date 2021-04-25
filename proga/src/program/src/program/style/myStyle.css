@@ -1,0 +1,358 @@
+.background {
+    -fx-background-image: url("images/rootBackground.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 6;
+}
+
+.backgroundTest {
+    -fx-background-image: url("images/testWindow.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-radius: 6;
+}
+
+.backgroundW {
+    -fx-background-color: rgba(255, 255, 255, 0.95);
+    -fx-background-radius: 20;
+}
+
+.backgroundWS {
+    -fx-background-color: rgba(255, 255, 255, 0.97);
+}
+
+.text-field {
+    -fx-border-color: #84cdff;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-color: transparent;
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 18;
+}
+
+.text-field:focused{
+    -fx-border-color: #14a9ff;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-color: transparent;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
+}
+
+.text-fieldBlocked {
+    -fx-border-color: #929292;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-color: transparent;
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 18;
+}
+
+.text-fieldBlocked:focused{
+    -fx-border-color: #929292;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-color: transparent;
+    -fx-effect: none;
+}
+
+.labelAuth {
+    -fx-font-size: 40;
+    -fx-font-weight: 600;
+    -fx-text-fill: #14a9ff;
+    -fx-font-family: "Bookman Old Style";
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
+}
+
+.labelAuthMess {
+    -fx-font-size: 14;
+    -fx-font-family: "Bookman Old Style";
+    -fx-text-fill: red;
+    -fx-effect: none;
+}
+
+#adminTab {
+    -fx-border-radius: 20;
+    -fx-background-color: transparent;
+    -fx-background-radius: 20;
+    -fx-tab-min-height: 45;
+    -fx-tab-max-height: 45;
+    -fx-tab-min-width: 150;
+    -fx-tab-max-width: 305;
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 14;
+}
+
+#userTab {
+    -fx-border-radius: 20;
+    -fx-background-color: transparent;
+    -fx-background-radius: 20;
+    -fx-tab-min-height: 45;
+    -fx-tab-max-height: 45;
+    -fx-tab-min-width: 150;
+    -fx-tab-max-width: 305;
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 14;
+}
+
+.tab-header-background {
+    -fx-background-color: #f3f3f3;
+}
+
+.tab .tab-label {
+    -fx-border-radius: 20;
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-text-fill: #0086d4;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,0.5,0 );
+}
+
+.tab {
+    -fx-background-color: #f8f8f8;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-width: 0 0 0 0;
+    -fx-border-color: #bebebe;
+}
+
+.tab:selected {
+    -fx-background-color: #eeeeee;
+    -fx-border-width: 4 0 0 0;
+    -fx-border-color: #65cbff;
+    -fx-focus-traversable: false;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab:focused{
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab:hover {
+    -fx-background-color: #f3f3f3;
+}
+
+.button {
+    -fx-font-size: 18;
+    -fx-font-family: "Bookman Old Style";
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-background-color: #6fc7ff;
+    -fx-text-fill: #0086d4;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: #5ec1ff;
+    -fx-font-weight: 700;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 4,0,0,1 );
+}
+
+.buttonReg {
+    -fx-background-color: transparent;
+    -fx-text-fill: #0086d4;
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+}
+
+.buttonReg:hover {
+    -fx-background-color: transparent;
+    -fx-font-size: 16;
+    -fx-text-fill: #00639b;
+    -fx-font-weight: bold;
+    -fx-effect: none;
+}
+
+.labelRegs {
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 18;
+    -fx-text-fill: #14a9ff;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
+}
+
+.labelProf {
+    -fx-font-size: 20;
+    -fx-font-weight: 600;
+    -fx-text-fill: #14a9ff;
+    -fx-font-family: "Bookman Old Style";
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
+}
+
+.table-view {
+    -fx-padding: -2;
+    -fx-background-color: linear-gradient(to bottom, white, #dfecff);
+}
+
+.table-view:hover {
+    -fx-background-color: linear-gradient(to bottom, white, #dfecff);
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header {
+    -fx-font-size: 22;
+}
+
+.table-view1 .column-header1{
+    -fx-font-size: 18;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #14a9ff;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
+    -fx-font-weight: normal;
+}
+
+.table-view .table-cell{
+    -fx-border-color: transparent;
+}
+
+.table-row-cell {
+    -fx-font-size: 16;
+    -fx-background-color: transparent;
+    -fx-text-background-color: black;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: transparent;
+    -fx-text-background-color: #0086d4;
+}
+
+.table-row-cell:focused {
+    -fx-background-color: transparent;
+    -fx-text-background-color: #0086d4;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: transparent;
+    -fx-text-fill: blue;
+}
+
+.table-row-cell:even{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 2 0;
+    -fx-background-color: transparent;
+    -fx-border-color:
+            transparent
+            transparent
+            #14a9ff
+            transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.backgroundAnother {
+    -fx-background-color: linear-gradient(to bottom, white, #dfecff);
+}
+
+.combo-box {
+    -fx-border-width: 1;
+    -fx-border-color: #bfd5ff;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-font-size: 18;
+    -fx-background-color: #dfecff;
+}
+
+.combo-box:hover {
+    -fx-background-color: #b2d1ff;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0, 1, 1 ,0 );
+}
+
+.choice-box {
+    -fx-border-width: 1;
+    -fx-border-color: #bfd5ff;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-font-size: 14;
+    -fx-background-color: #dfecff;
+}
+
+.combo-box:hover {
+    -fx-background-color: #b2d1ff;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0, 1, 1 ,0 );
+}
+
+.text-fieldLesson {
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+    -fx-border-color: #84cdff;
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 14;
+    -fx-background-color: white;
+}
+
+.text-fieldLesson:focused{
+    -fx-border-color: #14a9ff;
+    -fx-border-width: 2;
+    -fx-background-color: white;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,0.5,0 );
+}
+
+.text-areaLesson {
+    -fx-border-width: 2;
+    -fx-border-color: #84cdff;
+    -fx-border-radius: 4;
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 14;
+    -fx-background-color: white;
+}
+
+.text-areaLesson:focused{
+    -fx-border-color: #14a9ff;
+    -fx-border-width: 2;
+    -fx-background-color: white;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,0.5,0 );
+}
+
+.labelLQ {
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 14;
+    -fx-text-fill: black;
+}
+
+.labelDark {
+    -fx-font-family: "Bookman Old Style";
+    -fx-font-size: 18;
+    -fx-text-fill: #1269ff;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
+}
+
+.buttonTest {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: black;
+    -fx-font-size: 15;
+    -fx-font-weight: normal;
+}
+
+.buttonTest:hover {
+    -fx-background-color: #e0e0e0;
+    -fx-font-size: 15;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,1,0 );
+}
+
+.labelTest {
+    -fx-text-fill: black;
+    -fx-font-size: 18;
+    -fx-font-family: "Bookman Old Style";
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,0.5,0 );
+}
+
+.labelNum {
+    -fx-text-fill: blue;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-font-family: "Bookman Old Style";
+    -fx-effect: dropshadow( gaussian , rgb(88, 94, 119), 0,0,0.5,0 );
+}
+
+.labelInfo {
+    -fx-text-fill: black;
+    -fx-font-size: 14;
+    -fx-font-family: "Bookman Old Style";
+}
