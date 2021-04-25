@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,10 +26,8 @@ import program.Main;
 import program.models.JSONSerialize;
 import program.models.User;
 import program.utils.RestAPI;
-import program.utils.StringToMap;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +51,6 @@ public class AuthorizationController implements JSONSerialize {
     private Main main;
     private RestAPI restAPI;
     private AnchorPane anchorPane;
-    private StringToMap stringToMap;
 
 
     @FXML
@@ -71,15 +69,6 @@ public class AuthorizationController implements JSONSerialize {
 
     public boolean isSignInIsClicked() {
         return signInIsClicked;
-    }
-
-    public User formUser(String response, String role) throws IOException {
-        String login = stringToMap.createMap(response).get("login");
-        String password = stringToMap.createMap(response).get("password");
-        String firstName = stringToMap.createMap(response).get("firstName");
-        String lastName = stringToMap.createMap(response).get("lastName");
-        String status = stringToMap.createMap(response).get("status");
-        return new User(login, password, firstName, lastName, role, status);
     }
 
     private void createSleeper(User currentUser, String mayBeToken){
@@ -134,6 +123,14 @@ public class AuthorizationController implements JSONSerialize {
                 createSleeper(currentUser, mayBeToken);
             }
         } catch (IndexOutOfBoundsException e){}
+        catch (NullPointerException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(main.getPrimaryStage());
+            alert.setTitle("Отсутствует подключение!");
+            alert.setHeaderText("Сервер не запущен!");
+            alert.setContentText("Пожалуйста, запустите зервер и попробуйте снова!");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -158,11 +155,10 @@ public class AuthorizationController implements JSONSerialize {
         new Thread(sleeper).start();
     }
 
-    public void setMain(Main main, RestAPI restAPI, AnchorPane anchorPane, StringToMap stringToMap) {
+    public void setMain(Main main, RestAPI restAPI, AnchorPane anchorPane) {
         this.main = main;
         this.restAPI = restAPI;
         this.anchorPane = anchorPane;
-        this.stringToMap = stringToMap;
 
         main.createAppearEffect(anchorPane, 0.5);
     }

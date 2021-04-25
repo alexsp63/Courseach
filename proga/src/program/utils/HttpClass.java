@@ -3,26 +3,23 @@ package program.utils;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+/**
+ * Класс, осуществляющий связь между клиентом и сервером
+ */
 public class HttpClass {
 
+    /**
+     * Преобразование ответа сервера в строку
+     * @param conn - соединение
+     * @return - строку-ответ, если статус не 20*, то null
+     */
     private static String getString(URLConnection conn){
         try {
             StringBuilder sb = new StringBuilder();
@@ -38,6 +35,14 @@ public class HttpClass {
         }
     }
 
+    /**
+     * Отдельное добавление статистики, которое сразу вернёт добавленный объект
+     * @param url - ссылка для POST'а
+     * @param jsonString - строка json'а, которую нужно добавить
+     * @param token - токен текущего пользователя
+     * @return добавленный объект статистики
+     * @throws UnirestException - исключение
+     */
     public static HttpResponse<String> PostStatisticsRequest(String url, String jsonString, String token) throws UnirestException {
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("Content-Type", "application/json; charset=UTF-8");
@@ -45,6 +50,11 @@ public class HttpClass {
         return Unirest.post(url).headers(requestHeaders).body(jsonString).asString();
     }
 
+    /**
+     * Получение неавторизованным пользователем занятых логинов
+     * @param urlString - url для запроса
+     * @return строку ответа
+     */
     //это для неавторизованного пользователя, тут токена нет, сюда у меня разрешение всем на сервере
     public static String getRequest(String urlString){
         try {
@@ -60,6 +70,12 @@ public class HttpClass {
         }
     }
 
+    /**
+     * Получение чего-либо для уже авторизованного пользователя
+     * @param urlString - ссылка для получения данных
+     * @param token - токен текущего пользователя
+     * @return строку ответа
+     */
     //такая перегрузка нужна, потому что эти геты уже для авторизованного пользователя по токену
     public static String getRequest(String urlString, String token){
         try {
@@ -76,9 +92,15 @@ public class HttpClass {
         }
     }
 
+    /**
+     * Метод для регистрации и авторизации
+     * @param urlString - ссылка
+     * @param jsonString - строка для добавления/авторизации
+     * @return строку ответа
+     */
     //post для регистрации и авторизации, тут нет никакого токена, опять же пермит у меня для всех на регистрацию
-    public static String PostRequest(String urlString, String jsonString){
-        try{
+    public static String PostRequest(String urlString, String jsonString) {
+        try {
             URL url = new URL(urlString);
             URLConnection conn = url.openConnection();
             HttpURLConnection httpURLConnection = (HttpURLConnection) conn;
@@ -89,16 +111,25 @@ public class HttpClass {
             httpURLConnection.setFixedLengthStreamingMode(len);
             httpURLConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             httpURLConnection.connect();
-            try (OutputStream outputStream = httpURLConnection.getOutputStream()){
+            try (OutputStream outputStream = httpURLConnection.getOutputStream()) {
                 outputStream.write(out);
             }
             return getString(conn);
-        } catch (IOException e){
+        } catch (ConnectException e) {
+            return null;
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
 
+    /**
+     * Метод добавления для авторизованных пользователей
+     * @param urlString - адрес для выполнения запроса
+     * @param jsonString - строка добавления
+     * @param token - токен
+     * @return строку ответа
+     */
     public static String PostRequest(String urlString, String jsonString, String token){
         try{
             URL url = new URL(urlString);
@@ -122,6 +153,13 @@ public class HttpClass {
         }
     }
 
+    /**
+     * Метод удаления записи
+     * @param urlString - адрес для выполнения действия
+     * @param jsonString - объект, на который нужно обновить, в виду строки
+     * @param token - токен пользователя
+     * @return строку ответаы
+     */
     public static String PutRequest(String urlString, String jsonString, String token){
         try {
             URL url = new URL(urlString);
@@ -145,6 +183,12 @@ public class HttpClass {
         }
     }
 
+    /**
+     * Метод для удаления записи из таблицы
+     * @param urlString - адрес для выполнения запроса
+     * @param token - токен текущего пользователя
+     * @return строку ответа
+     */
     public static boolean DeleteRequest(String urlString, String token){
         try{
             URL url = new URL(urlString);

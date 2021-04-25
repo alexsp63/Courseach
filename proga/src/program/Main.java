@@ -1,27 +1,16 @@
 package program;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
-import javafx.scene.control.TabPane;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -31,36 +20,38 @@ import program.models.Lesson;
 import program.models.Question;
 import program.models.Statistics;
 import program.models.User;
-import program.utils.DateUtil;
 import program.utils.RestAPI;
-import program.utils.StringToMap;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
 
+/**
+ * Главный класс приложения
+ */
 public class Main extends Application {
 
     private Stage primaryStage;
     private BorderPane rootLayout;
     private RestAPI restAPI;
-    private StringToMap stringToMap;
     private ObservableList<User> userData = FXCollections.observableArrayList();
     private ObservableList<Lesson> lessonData = FXCollections.observableArrayList();
     private ObservableList<Question> questions4Data = FXCollections.observableArrayList();
     private ObservableList<Statistics> statisticsData = FXCollections.observableArrayList();
 
+    /**
+     * Конструктор - установка переменной restAPI, объекта класса RestAPI
+     */
     public Main() {
 
         restAPI = new RestAPI();
-        stringToMap = new StringToMap();
     }
 
-
+    /**
+     * Точко входа в приложение
+     * @param primaryStage - главная сцена приложения, на которую будут помещаться разные scene
+     * @throws Exception - исключение
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -71,9 +62,13 @@ public class Main extends Application {
         initRootLayout(); //сначала показываем root
 
         showAuthorizationForm(); //потом форму авторизации
-        //showAdminForm(new User(), "jmnd");
     }
 
+    /**
+     * Метод сокрытия окна с анимацией
+     * @param anchorPane - панель, которую нужно плавно закрыть
+     * @param sec - число секунд, в течение которого окно должно плавно закрываться
+     */
     public void hideOverview(AnchorPane anchorPane, double sec) {
         KeyValue initKeyValue = new KeyValue(anchorPane.opacityProperty(), 1.0);
         KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
@@ -84,6 +79,11 @@ public class Main extends Application {
         timeline.play();
     }
 
+    /**
+     * Эффект появления окна - плавное выцветание
+     * @param anchorPane - окно, которое должно плавно появиться
+     * @param sec - число секунд, в течение которого окно должно выцветать
+     */
     public void createAppearEffect(AnchorPane anchorPane, double sec){
         KeyValue initKeyValue = new KeyValue(anchorPane.opacityProperty(), 0.0);
         KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
@@ -94,44 +94,42 @@ public class Main extends Application {
         timeline.play();
     }
 
-    public void createAppearEffect(TabPane tabPane){
-        KeyValue initKeyValue = new KeyValue(tabPane.opacityProperty(), 0.0);
-        KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
-        KeyValue endKeyValue = new KeyValue(tabPane.opacityProperty(), 1.0);
-        KeyFrame endFrame = new KeyFrame(Duration.seconds(1), endKeyValue);
-        Timeline timeline = new Timeline(initFrame, endFrame);
-        timeline.setCycleCount(1);
-        timeline.play();
-    }
-
-    public void createAppearEffect(Button tabPane){
-        KeyValue initKeyValue = new KeyValue(tabPane.opacityProperty(), 0.0);
-        KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
-        KeyValue endKeyValue = new KeyValue(tabPane.opacityProperty(), 1.0);
-        KeyFrame endFrame = new KeyFrame(Duration.seconds(1), endKeyValue);
-        Timeline timeline = new Timeline(initFrame, endFrame);
-        timeline.setCycleCount(1);
-        timeline.play();
-    }
-
+    /**
+     * Обновление таблицы пользователей
+     * @param token - токен текущего пользователя для осуществления get-запроса
+     */
     public void updateUserTable(String token){
         userData.clear();
         userData.addAll(restAPI.getUsers(token));
     }
 
+    /**
+     * Обновление таблицы уроков
+     * @param token - токен текущего пользователя для осуществления get-запроса
+     */
     public void updateLessonTable(String token){
         lessonData.clear();
         lessonData.addAll(restAPI.getLessons(token));
     }
 
+    /**
+     * Обновление таблицы вопросов
+     * @param token - токен текущего пользователя
+     * @param lesson - урок, по которому нужно найти все вопросы
+     */
     public void updateQuestionData(String token, Lesson lesson){
         questions4Data.clear();
-        //System.out.println(restAPI.getQuestionsByLesson(token, lesson));
         List<Question> questions = restAPI.getQuestionsByLesson(token, lesson);
 
         questions4Data.addAll(questions);
     }
 
+    /**
+     * Обновление таблицы статистики
+     * @param token - токен текущего пользователя
+     * @param lesson - урок, по которому нужно найти статистику
+     * @param user - пользователь, по которому нужно найти статистику
+     */
     public void updateStatisticsData(String token, Lesson lesson, User user){
         statisticsData.clear();
         List<Statistics> statistics = restAPI.getStatiscticsByLessonAndUser(token, lesson, user);
@@ -139,7 +137,9 @@ public class Main extends Application {
         statisticsData.addAll(statistics);
     }
 
-
+    /**
+     * Загрузка картинки заднего фона, это главная сцена
+     */
     public void initRootLayout() {
 
         //загрузка фона
@@ -157,6 +157,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Показ формы авторизации
+     */
     public void showAuthorizationForm() {
 
         //загрузка формы авторизация
@@ -169,13 +172,17 @@ public class Main extends Application {
             rootLayout.setCenter(authorization);  //устанавливаем форму авторизации
 
             AuthorizationController controller = loader.getController();
-            controller.setMain(this, restAPI, authorization, stringToMap);
+            controller.setMain(this, restAPI, authorization);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Показ формы регистрации
+     * @return true, если регистрация прошла успешно, иначе - false
+     */
     public boolean showSignUpForm(){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -194,7 +201,11 @@ public class Main extends Application {
         return false;
     }
 
-
+    /**
+     * Показ главного окна администратора
+     * @param admin - администратор, авторизовавшийся в системе
+     * @param token - токен текущего администратора
+     */
     public void showAdminForm(User admin, String token){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -215,6 +226,11 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Главное окно пользователя
+     * @param user - пользователь, работающий в ситеме в данный момент
+     * @param token - токен текущего пользователя
+     */
     public void showUserForm(User user, String token){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -233,6 +249,11 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Показ вопросов к уроку
+     * @param token - токен человека, работающего в системе
+     * @param lesson - урок, по которому надо показать вопросы
+     */
     public void showLessonQuestions(String token, Lesson lesson){
         try{
             FXMLLoader loader = new FXMLLoader();
@@ -258,6 +279,13 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Форма добавления/изменения уроков
+     * @param lesson - урок, который надо изменить, если добавляем, то null
+     * @param token - токен администратора, желающего добавить/изменить урок
+     * @return true, если урок добавлен/обновлён, иначе false
+     * @throws IOException - исключение
+     */
     public boolean showLessonAddEditForm(Lesson lesson, String token) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -286,6 +314,13 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Форма изменения/добавления вопроса
+     * @param question - вопрос, который надо изменить, если добавить - то null
+     * @param token - токен администратора, авторизованного в системе
+     * @param lesson - урок, к которому принадлежить изменяемый/добавляемый вопрос
+     * @return true, если вопрос добавлен/изменён, иначе false
+     */
     public boolean showQuestionAddEditForm(Question question, String token, Lesson lesson){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -314,6 +349,12 @@ public class Main extends Application {
         }
     }
 
+    /**Окно прохождения теста пользователем
+     * @param token - токен пользователя, проходящего тест
+     * @param questions - список вопросов
+     * @param lesson - урок, по которому проходится тест
+     * @param user - пользователь, проходящий тест
+     */
     public void showTestWindow(String token, List<Question> questions, Lesson lesson, User user){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -340,6 +381,12 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Показ статистики пользователю
+     * @param token - строка токена текущего пользователя системы
+     * @param lesson - урок, по которому будет отображена статистика
+     * @param user - пользователь, по которому будет отображена статистика
+     */
     public void showStatUserForm(String token, Lesson lesson, User user){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -365,6 +412,12 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Окно показа статистики для администратора
+     * @param token - токен администратора
+     * @param user - пользователь, по которому будет отображена статистика
+     * @param lesson - урок, по которому будет отображена статистика
+     */
     public void showStatAdminForm(String token, User user, Lesson lesson){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -394,6 +447,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Окно информации
+     * @param type - тип информации, который надо отобразить
+     */
     public void showInfo(String type){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -425,30 +482,58 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Получение статистики
+     * @return список статистики
+     */
     public ObservableList<Statistics> getStatisticsData() {
         return statisticsData;
     }
 
+    /**
+     * Получение пользовательской информации
+     * @return список пользователей
+     */
     public ObservableList<User> getUserData() {
         return userData;
     }
 
+    /**
+     * Получение информации по урокам
+     * @return список уроков
+     */
     public ObservableList<Lesson> getLessonData() {
         return lessonData;
     }
 
+    /**
+     * Получение информации о вопросах
+     * @return список вопросов
+     */
     public ObservableList<Question> getQuestionsData() {
         return questions4Data;
     }
 
+    /**
+     * Получение главной Stage приложения
+     * @return главную Stage
+     */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    /**
+     * Для работы с сервером
+     * @return объект класса RestAPI
+     */
     public RestAPI getRestAPI() {
         return restAPI;
     }
 
+    /**
+     * точка входа в приложение
+     * @param args - аругменты командной строки
+     */
     public static void main(String[] args) {
         launch(args);
     }

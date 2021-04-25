@@ -1,18 +1,23 @@
 package program.utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
+/**
+ * Класс форматирования для дат
+ */
 public class DateUtil {
     private static final String DATE_PATTERN = "dd.MM.yyyy";
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern(DATE_PATTERN);
 
+    /**
+     * Форматирование даты в строку
+     * @param date - дата
+     * @return строка даты
+     */
     public static String format(LocalDate date){
         if (date == null){
             return null;
@@ -20,6 +25,11 @@ public class DateUtil {
         return DATE_TIME_FORMATTER.format(date);
     }
 
+    /**
+     * Форматировние строки в дату
+     * @param dateString - строка даты
+     * @return дата
+     */
     public static LocalDate parse(String dateString){
         try{
             return DATE_TIME_FORMATTER.parse(dateString, LocalDate::from);
@@ -28,7 +38,4 @@ public class DateUtil {
         }
     }
 
-    public static boolean validDate(String dateString){
-        return DateUtil.parse(dateString) != null;
-    }
 }
