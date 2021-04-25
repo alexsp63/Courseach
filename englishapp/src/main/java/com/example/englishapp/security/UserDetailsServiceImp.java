@@ -28,8 +28,8 @@ public class UserDetailsServiceImp implements UserDetailsService {
     /**
      * Поиск пользователя в базе данных по логину
      * @param login - логин, по которому надо попробовать авторизовать пользователя
-     * @return
-     * @throws UsernameNotFoundException
+     * @return секьюрного пользователя
+     * @throws UsernameNotFoundException исключение
      */
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {

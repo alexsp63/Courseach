@@ -30,8 +30,8 @@ public class JWTTokenFilter extends GenericFilter {
      * @param servletRequest - запрос из переопределния
      * @param servletResponse - ответ
      * @param filterChain - фильтрация из переопределения
-     * @throws IOException
-     * @throws ServletException
+     * @throws IOException исключение
+     * @throws ServletException исключение
      */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

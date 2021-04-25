@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * получать уже занятые логины тоже могут все, это нужно для регистрации,
      * вместо стандартной секьюрной странички применяю созданные конфигурации
      * @param http - так как использую http security
-     * @throws Exception
+     * @throws Exception исключение
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception{
@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Для хеширования паролей с силой 12
-     * @return
+     * @return кодировщик паролей
      */
     @Bean
     protected PasswordEncoder passwordEncoder(){
@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Переопределние бина менеджера аутентификации
      * @return дефолтное
-     * @throws Exception
+     * @throws Exception исключение
      */
     @Bean
     @Override

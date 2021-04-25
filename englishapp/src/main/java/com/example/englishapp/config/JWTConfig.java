@@ -8,7 +8,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.stereotype.Component;
 
 /**
- * РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ С‚РѕРєРµРЅР°
+ * Конфигурация токена
  */
 @Component
 public class JWTConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
@@ -16,8 +16,8 @@ public class JWTConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterCh
     private final JWTTokenFilter jwtTokenFilter;
 
     /**
-     * РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
-     * @param jwtTokenFilter - СЌРєР·РµРјРїР»СЏСЂ СЃРѕР·РґР°РЅРЅРѕРіРѕ РєР»Р°СЃСЃР°
+     * Конструктор
+     * @param jwtTokenFilter - экземпляр созданного класса
      */
     public JWTConfig(JWTTokenFilter jwtTokenFilter) {
         this.jwtTokenFilter = jwtTokenFilter;
@@ -25,9 +25,9 @@ public class JWTConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterCh
 
 
     /**
-     * Р”РѕР±Р°РІР»РµРЅРёРµ РІ РЅР°С‡Р°Р»Рѕ РЅР°С€РµРіРѕ С„РёР»СЊС‚СЂР° С‚РѕРєРµРЅР°
-     * @param httpSecurity - РёР· РїРµСЂРµРѕРїСЂРµРґРµР»РЅРёСЏ
-     * @throws Exception
+     * Добавление в начало нашего фильтра токена
+     * @param httpSecurity - из переопределния
+     * @throws Exception исключение
      */
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception {

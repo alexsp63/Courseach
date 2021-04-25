@@ -84,7 +84,7 @@ public class JWTTokenProvider {
     /**
      * Получение аутентификации пользователя
      * @param token - токен
-     * @return
+     * @return аутентификация
      */
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(getLogin(token));

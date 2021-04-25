@@ -24,7 +24,7 @@ public enum Role {
 
     /**
      * Получение разрешений для роли
-     * @return
+     * @return множество разрешений
      */
     public Set<Permission> getPermissionSet() {
         return permissionSet;
