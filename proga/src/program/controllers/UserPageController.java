@@ -20,6 +20,9 @@ import java.util.List;
 import static program.controllers.SignUpController.isDouble;
 import static program.controllers.SignUpController.isInteger;
 
+/**
+ * Контроллер отвечающий за окно пользователя - userMainPage.fxml
+ */
 public class UserPageController {
 
     @FXML
@@ -70,6 +73,14 @@ public class UserPageController {
     private User user;
     private String token;
 
+    /**
+     * Инициализация главных элементов формы
+     * @param user - авторизованного пользователя
+     * @param main - main
+     * @param restAPI - restAPI
+     * @param anchorPane - окно пользователя
+     * @param token - токен
+     */
     public void setMain(User user, Main main, RestAPI restAPI, AnchorPane anchorPane, String token) {
         this.user = user;
         this.main = main;
@@ -81,6 +92,9 @@ public class UserPageController {
         main.createAppearEffect(anchorPane, 1.5);
     }
 
+    /**
+     * Инициализация и установление поведения элементам взаимодействия с пользователем
+     */
     @FXML
     private void initialize() {
 
@@ -115,6 +129,10 @@ public class UserPageController {
         );
     }
 
+    /**
+     * Отображение данных по выбранному уроку
+     * @param lesson - выбранный урок
+     */
     public void showLessonDetails(Lesson lesson){
         if (lesson != null){
             if (restAPI.getQuestionsByLesson(token, lesson).size() < 10){
@@ -156,6 +174,10 @@ public class UserPageController {
         }
     }
 
+    /**
+     * Установка пользователю в личном кабинете его данных
+     * @param user - авторизованный пользователь
+     */
     public void setUser(User user){
         userFirstName.setText(user.getFirstName());
         userLastName.setText(user.getLastName());
@@ -164,6 +186,10 @@ public class UserPageController {
         userRepeatedPassword.setText("");
     }
 
+    /**
+     * Формирование сообщения об ошибке
+     * @return сообщение об ошибке
+     */
     private String userError(){
         if (userFirstName.getText() == null || isDouble(userFirstName.getText()) == true
                 || isInteger(userFirstName.getText()) == true || userFirstName.getText().length() == 0
@@ -187,6 +213,10 @@ public class UserPageController {
         return "";
     }
 
+    /**
+     * Проверка пользовательского ввода
+     * @return состояние ввода
+     */
     private boolean userInputCheck(){
         String message = userError();
         if (message.length() == 0) {
@@ -202,6 +232,9 @@ public class UserPageController {
         }
     }
 
+    /**
+     * Сохранение изменений о пользователе
+     */
     @FXML
     public void userSave(){
         if (userInputCheck()){
@@ -227,6 +260,12 @@ public class UserPageController {
         }
     }
 
+    /**
+     * Установка сообщения об ошибке
+     * @param userErrorMessage - сообщение об ошибке
+     * @param main - main
+     * @param token - токен
+     */
     static void setErrorMessage(Label userErrorMessage, Main main, String token) {
         userErrorMessage.setTextFill(Color.web("green"));
         userErrorMessage.setText("Информация обновлена");
@@ -236,11 +275,17 @@ public class UserPageController {
         main.updateUserTable(token);
     }
 
+    /**
+     * Пользователь решил отменить введённые, но не сохранёные изменения
+     */
     @FXML
     public void userCancel(){
         setUser(user);
     }
 
+    /**
+     * Пользователь начал тестирование
+     */
     @FXML
     public void startTest(){
         Lesson selectedLesson = lessonTable.getSelectionModel().getSelectedItem();
@@ -250,12 +295,18 @@ public class UserPageController {
         }
     }
 
+    /**
+     * Пользователь захотел посмотреть свою статистику по тому или инаму уроку
+     */
     @FXML
     public void showStat(){
         Lesson selectedLesson = lessonTable.getSelectionModel().getSelectedItem();
         main.showStatUserForm(token, selectedLesson, this.user);
     }
 
+    /**
+     * Выход из личного кабинета и возвращение к окну авторизации
+     */
     @FXML
     public void logOut(){
         Task<Void> sleeper = new Task<Void>() {
@@ -278,6 +329,9 @@ public class UserPageController {
         new Thread(sleeper).start();
     }
 
+    /**
+     * Показ пользователю информации о программе
+     */
     @FXML
     public void showInfo(){
         main.showInfo("user");

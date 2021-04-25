@@ -10,9 +10,9 @@ public interface JSONSerialize {
 
     /**
      * Метод для конвертации в Json-строку
-     * @return
-     * @throws JsonProcessingException
-     * @throws JSONException
+     * @return json-строку
+     * @throws JsonProcessingException исключение
+     * @throws JSONException исключение
      */
     String toJson() throws JsonProcessingException, JSONException;
 }

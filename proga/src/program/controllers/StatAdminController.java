@@ -16,6 +16,9 @@ import program.utils.RestAPI;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Контроллер, отвечающий за форму statAdminForm.fxml - показ статистики администратору по выбранному криетрию
+ */
 public class StatAdminController {
 
     @FXML
@@ -106,6 +109,15 @@ public class StatAdminController {
     private Lesson lesson;
     private User user;
 
+    /**
+     * Инициализация главных элементов и установка label'ов минимального, среднего и максимального результатов
+     * @param stage - окно
+     * @param main - main
+     * @param restAPI - restAPI
+     * @param token - токен
+     * @param user - пользователь, по которому будем показывать статистику
+     * @param lesson - урок, по которому будет показывать статистику
+     */
     public void setMain(Stage stage, Main main, RestAPI restAPI, String token, User user, Lesson lesson){
         this.stage = stage;
         this.main = main;
@@ -150,6 +162,9 @@ public class StatAdminController {
         }
     }
 
+    /**
+     * Инициализация и задание поведения таблице статистики
+     */
     @FXML
     public void initialize(){
         statDate.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
@@ -162,6 +177,10 @@ public class StatAdminController {
         showStatDetails(null);
     }
 
+    /**
+     * Отображение истории ответов сбоку от таблицы
+     * @param statistics - объект статистики, по которому будет отображаться история ответов
+     */
     public void showStatDetails(Statistics statistics) {
 
         Label[] textLabels = {question1Text, question2Text, question3Text, question4Text, question5Text,

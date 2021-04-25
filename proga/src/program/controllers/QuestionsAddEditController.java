@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import program.Main;
@@ -13,6 +12,9 @@ import program.models.Lesson;
 import program.models.Question;
 import program.utils.RestAPI;
 
+/**
+ * Контроллер, отвечающий за добавление/изменение вопросов - questionsAddEditForm.fxml
+ */
 public class QuestionsAddEditController {
 
     @FXML
@@ -44,7 +46,14 @@ public class QuestionsAddEditController {
     private Lesson lesson;
     private boolean saveIsClicked;
 
-
+    /**
+     * Инициализация главных элементов
+     * @param questionStage - окна
+     * @param main - main
+     * @param restAPI - restAPI
+     * @param token - токен
+     * @param lesson - урок, которому принадлежат вопросы
+     */
     public void setStage(Stage questionStage, Main main, RestAPI restAPI, String token, Lesson lesson){
         this.questionStage = questionStage;
         this.main = main;
@@ -62,6 +71,10 @@ public class QuestionsAddEditController {
         }
     }
 
+    /**
+     * Установка информации о вопросе сбоку от таблицы
+     * @param question - вопрос
+     */
     public void setQuestion(Question question){
         this.question = question;
         if (question != null){
@@ -89,13 +102,24 @@ public class QuestionsAddEditController {
         }
     }
 
+    /**
+     * Нажата ли кнопка сохранения
+     * @return состояние нажатия кнопки
+     */
     public boolean isSaveIsClicked() {
         return saveIsClicked;
     }
 
+    /**
+     * Инициализоция
+     */
     @FXML
     private void initialize(){}
 
+    /**
+     * Формирование сообщения об ошибке при некорректном вооде
+     * @return сообщение об ошибке
+     */
     public String errorMessage(){
         if (questionText.getText() == null || questionText.getText().length() == 0 || questionText.getText().equals("")){
             LessonAddEditController.makeRed(questionText);
@@ -153,6 +177,10 @@ public class QuestionsAddEditController {
         return "";
     }
 
+    /**
+     * Проверка ввода
+     * @return валидность ввода
+     */
     public boolean inputCheck(){
         String erMessage = errorMessage();
         if (erMessage.length() == 0) {
@@ -167,6 +195,9 @@ public class QuestionsAddEditController {
         }
     }
 
+    /**
+     * Нажата кнопка сохранения вопроса
+     */
     @FXML
     public void saveQ(){
         if (inputCheck()){
@@ -188,6 +219,9 @@ public class QuestionsAddEditController {
         }
     }
 
+    /**
+     * Администратор передумал добавлять/изменять вопрос и нажал кнопку отмены
+     */
     @FXML
     public void cancelQ(){
         questionStage.close();

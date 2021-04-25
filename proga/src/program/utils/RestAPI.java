@@ -92,6 +92,7 @@ public class RestAPI {
      * Преобразование объекта ответа в статистику
      * @param thisStatistics - объект ответа
      * @return новый объект модели Статистика
+     * @throws ParseException - exception
      */
     public Statistics parseStatistics(JsonObject thisStatistics) throws ParseException {
         Integer id = thisStatistics.get("id").getAsInt();
@@ -107,6 +108,7 @@ public class RestAPI {
      * Преобразование объекта ответа в историю ответов
      * @param thisAnswerHistory - объект ответа
      * @return новый объект модели История ответов
+     * @throws ParseException exception
      */
     public AnswerHistory parseAnswerHistory(JsonObject thisAnswerHistory) throws ParseException {
         Integer id = thisAnswerHistory.get("id").getAsInt();

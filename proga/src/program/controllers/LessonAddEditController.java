@@ -16,6 +16,9 @@ import program.utils.RestAPI;
 import static program.controllers.SignUpController.isDouble;
 import static program.controllers.SignUpController.isInteger;
 
+/**
+ * Этот контроллер отвечает за форму редактирования уроков - lessonAddEditForm.fxml
+ */
 public class LessonAddEditController {
 
     @FXML
@@ -37,6 +40,13 @@ public class LessonAddEditController {
     private String token;
     private Lesson lesson;
 
+    /**
+     * Установка окна, открывающегося в новой вкладке
+     * @param lessonStage - stage
+     * @param main - main
+     * @param restAPI - restAPI
+     * @param token - токен пользователя в системе
+     */
     public void setStage(Stage lessonStage, Main main, RestAPI restAPI, String token){
         this.lessonStage = lessonStage;
         this.main = main;
@@ -44,6 +54,10 @@ public class LessonAddEditController {
         this.token = token;
     }
 
+    /**
+     * Окрашивание невалидного текстового поля в красный цвет на 2 секнуды (и затем возвращение стиля назад)
+     * @param textField - окрашиваемое поле
+     */
     public static void makeRed(TextField textField){
         textField.setStyle("-fx-border-color: red;");
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
@@ -51,6 +65,10 @@ public class LessonAddEditController {
         pause.play();
     }
 
+    /**
+     * Окрашивание невалидной текстовой области в красный цвет на 2 секнуды (и затем возвращение стиля назад)
+     * @param textArea - окрашиваемая текстовая область
+     */
     public void makeRed(TextArea textArea){
         textArea.setStyle("-fx-border-color: red;");
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
@@ -58,6 +76,10 @@ public class LessonAddEditController {
         pause.play();
     }
 
+    /**
+     * Окрашивание пустого ComboBox'а в красный цвет на 2 секнуды (и затем возвращение стиля назад)
+     * @param comboBox - окрашиваемаый ComboBox
+     */
     public void makeRed(ComboBox<String> comboBox){
         comboBox.setStyle("-fx-border-color: red;");
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
@@ -65,6 +87,9 @@ public class LessonAddEditController {
         pause.play();
     }
 
+    /**
+     * Инициализация TextField, TextArea, ComboBox и задание им стиля и поведения
+     */
     @FXML
     private void initialize() {
 
@@ -90,10 +115,18 @@ public class LessonAddEditController {
                                                   "Открытый вопрос");
     }
 
+    /**
+     * Проверка на нажатие кнопки сохранения
+     * @return true, если нажата и валидация прошла успешно, иначе - false
+     */
     public boolean isSaveIsClicked() {
         return saveIsClicked;
     }
 
+    /**
+     * Установка урока для изменения
+     * @param lesson - урок для изменения
+     */
     public void setLesson(Lesson lesson){
         this.lesson = lesson;
         if (lesson != null){
@@ -111,6 +144,10 @@ public class LessonAddEditController {
         }
     }
 
+    /**
+     * Формирование сообщения об ошибке
+     * @return сообщение об ошибке
+     */
     private String errorMessage(){
         if (lessonNameText.getText() == null || lessonNameText.getText().length() == 0){
             makeRed(lessonNameText);
@@ -134,6 +171,10 @@ public class LessonAddEditController {
         return "";
     }
 
+    /**
+     * Проверка ввода
+     * @return true при корректном вводе, иначе - false и установка сообщения об ошибке
+     */
     public boolean inputCheck(){
         String message = errorMessage();
         if (message.length() == 0) {
@@ -148,6 +189,10 @@ public class LessonAddEditController {
         }
     }
 
+    /**
+     * Нажата кнопка записать:
+     * Происходит валидация ввода, и если всё хорошо, окно закрывается
+     */
     @FXML
     public void write(){
         if (inputCheck()){
@@ -162,6 +207,9 @@ public class LessonAddEditController {
         }
     }
 
+    /**
+     * Администратор передумал создавать/редактировать вопрос
+     */
     @FXML
     public void cancel(){
         lessonStage.close();

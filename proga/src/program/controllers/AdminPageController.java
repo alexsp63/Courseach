@@ -2,7 +2,6 @@ package program.controllers;
 
 
 import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.transformation.FilteredList;
@@ -25,6 +24,9 @@ import java.io.IOException;
 import static program.controllers.SignUpController.isDouble;
 import static program.controllers.SignUpController.isInteger;
 
+/**
+ * Контроллер, отвечающий за окно администратора (adminMainPage.fxml)
+ */
 public class AdminPageController {
 
     @FXML
@@ -156,6 +158,14 @@ public class AdminPageController {
     private User admin;
     private String token;
 
+    /**
+     * Инициализация из Main'а
+     * @param admin - администратор, который зашёл в систему
+     * @param main - maim
+     * @param restAPI - restAPI
+     * @param anchorPane - форма окна администратора
+     * @param token - токен залогиневшегося админа
+     */
     public void setMain(User admin, Main main, RestAPI restAPI, AnchorPane anchorPane, String token) {
         this.admin = admin;
         this.main = main;
@@ -175,6 +185,14 @@ public class AdminPageController {
         main.createAppearEffect(anchorPane,2);
     }
 
+    /**
+     * Инициализация элементов формы:
+     * Задание стилей и поведения TextField'ам,
+     * Обработка динамического отображения элементов в таблице при поиске,
+     * Добавление элементов ComboBox'ов, ChoiceBox'ов,
+     * Прописано поведение таблиц (в том числе при выборе строки)
+     * @throws NullPointerException - исключение
+     */
     @FXML
     private void initialize() throws NullPointerException{
 
@@ -303,6 +321,10 @@ public class AdminPageController {
         userStatus.getItems().addAll("ACTIVE", "BANNED");
     }
 
+    /**
+     * Установка информации в личный кабинет администратора
+     * @param admin - текущий авторизованный в системе администратор
+     */
     public void setAdmin(User admin){
         adminFirstName.setText(admin.getFirstName());
         adminLastName.setText(admin.getLastName());
@@ -311,6 +333,10 @@ public class AdminPageController {
         adminRepeatedPassword.setText("");
     }
 
+    /**
+     * Отображение информации о пользователе сбоку от таблицы пользователей
+     * @param user - выбранная строчка в таблице
+     */
     public void showUserDetails(User user){
         if (user != null) {
             userSaveButton.setDisable(false);
@@ -329,6 +355,10 @@ public class AdminPageController {
         }
     }
 
+    /**
+     * Отображение информации об уроке сбоку от таблицы
+     * @param lesson - выбранная строчка таблицы уроков
+     */
     public void showLessonDetails(Lesson lesson){
         if (lesson != null){
             lessonQuestionsButton.setDisable(false);
@@ -347,17 +377,29 @@ public class AdminPageController {
         }
     }
 
+    /**
+     * Показ формы статистики для администратора (по выбранному пользователю)
+     * @param user - выбранный пользователь
+     */
     public void showStatForAdmin(User user){
 
         main.showStatAdminForm(token, user, null);
     }
 
+    /**
+     *Показ формы статистики для администратора (по выбранному уроку)
+     * @param lesson - выбранный урок
+     */
     public void showStatForAdmin(Lesson lesson){
 
         main.showStatAdminForm(token, null, lesson);
 
     }
 
+    /**
+     * Формирование сообщения об ошибке при валидации введённых в личном кабинете данных
+     * @return строку сообщения об ошибке
+     */
     private String adminErrorMessage(){
         if (adminFirstName.getText() == null || isDouble(adminFirstName.getText()) == true
                 || isInteger(adminFirstName.getText()) == true || adminFirstName.getText().length() == 0
@@ -381,6 +423,9 @@ public class AdminPageController {
         return "";
     }
 
+    /**
+     * Нажатие на кнопку сохранения введённых изменений в личном кабинете
+     */
     @FXML
     public void adminSave(){
         if (adminInputCheck()){
@@ -406,17 +451,26 @@ public class AdminPageController {
         }
     }
 
+    /**
+     * Нажатие на кнопку отмены изменений в личном кабинете
+     */
     @FXML
     public void adminCancel(){
         setAdmin(admin);
     }
 
+    /**
+     * Нажатие на кнопку отмены изменений в окне редактирования пользователей
+     */
     @FXML
     public void userCancel(){
         User selectedUser = userTable.getSelectionModel().getSelectedItem();
         showUserDetails(selectedUser);
     }
 
+    /**
+     * Нажатие на кнопку сохранения выбранных изменений в окне редактирования пользователей
+     */
     @FXML
     public void userSave(){
         User selectedUser = userTable.getSelectionModel().getSelectedItem();
@@ -440,6 +494,9 @@ public class AdminPageController {
         }
     }
 
+    /**
+     * Показ вопросов выбранного из таблицы урока
+     */
     @FXML
     public void showQuestions(){
         Lesson selectedLesson = lessonTable.getSelectionModel().getSelectedItem();
@@ -449,6 +506,10 @@ public class AdminPageController {
         }
     }
 
+    /**
+     * Нажатие на кнопку добавления урока
+     * @throws IOException - исключение
+     */
     @FXML
     public void addLesson() throws IOException {
         //тут нам не важно, выбрана какая-то запись или нет: новый lesson есть новый lesson
@@ -461,6 +522,10 @@ public class AdminPageController {
         }
     }
 
+    /**
+     * Нажатие на кнопку изменения урока
+     * @throws IOException - исключение
+     */
     @FXML
     public void editLesson() throws IOException {
         Lesson selectedLesson = lessonTable.getSelectionModel().getSelectedItem();
@@ -474,6 +539,9 @@ public class AdminPageController {
         }
     }
 
+    /**
+     * Нажатие на кнопку удаления уроков
+     */
     @FXML
     public void deleteLesson(){
         Lesson selectedLesson = lessonTable.getSelectionModel().getSelectedItem();
@@ -484,6 +552,10 @@ public class AdminPageController {
         }
     }
 
+    /**
+     * Проверка ввода новых данных в личном кабинете
+     * @return true при корректном вводе, false и сообщение об ошибке - при некорректном
+     */
     private boolean adminInputCheck() {
         String message = adminErrorMessage();
         if (message.length() == 0) {
@@ -499,6 +571,9 @@ public class AdminPageController {
         }
     }
 
+    /**
+     * Нажатие на кнопку "Выйти"
+     */
     @FXML
     public void logOut(){
         Task<Void> sleeper = new Task<Void>() {
@@ -521,6 +596,9 @@ public class AdminPageController {
         new Thread(sleeper).start();
     }
 
+    /**
+     * Нажатие на кнопку показа справки о программе для администратора
+     */
     @FXML
     private void showInfo(){
         main.showInfo("admin");

@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.json.JSONException;
@@ -18,14 +17,15 @@ import program.Main;
 import program.models.*;
 import program.utils.RestAPI;
 
-import javax.swing.*;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
+/**
+ * Контроллер, отвечающий за тестовое окно - форма testWindow.fxml
+ */
 public class TestWindowController {
 
     @FXML
@@ -77,6 +77,16 @@ public class TestWindowController {
     private Statistics statistics;
     private List<AnswerHistory> answerHistoryList;
 
+    /**
+     * Инициализация главных элементов формы, установка элементов в зависимости от типа вопросов
+     * @param questionStage - окна теста
+     * @param main - main
+     * @param restAPI - restAPI
+     * @param token - токен
+     * @param questionList - список вопросов по выбранному пользователем уроку
+     * @param user - пользователь, проходящий тест
+     * @param lesson - урок, тест по которому проходит пользователь
+     */
     public void setStage(Stage questionStage,
                                 Main main,
                                 RestAPI restAPI,
@@ -147,6 +157,9 @@ public class TestWindowController {
         setTestQuestion();
     }
 
+    /**
+     * Инициализация стилей тестовых элементов - кнопок и поля открытого ответа, задание им поведения
+     */
     @FXML
     private void initialize(){
 
@@ -171,6 +184,12 @@ public class TestWindowController {
         }
     }
 
+    /**
+     * Обращение к серверу на добавление статистики в базу данных по завершении прохождения пользователем теста
+     * @throws JSONException - исключение
+     * @throws ParseException - исключение
+     * @throws UnirestException - исключение
+     */
     private void postThisStatistics() throws JSONException, ParseException, UnirestException {
         this.statistics.setDate(LocalDate.now());
         this.statistics.setScore(score);
@@ -185,6 +204,11 @@ public class TestWindowController {
         }
     }
 
+    /**
+     * Сравнение выбранного варианта ответа с правильным для вопросов с кнопками
+     * @param usersAnswer - ответ, выбранный пользователем
+     * @param clickedButton - кнопку, на которую он нажал
+     */
     private void compareAnswer(String usersAnswer, Button clickedButton) {
         AnswerHistory currentAnswerHistory = answerHistoryList.get(n);
         if (usersAnswer == questionList.get(n).getCorrectAnswer()){
@@ -245,6 +269,10 @@ public class TestWindowController {
         new Thread(sleeper).start();
     }
 
+    /**
+     * Сравнение ответа, данного пользователем, на открытый вопрос
+     * @param usersAnswer - ответ пользователя
+     */
     private void compareAnswer(String usersAnswer) {
         //для открытого ответа
         AnswerHistory currentAnswerHistory = answerHistoryList.get(n);
@@ -301,6 +329,10 @@ public class TestWindowController {
         new Thread(sleeper).start();
     }
 
+    /**
+     * Создание эффекта выцветания вариантов ответа
+     * @param button - кнопка с выцветаемым текстом
+     */
     public void createAppearEffect(Button button){
         KeyValue initKeyValue = new KeyValue(button.opacityProperty(), 0.0);
         KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
@@ -312,6 +344,10 @@ public class TestWindowController {
         timeline.play();
     }
 
+    /**
+     * Создание эффекта плавного выцветания текста вопроса и описания
+     * @param label - плавно выцветающий label
+     */
     public void createAppearEffect(Label label){
         KeyValue initKeyValue = new KeyValue(label.opacityProperty(), 0.0);
         KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
@@ -323,6 +359,10 @@ public class TestWindowController {
         timeline.play();
     }
 
+    /**
+     * Создание эффекта плавного исчезания для label'ов
+     * @param label - тот, который должен исчезать
+     */
     public void createDisappearEffect(Label label){
         KeyValue initKeyValue = new KeyValue(label.opacityProperty(), 1.0);
         KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
@@ -334,6 +374,10 @@ public class TestWindowController {
         timeline1.play();
     }
 
+    /**
+     * Создание эффекта исчезновения для кнопок
+     * @param button - кнопка, к которой применяется этот эффект
+     */
     public void createDisappearEffect(Button button){
         KeyValue initKeyValue = new KeyValue(button.opacityProperty(), 1.0);
         KeyFrame initFrame = new KeyFrame(Duration.ZERO, initKeyValue);
@@ -345,6 +389,9 @@ public class TestWindowController {
         timeline1.play();
     }
 
+    /**
+     * Установка тестового вопроса
+     */
     private void setTestQuestion(){
         questNumb.setText("Вопрос: " + (n+1) + "/10");
         descriptionText.setText("");
@@ -386,11 +433,17 @@ public class TestWindowController {
         createAppearEffect(questionText);
     }
 
+    /**
+     * Нажатие кнопки перехода к следующему вопросу (для вопросов с открытым вариантом ответа)
+     */
     @FXML
     public void next(){
         compareAnswer(openAnswer.getText().trim());
     }
 
+    /**
+     * Кнопка окончания теста
+     */
     @FXML
     public void end(){
         questionText.setText("Тест закончен! Ваша оценка: " + score + "/" + questionList.size());
@@ -408,6 +461,9 @@ public class TestWindowController {
         closeButton.setVisible(true);
     }
 
+    /**
+     * Досрочное закрытие окна тестирования
+     */
     @FXML
     public void close(){
         questionStage.close();

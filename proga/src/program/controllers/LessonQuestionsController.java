@@ -1,6 +1,5 @@
 package program.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,10 +12,9 @@ import program.models.Lesson;
 import program.models.Question;
 import program.utils.RestAPI;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
+/**
+ * Контроллер, отвечающий за окно вопросов урока - lessonQuestions.fxml
+ */
 public class LessonQuestionsController {
 
     @FXML
@@ -79,6 +77,14 @@ public class LessonQuestionsController {
     private Main main;
     private Stage stage;
 
+    /**
+     * Инициализация главных элементов
+     * @param stage - окна
+     * @param main - main
+     * @param restAPI - restAPI
+     * @param lesson - урока, которому принадлежат вопросы
+     * @param token - токен
+     */
     public void setStage(Stage stage, Main main, RestAPI restAPI, Lesson lesson, String token){
         this.stage = stage;
         this.main = main;
@@ -99,6 +105,9 @@ public class LessonQuestionsController {
 
     }
 
+    /**
+     * Инициализация таблицы и задание ей поведения
+     */
     @FXML
     private void initialize(){
 
@@ -112,6 +121,10 @@ public class LessonQuestionsController {
         incorrect2Label.setWrapText(true);
     }
 
+    /**
+     * Показ деталей вопроса
+     * @param question - выбранный администратором вопрос из таблицы
+     */
     public void showQuestionDetails(Question question){
 
         if (question != null){
@@ -152,6 +165,10 @@ public class LessonQuestionsController {
         }
     }
 
+    /**
+     * Добавление вопроса
+     * @throws JSONException - исключение
+     */
     @FXML
     private void addQuestion() throws JSONException {
         Question newQuestion = new Question();
@@ -165,6 +182,10 @@ public class LessonQuestionsController {
         }
     }
 
+    /**
+     * Изменение вопроса
+     * @throws JSONException - исключение
+     */
     @FXML
     private void editQuestion() throws JSONException {
         Question selectedItem = questionTable.getSelectionModel().getSelectedItem();
@@ -177,6 +198,9 @@ public class LessonQuestionsController {
         }
     }
 
+    /**
+     * Удаление вопроса
+     */
     @FXML
     private void deleteQuestion(){
         Question selectedItem = questionTable.getSelectionModel().getSelectedItem();

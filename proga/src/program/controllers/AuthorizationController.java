@@ -2,13 +2,7 @@ package program.controllers;
 
 import com.google.gson.Gson;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -33,6 +27,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Контроллер авторизации, отвечает за форму authorizationForm.fxml
+ */
 public class AuthorizationController implements JSONSerialize {
 
     @FXML
@@ -53,6 +50,10 @@ public class AuthorizationController implements JSONSerialize {
     private AnchorPane anchorPane;
 
 
+    /**
+     * Инициализация
+     * @throws UnirestException - исключение
+     */
     @FXML
     private void initialize() throws UnirestException {
 
@@ -61,16 +62,20 @@ public class AuthorizationController implements JSONSerialize {
 
     }
 
+    /**
+     * Показ prompt text'а
+     */
     public void showDefaultText() {
 
         loginText.setPromptText("Логин");
         passwordText.setPromptText("Пароль");
     }
 
-    public boolean isSignInIsClicked() {
-        return signInIsClicked;
-    }
-
+    /**
+     * Усыпление потока приложения, чтобы была анимация
+     * @param currentUser - пользователь, успешно авторизовавшийся
+     * @param mayBeToken - токен, созданный этому пользователю
+     */
     private void createSleeper(User currentUser, String mayBeToken){
         Task<Void> sleeper = new Task<Void>() {
             @Override
@@ -96,6 +101,10 @@ public class AuthorizationController implements JSONSerialize {
         new Thread(sleeper).start();
     }
 
+    /**
+     * Нажата кнопка входа
+     * @throws IOException - исключение
+     */
     @FXML
     public void signInButton() throws IOException {
         try {
@@ -133,6 +142,11 @@ public class AuthorizationController implements JSONSerialize {
         }
     }
 
+    /**
+     * Нажата кнопка регистрации
+     * Опять же надо усыпыть поток, чтобы анимация исчезания окна авторизации прошла
+     * @param actionEvent - событие
+     */
     @FXML
     public void signUpButton(ActionEvent actionEvent) {
         Task<Void> sleeper = new Task<Void>() {
@@ -155,6 +169,12 @@ public class AuthorizationController implements JSONSerialize {
         new Thread(sleeper).start();
     }
 
+    /**
+     * Инициализация форма
+     * @param main - main
+     * @param restAPI - restAPI
+     * @param anchorPane - окно авторизации
+     */
     public void setMain(Main main, RestAPI restAPI, AnchorPane anchorPane) {
         this.main = main;
         this.restAPI = restAPI;
@@ -163,15 +183,26 @@ public class AuthorizationController implements JSONSerialize {
         main.createAppearEffect(anchorPane, 0.5);
     }
 
+    /**
+     * Показ справки об авторе
+     */
     @FXML
     public void showAuthInfo(){
         main.showInfo("author");
     }
 
+    /**
+     * Получение окна
+     * @return окно
+     */
     public AnchorPane getAnchorPane() {
         return anchorPane;
     }
 
+    /**
+     * Преобразования введённых данных в json-строку для отправки на сервер
+     * @return json-строка
+     */
     @Override
     public String toJson() {
         Map<String, String> map = new HashMap<>();

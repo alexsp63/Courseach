@@ -6,12 +6,10 @@ import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import program.Main;
 import program.models.User;
@@ -19,6 +17,9 @@ import program.utils.RestAPI;
 
 import java.util.List;
 
+/**
+ * Контроллер, отвечающий за форму регистрации - signUpForm.fxml
+ */
 public class SignUpController {
 
     @FXML
@@ -45,6 +46,12 @@ public class SignUpController {
     private AnchorPane anchorPane;
     private boolean closeISClicked;
 
+    /**
+     * Инициализация главных элементов
+     * @param main - main
+     * @param restAPI - restAPI
+     * @param anchorPane - окно регистрации
+     */
     public void setMain(Main main, RestAPI restAPI, AnchorPane anchorPane) {
         this.main = main;
         this.restAPI = restAPI;
@@ -53,6 +60,9 @@ public class SignUpController {
         main.createAppearEffect(anchorPane, 0.5);
     }
 
+    /**
+     * Инициализация TextField'ов и задание им поведения, чтобы они меняли стиль
+     */
     @FXML
     private void initialize(){
         TextField[] textFields = {firstNameText, lastNameText, loginText, passwordText, repeatPasswordText};
@@ -68,6 +78,10 @@ public class SignUpController {
         }
     }
 
+    /**
+     * Подчеркивание TextField'а красным цветом
+     * @param textField - элемент, в котором был замечен некорректный ввод
+     */
     public static void makeRed(TextField textField){
         textField.setStyle("-fx-border-color: #ff0000; -fx-border-width: 0 0 2 0;");
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
@@ -75,10 +89,17 @@ public class SignUpController {
         pause.play();
     }
 
+    /**
+     * Нажата ли кнопка регистрации
+     * @return состояние кнопки
+     */
     public boolean isCloseISClicked() {
         return closeISClicked;
     }
 
+    /**
+     * Нажатие кнопки отмены регистрации и возвращение к окну авторизации
+     */
     @FXML
     private void cancelIsClicked(){
         Task<Void> sleeper = new Task<Void>() {
@@ -101,6 +122,11 @@ public class SignUpController {
         new Thread(sleeper).start();
     }
 
+    /**
+     * Проверка ввода на число
+     * @param str - введённая пользователем строка
+     * @return является ли числом
+     */
     public static boolean isDouble(String str) {
         //Проверка на не целое число (ну имя должно иметь хотя бы одну букву, как и фамилия)
         try {
@@ -111,6 +137,11 @@ public class SignUpController {
         }
     }
 
+    /**
+     * Проверка ввода на целое число
+     * @param str - введённая пользователем строка
+     * @return является ли целым числом
+     */
     public static boolean isInteger(String str) {
         //Проверка на целое число (нам нельзя, чтобы имя или фамилия было целым числом)
         try {
@@ -121,6 +152,10 @@ public class SignUpController {
         }
     }
 
+    /**
+     * Формирование сообщения об ошибке
+     * @return сообщение об ошибке
+     */
     private String errorMessage(){
         List<String> unavailableLogins = restAPI.getAllLogins();
         if (firstNameText.getText().trim() == null || isDouble(firstNameText.getText()) == true
@@ -158,6 +193,10 @@ public class SignUpController {
         return "";
     }
 
+    /**
+     * Проверка правильности ввода
+     * @return корректен ли ввод или нет
+     */
     private boolean InputCheck(){
         String message = errorMessage();
         if (message.length() == 0) {
@@ -171,6 +210,10 @@ public class SignUpController {
         }
     }
 
+    /**
+     * Нажата кнопка регистрации
+     * @throws UnirestException - исключение
+     */
     @FXML
     private void signUpClicked() throws UnirestException {
         if (InputCheck()) {

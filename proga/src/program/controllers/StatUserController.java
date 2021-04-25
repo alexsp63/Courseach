@@ -11,7 +11,6 @@ import program.models.AnswerHistory;
 import program.models.Lesson;
 import program.models.Statistics;
 import program.models.User;
-import program.utils.DateUtil;
 import program.utils.RestAPI;
 
 import java.util.ArrayList;
@@ -19,8 +18,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
+/**
+ * Контроллер, отвечающий за форму отображения статистики для пользователя
+ */
 public class StatUserController {
 
     @FXML
@@ -108,6 +109,15 @@ public class StatUserController {
     private Lesson lesson;
     private User user;
 
+    /**
+     * Инициализация главных элементов и статистических результатов: мин, макс и среднее
+     * @param stage - сцена
+     * @param main - main
+     * @param restAPI - restAPI
+     * @param token - токен
+     * @param lesson - урок
+     * @param user - пользователь
+     */
     public void setMain(Stage stage, Main main, RestAPI restAPI, String token, Lesson lesson, User user) {
         this.stage = stage;
         this.main = main;
@@ -137,6 +147,10 @@ public class StatUserController {
         maxLabel.setText("MAX: " + max + "%");
     }
 
+    /**
+     * Инициализация
+     * Задание поведения таблице статистики
+     */
     @FXML
     private void initialize() {
 
@@ -150,6 +164,10 @@ public class StatUserController {
         showStatDetails(null);
     }
 
+    /**
+     * Отображение подробностей - истории ответов
+     * @param statistics - для выбранного объекта статистики
+     */
     public void showStatDetails(Statistics statistics) {
 
         Label[] textLabels = {question1Text, question2Text, question3Text, question4Text, question5Text,
