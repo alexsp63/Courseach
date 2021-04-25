@@ -3,6 +3,7 @@ package program.controllers;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -18,22 +19,22 @@ import program.utils.RestAPI;
 public class QuestionsAddEditController {
 
     @FXML
-    private TextField questionText;
+    private TextArea questionText;
 
     @FXML
-    private TextField questionDescription;
+    private TextArea questionDescription;
 
     @FXML
-    private TextField questionCorrect;
+    private TextArea questionCorrect;
 
     @FXML
-    private TextField questionIncorrect1;
+    private TextArea questionIncorrect1;
 
     @FXML
-    private TextField questionIncorrect2;
+    private TextArea questionIncorrect2;
 
     @FXML
-    private TextField questionIncorrect3;
+    private TextArea questionIncorrect3;
 
     @FXML
     private Label message;
@@ -115,7 +116,6 @@ public class QuestionsAddEditController {
      */
     @FXML
     private void initialize(){}
-
     /**
      * Формирование сообщения об ошибке при некорректном вооде
      * @return сообщение об ошибке
@@ -124,9 +124,9 @@ public class QuestionsAddEditController {
         if (questionText.getText() == null || questionText.getText().length() == 0 || questionText.getText().equals("")){
             LessonAddEditController.makeRed(questionText);
             return "Введите текст вопроса!";
-        } else if (questionText.getText().length() > 100) {
+        } else if (questionText.getText().length() > 300) {
             LessonAddEditController.makeRed(questionText);
-            return "Текст вопроса не должен превышать 100 символов!";
+            return "Текст вопроса не должен превышать 300 символов!";
         }
         else if (questionDescription.getText() == null || questionDescription.getText().length() == 0 || questionDescription.getText().equals("")){
             LessonAddEditController.makeRed(questionDescription);

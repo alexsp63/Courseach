@@ -48,22 +48,22 @@
                                     <children>
                                         <Label fx:id="textLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="630.0" styleClass="labelRegs" stylesheets="@../style/myStyle.css" text="Текст вопроса" textAlignment="CENTER" />
                                         <Label fx:id="questionText" alignment="TOP_LEFT" prefHeight="76.0" prefWidth="670.0" GridPane.columnIndex="1" />
-                                        <Label fx:id="question1Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" GridPane.rowIndex="1" />
+                                        <Label fx:id="question1Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" wrapText="true" GridPane.rowIndex="1" />
                                         <Label fx:id="question1Answer" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="208.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                        <Label fx:id="question2Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" GridPane.rowIndex="2" />
-                                        <Label fx:id="question3Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" GridPane.rowIndex="3" />
-                                        <Label fx:id="question4Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" GridPane.rowIndex="4" />
-                                        <Label fx:id="question5Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" GridPane.rowIndex="5" />
+                                        <Label fx:id="question2Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" wrapText="true" GridPane.rowIndex="2" />
+                                        <Label fx:id="question3Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" wrapText="true" GridPane.rowIndex="3" />
+                                        <Label fx:id="question4Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" wrapText="true" GridPane.rowIndex="4" />
+                                        <Label fx:id="question5Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" wrapText="true" GridPane.rowIndex="5" />
                                         <Label fx:id="question2Answer" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                         <Label fx:id="question3Answer" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                         <Label fx:id="question4Answer" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="208.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                         <Label fx:id="question5Answer" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="212.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="224.0" styleClass="labelRegs" text="Ответили" GridPane.columnIndex="1" />
-                                        <Label fx:id="question6Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" GridPane.rowIndex="6" />
-                                        <Label fx:id="question7Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" GridPane.rowIndex="7" />
-                                        <Label fx:id="question8Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" GridPane.rowIndex="8" />
-                                        <Label fx:id="question9Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" GridPane.rowIndex="9" />
-                                        <Label fx:id="question10Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" GridPane.rowIndex="10" />
+                                        <Label fx:id="question6Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" wrapText="true" GridPane.rowIndex="6" />
+                                        <Label fx:id="question7Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" wrapText="true" GridPane.rowIndex="7" />
+                                        <Label fx:id="question8Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" wrapText="true" GridPane.rowIndex="8" />
+                                        <Label fx:id="question9Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" wrapText="true" GridPane.rowIndex="9" />
+                                        <Label fx:id="question10Text" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="630.0" wrapText="true" GridPane.rowIndex="10" />
                                         <Label fx:id="question6Answer" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                         <Label fx:id="question7Answer" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                         <Label fx:id="question8Answer" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />

@@ -40,17 +40,17 @@
                           </rowConstraints>
                            <children>
                               <Label fx:id="textLabel" alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="88.0" prefWidth="210.0" styleClass="labelRegs" stylesheets="@../style/myStyle.css" text="Текст вопроса:" wrapText="true" />
-                              <Label fx:id="questionText" alignment="TOP_LEFT" prefHeight="85.0" prefWidth="624.0" styleClass="labelLQ" stylesheets="@../style/myStyle.css" GridPane.columnIndex="1" />
+                              <Label fx:id="questionText" alignment="TOP_LEFT" prefHeight="85.0" prefWidth="624.0" styleClass="labelLQ" stylesheets="@../style/myStyle.css" wrapText="true" GridPane.columnIndex="1" />
                               <Label fx:id="descriptionLabel" alignment="TOP_LEFT" prefHeight="92.0" prefWidth="210.0" styleClass="labelRegs" stylesheets="@../style/myStyle.css" text="Описание (обоснование ответа):" wrapText="true" GridPane.rowIndex="1" />
-                              <Label fx:id="questionDescription" alignment="TOP_LEFT" prefHeight="87.0" prefWidth="624.0" styleClass="labelLQ" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="questionDescription" alignment="TOP_LEFT" prefHeight="87.0" prefWidth="624.0" styleClass="labelLQ" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="corrLabel" alignment="TOP_LEFT" prefHeight="45.0" prefWidth="207.0" styleClass="labelRegs" stylesheets="@../style/myStyle.css" text="Правильный ответ:" wrapText="true" GridPane.rowIndex="2" />
                               <Label fx:id="incorrect1Label" alignment="TOP_LEFT" prefHeight="49.0" prefWidth="210.0" styleClass="labelRegs" stylesheets="@../style/myStyle.css" text="Неправильный ответ:" wrapText="true" GridPane.rowIndex="3" />
                               <Label fx:id="incorrect2Label" alignment="TOP_LEFT" prefHeight="46.0" prefWidth="206.0" styleClass="labelRegs" stylesheets="@../style/myStyle.css" text="Ещё один неправильный ответ:" wrapText="true" GridPane.rowIndex="4" />
                               <Label fx:id="lastLabel" alignment="TOP_LEFT" prefHeight="49.0" prefWidth="208.0" styleClass="labelRegs" stylesheets="@../style/myStyle.css" text="И ещё один неправильный ответ:" wrapText="true" GridPane.rowIndex="5" />
-                              <Label fx:id="correctAnswer" alignment="TOP_LEFT" prefHeight="46.0" prefWidth="624.0" styleClass="labelLQ" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label fx:id="incorrect1" alignment="TOP_LEFT" prefHeight="45.0" prefWidth="624.0" styleClass="labelLQ" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label fx:id="incorrect2" alignment="TOP_LEFT" prefHeight="45.0" prefWidth="624.0" styleClass="labelLQ" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Label fx:id="incorrect3" alignment="TOP_LEFT" prefHeight="43.0" prefWidth="624.0" styleClass="labelLQ" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="correctAnswer" alignment="TOP_LEFT" prefHeight="46.0" prefWidth="624.0" styleClass="labelLQ" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label fx:id="incorrect1" alignment="TOP_LEFT" prefHeight="45.0" prefWidth="624.0" styleClass="labelLQ" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="incorrect2" alignment="TOP_LEFT" prefHeight="45.0" prefWidth="624.0" styleClass="labelLQ" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="incorrect3" alignment="TOP_LEFT" prefHeight="43.0" prefWidth="624.0" styleClass="labelLQ" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                            </children>
                         </GridPane>
                      </children>

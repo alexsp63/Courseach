@@ -276,7 +276,7 @@ public class TestWindowController {
     private void compareAnswer(String usersAnswer) {
         //для открытого ответа
         AnswerHistory currentAnswerHistory = answerHistoryList.get(n);
-        if (usersAnswer.equals(questionList.get(n).getCorrectAnswer())) {
+        if (usersAnswer.toLowerCase().equals(questionList.get(n).getCorrectAnswer().toLowerCase())) {
             currentAnswerHistory.setIsCorrect(true);
             score += 1;
             openAnswer.setStyle("-fx-border-color: green; -fx-border-width: 0 0 4 0;");

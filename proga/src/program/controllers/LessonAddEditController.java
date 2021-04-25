@@ -69,7 +69,7 @@ public class LessonAddEditController {
      * Окрашивание невалидной текстовой области в красный цвет на 2 секнуды (и затем возвращение стиля назад)
      * @param textArea - окрашиваемая текстовая область
      */
-    public void makeRed(TextArea textArea){
+    public static void makeRed(TextArea textArea){
         textArea.setStyle("-fx-border-color: red;");
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(e -> textArea.setStyle("-fx-border-color: #84cdff;"));
@@ -198,15 +198,21 @@ public class LessonAddEditController {
         if (inputCheck()){
             lesson.setName(lessonNameText.getText());
             lesson.setTextText(lessonTextText.getText());
-            if (lesson.getQuestionType() == null || restAPI.getQuestionsByLesson(token, lesson).size() == 0) {
+            if (lesson.getQuestionType() == null && (restAPI.getQuestionsByLesson(token, lesson).size() == 0)) {
                 lesson.setQuestionType(lessonQuestionType.getValue());
             }
-
+            if (lessonQuestionType.getValue() != null){
+                lesson.setQuestionType(lessonQuestionType.getValue());
+            }
+            //System.out.println(lesson.getQuestionType() + " " + lessonQuestionType.getValue());
             saveIsClicked = true;
             lessonStage.close();
         }
     }
 
+    /*
+    Многие думают, что британцы серьёзные ребята, постоянно пьющие чай (они называют чашечку их любимого напитка ласковым словом - cuppa) и не умеющие веселиться. Что ж, про чай может и правда, но уж что, но повеселиться после тяжёлой недели они любят.
+     */
     /**
      * Администратор передумал создавать/редактировать вопрос
      */
